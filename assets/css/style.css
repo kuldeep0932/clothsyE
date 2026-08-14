@@ -36,6 +36,10 @@ body::-webkit-scrollbar-thumb {
   background-color: var(--primary-color);
 }
 
+.text-danger {
+  color: var(--primary-color) !important;
+}
+
 .tooltip {
   font-family: var(--worksans-font);
   font-size: 12px;
@@ -1060,6 +1064,99 @@ input[type="checkbox"] {
 }
 
 /* register page css end */
+
+
+/* shop page css start */
+.clothsy-shop-banner {
+  padding: 15px 0 15px;
+}
+
+.clothsy-shop-banner .container {
+  width: 100%;
+  min-height: 270px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-image: url("../images/shop_page_banner.jpeg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+}
+
+.clothsy-shop-banner-content {
+  z-index: 2;
+  padding: 40px 8%;
+}
+
+.clothsy-shop-banner h1 {
+  margin: 0 0 22px;
+  font-family: var(--playFairFont);
+  font-size: 52px;
+  line-height: 1.1;
+  font-weight: 600;
+  color: #1c1c1c;
+}
+
+.clothsy-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 14px;
+  color: #222;
+}
+
+.clothsy-breadcrumb a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.clothsy-breadcrumb .arrow {
+  color: #777;
+  font-size: 18px;
+}
+
+.clothsy-breadcrumb .current {
+  color: #555;
+}
+
+.sidebar_filter h5 {
+  font-family: var(--playFairFont);
+}
+
+
+.btn-close {
+  z-index: 99;
+}
+
+/* shop page css end */
+
+/* quick view popup css start */
+.modal h2 {
+  font-family: var(--playFairFont);
+}
+
+.size_btn_group .btn {
+  padding: 5px 13px;
+  border-color: #ddd;
+}
+
+.size_btn_group .btn:hover,
+.size_btn_group .btn:focus,
+.size_btn_group .btn.active, .quantity_inputsbox .btn:hover {
+  background-color: var(--primary-color) !important;
+}
+.quantity_inputsbox > * {
+    border-color: #ddd;
+}
+.quantity_inputsbox .btn:hover{
+  border-color: var(--primary-color);
+}
+
+.quantity_inputsbox .btn, .quantity_inputsbox input {
+    padding: 5px 13px !important;
+}
+/* quick view popup css end */
+
 
 /* media quiries */
 

@@ -43,8 +43,8 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
         <nav class="main_navigation d-flex align-items-center">
           <div class="overlay_menu"></div>
           <ul class="navigation_links list-unstyled">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Shop</a></li>
+            <li><a href="./index.php">Home</a></li>
+            <li><a href="./shop.php">Shop</a></li>
             <li><a href="#">Collection</a></li>
             <li><a href="#">About Us</a></li>
             <li><a href="#">Contact Us</a></li>

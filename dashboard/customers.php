@@ -21,6 +21,7 @@ $pageTitle = "Customers";
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/5.3.5/apexcharts-legend.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/5.3.5/apexcharts.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.3/css/dataTables.dataTables.min.css">
     <link rel="stylesheet" href="./components/dashboard.css">
 </head>
 
@@ -80,14 +81,14 @@ $pageTitle = "Customers";
                                                     class="datatables-customers table border-top dataTable dtr-column"
                                                     id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info"
                                                     style="width: 100%;">
-                                                    <colgroup>
+                                                    <!-- <colgroup>
                                                         <col data-dt-column="1" style="width: 89.6875px;">
                                                         <col data-dt-column="2" style="width: 392.125px;">
                                                         <col data-dt-column="3" style="width: 218.156px;">
                                                         <col data-dt-column="4" style="width: 324.859px;">
                                                         <col data-dt-column="5" style="width: 147.906px;">
                                                         <col data-dt-column="6" style="width: 215.266px;">
-                                                    </colgroup>
+                                                    </colgroup> -->
                                                     <thead>
                                                         <tr>
                                                             <th data-dt-column="0"
@@ -476,4 +477,5 @@ $pageTitle = "Customers";
                 </div>
             </div>
     </main>
+
     <?php include('./components/dash_footer.php') ?>
