@@ -178,4 +178,49 @@ $pageKeywords = "home, my website, awesome content";
 </section>
 <!-- why choose us section end -->
 
+<section class="py-3">
+    <div class="container">
+        <div class="row align-items-center text-center sect_bg rounded-4 py-4">
+
+            <div class="col-6 col-lg-3 border-end">
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-2"
+                     style="width:60px;height:60px;background:#fde0df;">
+                    <i class="fas fa-users fs-4 text-dark"></i>
+                </div>
+                <h3 class="fw-bold mb-1">50K+</h3>
+                <p class="mb-0 text-dark">Happy Customers</p>
+            </div>
+
+            <div class="col-6 col-lg-3 border-end">
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-2"
+                     style="width:60px;height:60px;background:#fde0df;">
+                    <i class="fas fa-shopping-bag fs-4 text-dark"></i>
+                </div>
+                <h3 class="fw-bold mb-1">1,200+</h3>
+                <p class="mb-0 text-dark">Products</p>
+            </div>
+
+            <div class="col-6 col-lg-3 border-end mt-4 mt-lg-0">
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-2"
+                     style="width:60px;height:60px;background:#fde0df;">
+                    <i class="fas fa-award fs-4 text-dark"></i>
+                </div>
+                <h3 class="fw-bold mb-1">99%</h3>
+                <p class="mb-0 text-dark">Customer Satisfaction</p>
+            </div>
+
+            <div class="col-6 col-lg-3 mt-4 mt-lg-0">
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-2"
+                     style="width:60px;height:60px;background:#fde0df;">
+                    <i class="fas fa-globe fs-4 text-dark"></i>
+                </div>
+                <h3 class="fw-bold mb-1">25+</h3>
+                <p class="mb-0 text-dark">Countries We Ship To</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
 <?php include('./templates/footer.php'); ?>

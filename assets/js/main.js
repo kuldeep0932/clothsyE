@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // js for the sale countdown date and time
-var countDownDate = new Date("Aug 16, 2026 00:00:00").getTime();
+var countDownDate = new Date("Sep 16, 2026 00:00:00").getTime();
 
 var x = setInterval(function () {
   var now = new Date().getTime();
@@ -113,16 +113,3 @@ var x = setInterval(function () {
   document.getElementById("minutes").innerHTML = String(minutes).padStart(2, '0');
   document.getElementById("seconds").innerHTML = String(seconds).padStart(2, '0');
 }, 1000);
-
-
-
-const signUp = document.getElementById('signup');
-const login = document.getElementById('login');
-const container = document.getElementById('container');
-
-signUp.addEventListener('click', () => {
-    container.classList.add('right-panel-active');
-})
-login.addEventListener('click', () => {
-    container.classList.remove('right-panel-active');
-})
