@@ -34,9 +34,9 @@
             <!-- footer navigation links start -->
             <ul
               class="footer_navig list-unstyled d-flex align-items-center gap-md-3 gap-3 flex-wrap justify-content-center mb-3">
-              <li><a href="#" class="text-white p-2">Home</a></li>
-              <li><a href="#" class="text-white p-2">Shop</a></li>
-              <li><a href="#" class="text-white p-2">Collection</a></li>
+              <li><a href="./index.php" class="text-white p-2">Home</a></li>
+              <li><a href="./shop.php" class="text-white p-2">Shop</a></li>
+              <li><a href="./collection.php" class="text-white p-2">Collection</a></li>
               <li><a href="#" class="text-white p-2">About Us</a></li>
               <li><a href="#" class="text-white p-2">Contact</a></li>
               <li><a href="#" class="text-white p-2">Privacy Policy</a></li>
@@ -69,9 +69,7 @@
 
 
 
-<!-- =========================
-     SINGLE PRODUCT QUICK VIEW
-========================= -->
+<!-- ========================= SINGLE PRODUCT QUICK VIEW ======================== -->
 
 <div class="modal fade" id="productQuickView" tabindex="-1" aria-labelledby="productQuickViewLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
@@ -88,21 +86,18 @@
         <div class="row ">
 
 
-          <!-- =========================
-                         PRODUCT IMAGES
-                    ========================== -->
+          <!-- ========================= PRODUCT IMAGES ========================== -->
 
           <div class="col-lg-6">
 
-                <img src="http://localhost/clothsyE/assets/images/category3.jpg" class="img-fluid rounded h-100 object-fit-cover" alt="Product Name">
+            <img src="http://localhost/clothsyE/assets/images/category3.jpg"
+              class="img-fluid rounded h-100 object-fit-cover" alt="Product Name">
 
 
           </div>
 
 
-          <!-- =========================
-                         PRODUCT DETAILS
-                    ========================== -->
+          <!-- ========================= PRODUCT DETAILS ========================== -->
 
           <div class="col-lg-6">
 
@@ -162,9 +157,7 @@
             </p>
 
 
-            <!-- =========================
-                             SIZE
-                        ========================== -->
+            <!-- ========================= SIZE ========================== -->
 
             <div class="mb-4">
 
@@ -208,9 +201,7 @@
             </div>
 
 
-            <!-- =========================
-                             QUANTITY
-                        ========================== -->
+            <!-- ========================= QUANTITY ========================== -->
 
             <div class="mb-4">
 
@@ -235,12 +226,12 @@
             </div>
 
 
-            <!-- =========================
-                             ACTION BUTTONS
-                        ========================== -->
+            <!-- ========================= ACTION BUTTONS ========================== -->
             <div class="d-flex align-items-center gap-3">
-              <a href="#" class="btn btn_fill w-100" tabindex="0"><i class="fa-solid fa-cart-shopping me-2"></i>Add To Cart</a>
-              <a href="#" class="btn btn_outline w-100" tabindex="0"><i class="fa-solid fa-bag-shopping me-2"></i> Buy Now</a>
+              <a href="#" class="btn btn_fill w-100" tabindex="0"><i class="fa-solid fa-cart-shopping me-2"></i>Add To
+                Cart</a>
+              <a href="#" class="btn btn_outline w-100" tabindex="0"><i class="fa-solid fa-bag-shopping me-2"></i> Buy
+                Now</a>
             </div>
 
           </div>

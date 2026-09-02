@@ -1,3 +1,8 @@
+<?php 
+  $pageTitle = "Collection - Clothsy";
+  $pageDescription = "Welcome to the homepage of My Website. Discover amazing content.";
+  $pageKeywords = "home, my website, awesome content";
+  ?>
 <?php include('./templates/header.php'); ?>
 
 <!-- page header section banner start -->

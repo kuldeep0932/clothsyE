@@ -48,7 +48,7 @@ body::-webkit-scrollbar-thumb {
 .sect_bg {
   position: relative;
   overflow: hidden;
-  background-color: #ef2d1917;
+  background-color: #ef2d1917 !important;
   z-index: 0;
 }
 
@@ -1217,7 +1217,11 @@ input[type="checkbox"] {
 
 /* collection page css end *
 
-
+/* about us page css start */
+.about_page_serve.sect_bg{
+  background-color: #ef2d1917 !important;
+}
+/* about us page css end */
 
 
 /* media quiries */

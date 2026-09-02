@@ -97,12 +97,21 @@ $pageTitle = "Customers";
                                                                     class="dt-column-title"></span><span
                                                                     class="dt-column-order"></span></th>
 
-                                                            <th data-dt-column="1" rowspan="1" colspan="1"
+                                                            <!-- <th data-dt-column="1" rowspan="1" colspan="1"
                                                                 class="dt-select dt-orderable-none" aria-label="">
                                                                 <span class="dt-column-title"></span>
                                                                 <span class="dt-column-order"></span>
                                                                 <input class="form-check-input" type="checkbox"
                                                                     aria-label="Select all rows">
+                                                            </th> -->
+
+                                                            <!-- Customer ID -->
+                                                            <th class="text-nowrap dt-orderable-asc dt-orderable-desc"
+                                                                data-dt-column="3" rowspan="1" colspan="1"
+                                                                aria-label="ID: Activate to sort" tabindex="0">
+                                                                <span class="dt-column-title" role="button">Customer
+                                                                    ID</span>
+                                                                <span class="dt-column-order"></span>
                                                             </th>
 
                                                             <!-- Customer Name -->
@@ -114,14 +123,6 @@ $pageTitle = "Customers";
                                                                 <span class="dt-column-order"></span>
                                                             </th>
 
-                                                            <!-- Customer ID -->
-                                                            <th class="text-nowrap dt-orderable-asc dt-orderable-desc"
-                                                                data-dt-column="3" rowspan="1" colspan="1"
-                                                                aria-label="ID: Activate to sort" tabindex="0">
-                                                                <span class="dt-column-title" role="button">Customer
-                                                                    ID</span>
-                                                                <span class="dt-column-order"></span>
-                                                            </th>
 
                                                             <!-- Email (replacing Country) -->
                                                             <th data-dt-column="4" rowspan="1" colspan="1"
@@ -173,10 +174,18 @@ $pageTitle = "Customers";
                                                                 <td class="control dtr-hidden" tabindex="0"
                                                                     style="display: none;"></td>
 
-                                                                <!-- Checkbox -->
+                                                                <!-- Checkbox
                                                                 <td class="dt-select">
                                                                     <input aria-label="Select row" class="form-check-input"
                                                                         type="checkbox">
+                                                                </td> -->
+
+                                                                
+                                                                <!-- Customer ID -->
+                                                                <td style="text-align:center;">
+                                                                    <span class="text-heading">#
+                                                                        <?= $row['id'] ?>
+                                                                    </span>
                                                                 </td>
 
                                                                 <!-- Customer -->
@@ -205,13 +214,6 @@ $pageTitle = "Customers";
                                                                         </div>
 
                                                                     </div>
-                                                                </td>
-
-                                                                <!-- Customer ID -->
-                                                                <td>
-                                                                    <span class="text-heading">#
-                                                                        <?= $row['id'] ?>
-                                                                    </span>
                                                                 </td>
 
                                                                 <!-- Email -->

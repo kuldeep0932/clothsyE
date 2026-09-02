@@ -1,7 +1,4 @@
 <?php 
-  $pageTitle = "Home - Clothsy";
-  $pageDescription = "Welcome to the homepage of My Website. Discover amazing content.";
-  $pageKeywords = "home, my website, awesome content";
   session_start();
 $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
 ?>
@@ -47,8 +44,8 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
           <ul class="navigation_links list-unstyled">
             <li><a href="./index.php">Home</a></li>
             <li><a href="./shop.php">Shop</a></li>
-            <li><a href="#">Collection</a></li>
-            <li><a href="#">About Us</a></li>
+            <li><a href="./collection.php">Collection</a></li>
+            <li><a href="./about-us.php">About Us</a></li>
             <li><a href="#">Contact Us</a></li>
           </ul>
           <ul class="icon_lists list-unstyled">
