@@ -1396,6 +1396,9 @@ input[type="checkbox"] {
     width: 100%;
     right: unset;
   }
+  .clothsy-shop-banner{
+    padding: 15px;
+  }
 }
 
 /* media quiery 600px below */
