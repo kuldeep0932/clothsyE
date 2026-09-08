@@ -37,8 +37,8 @@
               <li><a href="./index.php" class="text-white p-2">Home</a></li>
               <li><a href="./shop.php" class="text-white p-2">Shop</a></li>
               <li><a href="./collection.php" class="text-white p-2">Collection</a></li>
-              <li><a href="#" class="text-white p-2">About Us</a></li>
-              <li><a href="#" class="text-white p-2">Contact</a></li>
+              <li><a href="./about-us.php" class="text-white p-2">About Us</a></li>
+              <li><a href="./contact-us.php" class="text-white p-2">Contact</a></li>
               <li><a href="#" class="text-white p-2">Privacy Policy</a></li>
               <li>
                 <a href="#" class="text-white p-2">Return & Exchange</a>

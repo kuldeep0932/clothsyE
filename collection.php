@@ -138,7 +138,7 @@
                             Discover the latest trends for men
                         </p>
 
-                        <a href="#" class="btn btn-sm btn-danger rounded-pill px-3">
+                        <a href="#" class="btn btn-sm btn-danger rounded-pill px-3 btn_fill">
                             Shop Now
                             <i class="bx bx-right-arrow-alt ms-1"></i>
                         </a>
@@ -166,7 +166,7 @@
                             Stylish & trendy outfits for women
                         </p>
 
-                        <a href="#" class="btn btn-sm btn-danger rounded-pill px-3">
+                        <a href="#" class="btn btn-sm btn-danger rounded-pill px-3 btn_fill">
                             Shop Now
                             <i class="bx bx-right-arrow-alt ms-1"></i>
                         </a>
@@ -194,7 +194,7 @@
                             Comfortable & cute styles for kids
                         </p>
 
-                        <a href="#" class="btn btn-sm btn-danger rounded-pill px-3">
+                        <a href="#" class="btn btn-sm btn-danger rounded-pill px-3 btn_fill">
                             Shop Now
                             <i class="bx bx-right-arrow-alt ms-1"></i>
                         </a>
@@ -222,7 +222,7 @@
                             Step up your style game
                         </p>
 
-                        <a href="#" class="btn btn-sm btn-danger rounded-pill px-3">
+                        <a href="#" class="btn btn-sm btn-danger rounded-pill px-3 btn_fill">
                             Shop Now
                             <i class="bx bx-right-arrow-alt ms-1"></i>
                         </a>
@@ -250,7 +250,7 @@
                             Elegant bags for every occasion
                         </p>
 
-                        <a href="#" class="btn btn-sm btn-danger rounded-pill px-3">
+                        <a href="#" class="btn btn-sm btn-danger rounded-pill px-3 btn_fill">
                             Shop Now
                             <i class="bx bx-right-arrow-alt ms-1"></i>
                         </a>
@@ -278,7 +278,7 @@
                             Complete your look with accessories
                         </p>
 
-                        <a href="#" class="btn btn-sm btn-danger rounded-pill px-3">
+                        <a href="#" class="btn btn-sm btn-danger rounded-pill px-3 btn_fill">
                             Shop Now
                             <i class="bx bx-right-arrow-alt ms-1"></i>
                         </a>
