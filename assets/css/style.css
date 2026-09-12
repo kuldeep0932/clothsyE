@@ -1230,7 +1230,8 @@ input[type="checkbox"] {
 }
 
 .contact-wrapper {
-  max-width: 1140px;
+  max-width: 1140px !important;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -1386,7 +1387,7 @@ input[type="checkbox"] {
   line-height: 1.25;
   margin-bottom: 7px;
   color: #202020;
-  font-family:var(--worksans-font);
+  font-family: var(--worksans-font);
 }
 
 .info-text {
@@ -1394,7 +1395,7 @@ input[type="checkbox"] {
   line-height: 1.55;
   color: #62666b;
   margin: 0;
-  font-family:var(--worksans-font);
+  font-family: var(--worksans-font);
 }
 
 
@@ -1431,6 +1432,68 @@ input[type="checkbox"] {
   background: var(--primary-color);
   color: #fff;
 }
+
+.map_section .container {
+  max-width: 1140px !important;
+  margin: 0 auto;
+}
+
+.map-main_inner {
+  max-height: 100%;
+  height: 350px;
+  border-radius: 15px;
+  overflow: hidden;
+  padding: 80px 30px;
+
+}
+
+.map-main_inner iframe {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+iframe .gm-style-mtc {
+    display: none;
+}
+
+
+.store-card {
+  max-width: 270px;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 11px;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.store-icon {
+  color: var(--primary-color);
+  font-size: 27px;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.store-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 14px;
+  font-family: var(--playFairFont);
+}
+
+.store-address {
+  color: #666;
+  font-size: 15px;
+  line-height: 1.55;
+  margin-bottom: 20px;
+  font-family: var(--worksans-font);
+}
+
+
+
 /* contact us page css end */
 
 /* media quiries */
@@ -1619,7 +1682,8 @@ input[type="checkbox"] {
   .clothsy-shop-banner {
     padding: 15px;
   }
-   .contact-section {
+
+  .contact-section {
     padding: 15px;
   }
 
@@ -1680,6 +1744,11 @@ input[type="checkbox"] {
   .about_text {
     font-size: 14px !important;
   }
+
+  .contact-description br,
+  .info-text br {
+    display: none;
+  }
 }
 
 /* media quiery 400px below */
@@ -1687,4 +1756,134 @@ input[type="checkbox"] {
   .logo {
     font-size: 28px;
   }
+}
+
+/* Full-screen video loader */
+#page-loader {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: #101c2c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  opacity: 1;
+  visibility: visible;
+}
+
+#page-loader video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-width: 350px;
+  max-height: 196px;
+  object-position: center;
+}
+
+/* Hide loader */
+#page-loader.hide {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease;
+}
+
+
+/* full text css loader */
+#page-loader {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  background: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.5s ease,
+    visibility 0.5s ease;
+}
+
+
+/* Hide loader */
+
+#page-loader.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+
+/* =========================
+           SVG TEXT
+        ========================= */
+
+.text-line {
+  width: 100%;
+  max-width: 600px;
+  height: 120px;
+  stroke: var(--primary-color);
+  stroke-width: 2;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  font-size: 100px;
+  animation:
+    dash 8s linear forwards,
+    filling 8s ease-in forwards;
+}
+
+
+.text-line text {
+  font-family: var(--playFairFont);
+  font-weight: 600;
+  font-style: normal;
+}
+
+
+/* =========================
+           DRAW TEXT
+        ========================= */
+
+@keyframes dash {
+
+  0% {
+    stroke-dashoffset: 600;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
+
+}
+
+
+/* =========================
+           FILL TEXT
+        ========================= */
+
+@keyframes filling {
+
+  0% {
+    fill: var(--primary-color);
+    fill-opacity: 0;
+  }
+
+  85% {
+    fill: var(--primary-color);
+    fill-opacity: 0;
+  }
+
+  95% {
+    fill: var(--primary-color);
+    fill-opacity: 0.5;
+  }
+
+  100% {
+    fill: var(--primary-color);
+    fill-opacity: 1;
+  }
+
 }

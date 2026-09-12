@@ -26,23 +26,21 @@ include('./templates/header.php'); ?>
 
 
 <!-- contact page section start -->
- <section class="contact-section">
+<section class="contact-section">
 
     <div class="container-fluid contact-wrapper">
 
         <div class="row g-4">
 
-            <!-- =========================
-                 LEFT CONTACT FORM
-            ========================== -->
+            <!-- LEFT CONTACT FORM -->
 
             <div class="col-lg-7">
 
                 <div class="contact-card">
 
-                    <h1 class="contact-title">
+                    <h2 class="contact-title">
                         We’d Love To Hear From You!
-                    </h1>
+                    </h2>
 
                     <p class="contact-description">
                         Have a question, feedback, or need help with your order?<br>
@@ -63,12 +61,7 @@ include('./templates/header.php'); ?>
 
                             <div class="input-wrapper">
 
-                                <input
-                                    type="text"
-                                    id="name"
-                                    class="form-control"
-                                    placeholder="Enter your name"
-                                >
+                                <input type="text" id="name" class="form-control" placeholder="Enter your name">
 
                                 <i class="fa-regular fa-user input-icon"></i>
 
@@ -87,12 +80,7 @@ include('./templates/header.php'); ?>
 
                             <div class="input-wrapper">
 
-                                <input
-                                    type="email"
-                                    id="email"
-                                    class="form-control"
-                                    placeholder="Enter your email"
-                                >
+                                <input type="email" id="email" class="form-control" placeholder="Enter your email">
 
                                 <i class="fa-regular fa-envelope input-icon"></i>
 
@@ -111,10 +99,7 @@ include('./templates/header.php'); ?>
 
                             <div class="select-wrapper">
 
-                                <select
-                                    id="subject"
-                                    class="form-select"
-                                >
+                                <select id="subject" class="form-select">
                                     <option selected>
                                         How can we help you?
                                     </option>
@@ -152,21 +137,15 @@ include('./templates/header.php'); ?>
                                 Message
                             </label>
 
-                            <textarea
-                                id="message"
-                                class="form-control"
-                                placeholder="Write your message here..."
-                            ></textarea>
+                            <textarea id="message" class="form-control"
+                                placeholder="Write your message here..."></textarea>
 
                         </div>
 
 
                         <!-- SEND -->
 
-                        <button
-                            type="submit"
-                            class="send-btn btn btn_fill"
-                        >
+                        <button type="submit" class="send-btn btn btn_fill">
                             <span>Send Message</span>
                             <i class="fa-solid fa-paper-plane"></i>
                         </button>
@@ -178,9 +157,7 @@ include('./templates/header.php'); ?>
             </div>
 
 
-            <!-- =========================
-                 RIGHT CONTACT INFORMATION
-            ========================== -->
+            <!-- RIGHT CONTACT INFORMATION -->
 
             <div class="col-lg-5">
 
@@ -296,35 +273,19 @@ include('./templates/header.php'); ?>
 
                     <div class="social-links">
 
-                        <a
-                            href="#"
-                            class="social-link"
-                            aria-label="Instagram"
-                        >
+                        <a href="#" class="social-link" aria-label="Instagram">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
 
-                        <a
-                            href="#"
-                            class="social-link"
-                            aria-label="Facebook"
-                        >
+                        <a href="#" class="social-link" aria-label="Facebook">
                             <i class="fa-brands fa-facebook-f"></i>
                         </a>
 
-                        <a
-                            href="#"
-                            class="social-link"
-                            aria-label="X"
-                        >
+                        <a href="#" class="social-link" aria-label="X">
                             <i class="fa-brands fa-x-twitter"></i>
                         </a>
 
-                        <a
-                            href="#"
-                            class="social-link"
-                            aria-label="Pinterest"
-                        >
+                        <a href="#" class="social-link" aria-label="Pinterest">
                             <i class="fa-brands fa-pinterest-p"></i>
                         </a>
 
@@ -341,5 +302,118 @@ include('./templates/header.php'); ?>
 </section>
 <!-- contact page section end -->
 
+<!-- service section start -->
+<section class="service_sect pb-3 d-md-block d-none pt-3 px-2">
+    <div class="container p-4 rounded-4 shadow-sm serv_main_cont mt-0 sect_bg about_page_serve contact-wrapper">
+        <div class="row row-gap-4">
+            <div class="col-md-4 col-xl-3">
+                <div class="card border-0 serv_card bg-transparent">
+                    <div class="card-body p-0">
+                        <div class="service_content_card d-flex align-items-center justify-content-center gap-3">
+                            <div class="service_icon">
+                                <img src="./assets/images/free_ship.png" alt="service icon" width="40px" height="40px">
+                            </div>
+                            <div class="service_content">
+                                <h3 class="mb-0">Free Shipping</h3>
+                                <p class="mb-0">On orders over $50</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-xl-3">
+                <div class="card border-0 serv_card bg-transparent">
+                    <div class="card-body p-0">
+                        <div class="service_content_card d-flex align-items-center justify-content-center gap-3">
+                            <div class="service_icon">
+                                <img src="./assets/images/easy_return.png" alt="service icon" width="40px"
+                                    height="40px">
+                            </div>
+                            <div class="service_content">
+                                <h3 class="mb-0">Easy Return</h3>
+                                <p class="mb-0">30 days return policy</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-xl-3">
+                <div class="card border-0 serv_card bg-transparent">
+                    <div class="card-body p-0">
+                        <div class="service_content_card d-flex align-items-center justify-content-center gap-3">
+                            <div class="service_icon">
+                                <img src="./assets/images/secure-payment.png" alt="service icon" width="40px"
+                                    height="40px">
+                            </div>
+                            <div class="service_content">
+                                <h3 class="mb-0">Secure Payment</h3>
+                                <p class="mb-0">100% secure checkout</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-xl-3">
+                <div class="card border-0 serv_card bg-transparent">
+                    <div class="card-body p-0">
+                        <div class="service_content_card d-flex align-items-center justify-content-center gap-3">
+                            <div class="service_icon">
+                                <img src="./assets/images/support.png" alt="service icon" width="40px" height="40px">
+                            </div>
+                            <div class="service_content">
+                                <h3 class="mb-0">24/7 Support</h3>
+                                <p class="mb-0">Dedicated support</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- service section end -->
+
+<section class="map_section py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="map-main_inner position-relative">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d109744.05905926712!2d76.68831194438661!3d30.7324019832769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fed0be66ec96b%3A0xa5ff67f9527319fe!2sChandigarh!5e0!3m2!1sen!2sin!4v1789070195013!5m2!1sen!2sin"
+                        width="600" height="450" style="border:0;"></iframe>
+                    <!-- store-direction card -->
+                    <div class="store-card card p-3">
+
+                        <div class="d-flex align-items-start gap-3">
+                            <!-- Location Icon -->
+                            <div class="store-icon">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+
+                            <div>
+                                <!-- Title -->
+                                <h5 class="store-title">Visit Our Store</h5>
+
+                                <!-- Address -->
+                                <div class="store-address">
+                                    123 Fashion Street,<br>
+                                    Style City, SC 12345,<br>
+                                    United States
+                                </div>
+
+                                <!-- Button -->
+                                <a href="https://maps.app.goo.gl/KfKX1mZZWVLZjqje8" class="directions-btn btn btn_fill">
+                                    Get Directions
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <?php include('./templates/footer.php'); ?>

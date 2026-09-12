@@ -1,0 +1,5493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VivahBio - Marriage Biodata Maker</title>
+
+<meta name="description"
+content="Create beautiful marriage biodata online. Enter your details, upload your photo, choose a beautiful template and download your biodata PDF.">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap"
+rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<!-- PDF Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+<style>
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root{
+
+    --primary:#c51d67;
+    --primary-dark:#a91555;
+
+    --navy:#143957;
+    --navy-dark:#0c263d;
+
+    --text:#27384a;
+    --muted:#718096;
+
+    --cream:#fffaf5;
+    --pink:#fff4f8;
+
+    --border:#e9e2e6;
+
+    --white:#ffffff;
+
+    --shadow:
+        0 20px 60px rgba(26,39,54,.09);
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:"DM Sans",sans-serif;
+
+    color:var(--text);
+
+    background:#fff;
+
+    line-height:1.6;
+
+}
+
+button,
+input,
+select,
+textarea{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+img{
+    max-width:100%;
+}
+
+.container{
+
+    width:min(1180px,calc(100% - 40px));
+
+    margin:auto;
+
+}
+
+.section{
+
+    padding:100px 0;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+
+    height:78px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    background:rgba(255,255,255,.94);
+
+    backdrop-filter:blur(15px);
+
+    border-bottom:1px solid #eee;
+
+}
+
+.header-inner{
+
+    height:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+}
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+}
+
+.logo-icon{
+
+    width:43px;
+    height:43px;
+
+    border-radius:13px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+
+    background:
+    linear-gradient(
+        135deg,
+        #dc2975,
+        #ad1457
+    );
+
+    box-shadow:
+    0 8px 20px rgba(197,29,103,.22);
+
+}
+
+.logo-text strong{
+
+    display:block;
+
+    color:var(--navy);
+
+    font-size:18px;
+
+    line-height:1.1;
+
+}
+
+.logo-text span{
+
+    display:block;
+
+    font-size:10px;
+
+    color:#8995a3;
+
+    margin-top:4px;
+
+}
+
+.nav{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:32px;
+
+}
+
+.nav a{
+
+    font-size:13px;
+
+    font-weight:600;
+
+    color:#4d5c6c;
+
+    transition:.25s;
+
+}
+
+.nav a:hover{
+
+    color:var(--primary);
+
+}
+
+.nav .nav-cta{
+
+    color:#fff;
+
+    background:var(--primary);
+
+    padding:11px 20px;
+
+    border-radius:30px;
+
+}
+
+.mobile-menu{
+
+    display:none;
+
+    border:0;
+
+    background:none;
+
+    font-size:23px;
+
+    color:var(--navy);
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:95px 0 85px;
+
+    background:
+
+    radial-gradient(
+        circle at 80% 25%,
+        rgba(197,29,103,.11),
+        transparent 30%
+    ),
+
+    radial-gradient(
+        circle at 10% 90%,
+        rgba(21,57,87,.06),
+        transparent 30%
+    ),
+
+    linear-gradient(
+        135deg,
+        #fffaf5,
+        #fff7fa
+    );
+
+}
+
+.hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    border:1px solid rgba(197,29,103,.08);
+
+    border-radius:50%;
+
+    left:-170px;
+    top:100px;
+
+}
+
+.hero-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    1.05fr .95fr;
+
+    align-items:center;
+
+    gap:70px;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.hero-tag{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:var(--primary);
+
+    font-size:11px;
+
+    font-weight:700;
+
+    letter-spacing:2.5px;
+
+    margin-bottom:18px;
+
+}
+
+.hero-tag::before{
+
+    content:"";
+
+    width:28px;
+
+    height:2px;
+
+    background:var(--primary);
+
+}
+
+.hero h1{
+
+    font-family:
+    "Playfair Display",
+    serif;
+
+    font-size:
+    clamp(45px,5.3vw,70px);
+
+    color:var(--navy);
+
+    line-height:1.04;
+
+    margin-bottom:22px;
+
+}
+
+.hero h1 span{
+
+    color:var(--primary);
+
+}
+
+.hero-description{
+
+    max-width:580px;
+
+    color:#647386;
+
+    font-size:16px;
+
+    margin-bottom:30px;
+
+}
+
+.hero-buttons{
+
+    display:flex;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+}
+
+.btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    padding:14px 24px;
+
+    border-radius:30px;
+
+    border:0;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    transition:.3s;
+
+}
+
+.btn-primary{
+
+    color:white;
+
+    background:
+    linear-gradient(
+        135deg,
+        #d3246f,
+        #ae1456
+    );
+
+    box-shadow:
+    0 10px 25px
+    rgba(197,29,103,.22);
+
+}
+
+.btn-primary:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 15px 30px
+    rgba(197,29,103,.28);
+
+}
+
+.btn-outline{
+
+    color:var(--navy);
+
+    background:#fff;
+
+    border:1px solid #e2e7eb;
+
+}
+
+.hero-trust{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    margin-top:35px;
+
+}
+
+.trust-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#697889;
+
+    font-size:11px;
+
+}
+
+.trust-item i{
+
+    color:var(--primary);
+
+}
+
+
+/* =========================================================
+   HERO MOCKUP
+========================================================= */
+
+.hero-visual{
+
+    min-height:470px;
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.hero-biodata{
+
+    width:275px;
+
+    min-height:370px;
+
+    background:#fff;
+
+    border-radius:8px;
+
+    box-shadow:
+    0 30px 80px
+    rgba(30,40,50,.16);
+
+    padding:30px 24px;
+
+    transform:
+    rotate(5deg);
+
+    position:relative;
+
+    z-index:3;
+
+    border:7px solid #f6eee1;
+
+}
+
+.hero-biodata::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:9px;
+
+    border:1px solid #d4ad61;
+
+}
+
+.hero-biodata-inner{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.mock-top{
+
+    text-align:center;
+
+}
+
+.mock-label{
+
+    font-size:8px;
+
+    letter-spacing:3px;
+
+    color:#ad8035;
+
+}
+
+.mock-title{
+
+    font-family:
+    "Playfair Display",
+    serif;
+
+    color:var(--navy);
+
+    font-size:21px;
+
+    margin:7px 0 14px;
+
+}
+
+.mock-photo{
+
+    width:78px;
+    height:78px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:#f0dddd;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    color:#c08e95;
+
+    font-size:25px;
+
+    border:4px solid #fff;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.12);
+
+}
+
+.mock-lines{
+
+    margin-top:20px;
+
+}
+
+.mock-line{
+
+    height:5px;
+
+    background:#e9edf0;
+
+    margin-bottom:8px;
+
+    border-radius:5px;
+
+}
+
+.mock-line:nth-child(2){
+
+    width:80%;
+
+}
+
+.mock-line:nth-child(3){
+
+    width:60%;
+
+}
+
+.mock-line:nth-child(4){
+
+    width:75%;
+
+}
+
+.mock-line:nth-child(5){
+
+    width:55%;
+
+}
+
+.floating-card{
+
+    position:absolute;
+
+    width:180px;
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:18px;
+
+    box-shadow:
+    0 20px 50px
+    rgba(30,40,50,.12);
+
+}
+
+.floating-card.left{
+
+    left:0;
+
+    bottom:25px;
+
+    transform:rotate(-7deg);
+
+}
+
+.floating-card.right{
+
+    right:-10px;
+
+    top:30px;
+
+    transform:rotate(7deg);
+
+}
+
+.float-icon{
+
+    width:38px;
+    height:38px;
+
+    border-radius:11px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#fff0f5;
+
+    color:var(--primary);
+
+    margin-bottom:10px;
+
+}
+
+.floating-card strong{
+
+    font-size:12px;
+
+    color:var(--navy);
+
+}
+
+.floating-card p{
+
+    font-size:10px;
+
+    color:#8994a1;
+
+    margin-top:3px;
+
+}
+
+
+/* =========================================================
+   SECTION HEADINGS
+========================================================= */
+
+.section-heading{
+
+    max-width:700px;
+
+    text-align:center;
+
+    margin:
+    0 auto 55px;
+
+}
+
+.section-label{
+
+    font-size:10px;
+
+    color:var(--primary);
+
+    font-weight:700;
+
+    letter-spacing:3px;
+
+    margin-bottom:9px;
+
+}
+
+.section-heading h2{
+
+    font-family:
+    "Playfair Display",
+    serif;
+
+    font-size:42px;
+
+    line-height:1.2;
+
+    color:var(--navy);
+
+    margin-bottom:12px;
+
+}
+
+.section-heading p{
+
+    color:#718096;
+
+    font-size:14px;
+
+}
+
+
+/* =========================================================
+   HOW IT WORKS
+========================================================= */
+
+.steps-section{
+
+    background:#fff;
+
+}
+
+.steps{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:30px;
+
+}
+
+.step{
+
+    text-align:center;
+
+    position:relative;
+
+}
+
+.step-icon{
+
+    width:72px;
+    height:72px;
+
+    margin:0 auto 18px;
+
+    border-radius:22px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:23px;
+
+    color:var(--primary);
+
+    background:#fff2f6;
+
+    position:relative;
+
+}
+
+.step-number{
+
+    position:absolute;
+
+    width:22px;
+    height:22px;
+
+    border-radius:50%;
+
+    background:var(--primary);
+
+    color:#fff;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:10px;
+
+    right:-6px;
+    bottom:-5px;
+
+    border:3px solid white;
+
+}
+
+.step:not(:last-child)::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:35px;
+
+    left:
+    calc(50% + 48px);
+
+    width:
+    calc(100% - 96px);
+
+    border-top:1px dashed #dfe3e7;
+
+}
+
+.step h3{
+
+    color:var(--navy);
+
+    font-size:16px;
+
+    margin-bottom:6px;
+
+}
+
+.step p{
+
+    color:#7a8795;
+
+    font-size:12px;
+
+}
+
+
+/* =========================================================
+   TEMPLATE SECTION
+========================================================= */
+
+.template-section{
+
+    background:
+    linear-gradient(
+        135deg,
+        #fff8fa,
+        #fffaf5
+    );
+
+}
+
+.template-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:24px;
+
+}
+
+.template-option{
+
+    cursor:pointer;
+
+}
+
+.template-card{
+
+    background:white;
+
+    border:2px solid transparent;
+
+    border-radius:17px;
+
+    padding:10px;
+
+    box-shadow:
+    0 10px 35px
+    rgba(35,40,50,.06);
+
+    transition:.3s;
+
+}
+
+.template-option:hover
+.template-card{
+
+    transform:translateY(-7px);
+
+}
+
+.template-option.selected
+.template-card{
+
+    border-color:var(--primary);
+
+    box-shadow:
+    0 15px 40px
+    rgba(197,29,103,.14);
+
+}
+
+.template-image{
+
+    aspect-ratio:
+    .72;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+
+/* =========================================================
+   TEMPLATE 1 - ROYAL
+========================================================= */
+
+.t-royal{
+
+    background:#fffaf1;
+
+    padding:20px;
+
+    border:1px solid #d9b86b;
+
+}
+
+.t-royal::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:9px;
+
+    border:1px solid #d9b86b;
+
+}
+
+.royal-decoration{
+
+    text-align:center;
+
+    color:#ae8232;
+
+    font-size:8px;
+
+    letter-spacing:3px;
+
+}
+
+.royal-title{
+
+    text-align:center;
+
+    font-family:
+    "Playfair Display",
+    serif;
+
+    color:#193c59;
+
+    font-size:19px;
+
+    margin:16px 0;
+
+}
+
+.royal-photo{
+
+    width:58px;
+    height:58px;
+
+    border-radius:50%;
+
+    background:#ead8d7;
+
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#b18a8a;
+
+}
+
+.royal-lines{
+
+    margin-top:15px;
+
+}
+
+.royal-lines div{
+
+    height:4px;
+
+    background:#ddd;
+
+    margin-bottom:6px;
+
+    border-radius:3px;
+
+}
+
+
+/* =========================================================
+   TEMPLATE 2 - MINIMAL
+========================================================= */
+
+.t-minimal{
+
+    background:#fff;
+
+    padding:25px 20px;
+
+}
+
+.minimal-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+}
+
+.minimal-title{
+
+    font-family:
+    "Inter",
+    sans-serif;
+
+    font-weight:700;
+
+    color:#111827;
+
+    font-size:17px;
+
+}
+
+.minimal-accent{
+
+    width:25px;
+
+    height:3px;
+
+    background:#111827;
+
+}
+
+.minimal-photo{
+
+    width:72px;
+    height:72px;
+
+    border-radius:10px;
+
+    background:#edf0f2;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#9ba6b1;
+
+    margin-bottom:20px;
+
+}
+
+.minimal-line{
+
+    display:flex;
+
+    border-bottom:1px solid #eceff2;
+
+    padding:7px 0;
+
+    font-size:7px;
+
+}
+
+.minimal-line strong{
+
+    width:42%;
+
+    color:#6b7280;
+
+}
+
+.minimal-line span{
+
+    color:#111827;
+
+}
+
+
+/* =========================================================
+   TEMPLATE 3 - FLORAL
+========================================================= */
+
+.t-floral{
+
+    background:#fff;
+
+    padding:20px;
+
+    border:1px solid #eadbd5;
+
+}
+
+.floral-top{
+
+    text-align:center;
+
+    color:#bc5576;
+
+    font-size:10px;
+
+}
+
+.floral-title{
+
+    text-align:center;
+
+    font-family:
+    "Cormorant Garamond",
+    serif;
+
+    font-size:24px;
+
+    color:#744456;
+
+    margin:12px 0;
+
+}
+
+.floral-photo{
+
+    width:65px;
+    height:65px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:#f2dedf;
+
+    border:3px solid #f8e9ec;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#b9828b;
+
+}
+
+.floral-data{
+
+    margin-top:17px;
+
+}
+
+.floral-data div{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    font-size:7px;
+
+    padding:6px 0;
+
+    border-bottom:1px dashed #ead8dc;
+
+}
+
+.floral-data strong{
+
+    color:#8a5667;
+
+}
+
+
+/* =========================================================
+   TEMPLATE 4 - DARK LUXURY
+========================================================= */
+
+.t-dark{
+
+    background:
+    linear-gradient(
+        150deg,
+        #111d2b,
+        #24394b
+    );
+
+    padding:20px;
+
+    color:white;
+
+}
+
+.dark-border{
+
+    position:absolute;
+
+    inset:9px;
+
+    border:1px solid #b99a57;
+
+}
+
+.dark-label{
+
+    text-align:center;
+
+    color:#d5b56b;
+
+    font-size:8px;
+
+    letter-spacing:3px;
+
+}
+
+.dark-title{
+
+    text-align:center;
+
+    font-family:
+    "Playfair Display",
+    serif;
+
+    color:#fff;
+
+    font-size:20px;
+
+    margin:15px 0;
+
+}
+
+.dark-photo{
+
+    width:65px;
+    height:65px;
+
+    border-radius:50%;
+
+    margin:auto;
+
+    background:#d7c6c2;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#756b69;
+
+}
+
+.dark-data{
+
+    margin-top:18px;
+
+}
+
+.dark-data div{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    font-size:7px;
+
+    color:#d9dde1;
+
+    padding:6px 0;
+
+    border-bottom:
+    1px solid rgba(255,255,255,.12);
+
+}
+
+.dark-data strong{
+
+    color:#d5b56b;
+
+}
+
+.template-name{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    padding:13px 4px 4px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    color:var(--navy);
+
+}
+
+.radio{
+
+    width:16px;
+    height:16px;
+
+    border-radius:50%;
+
+    border:1px solid #b7c1ca;
+
+}
+
+.template-option.selected .radio{
+
+    border:5px solid var(--primary);
+
+}
+
+
+/* =========================================================
+   BUILDER
+========================================================= */
+
+.builder-section{
+
+    background:#fff;
+
+}
+
+.builder{
+
+    display:grid;
+
+    grid-template-columns:
+    410px 1fr;
+
+    gap:30px;
+
+    align-items:start;
+
+}
+
+.form-panel{
+
+    border:1px solid #e9e4e7;
+
+    border-radius:20px;
+
+    background:#fff;
+
+    padding:27px;
+
+    box-shadow:var(--shadow);
+
+    position:sticky;
+
+    top:100px;
+
+}
+
+.form-heading{
+
+    margin-bottom:25px;
+
+}
+
+.form-heading h3{
+
+    font-size:21px;
+
+    color:var(--navy);
+
+}
+
+.form-heading p{
+
+    color:#82909f;
+
+    font-size:12px;
+
+    margin-top:4px;
+
+}
+
+.form-title{
+
+    font-size:11px;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+    padding-bottom:9px;
+
+    margin:
+    25px 0 15px;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.form-group{
+
+    margin-bottom:13px;
+
+}
+
+.form-group label{
+
+    display:block;
+
+    color:#506072;
+
+    font-size:11px;
+
+    font-weight:600;
+
+    margin-bottom:6px;
+
+}
+
+.input{
+
+    width:100%;
+
+    border:1px solid #dde4e9;
+
+    border-radius:9px;
+
+    padding:11px 12px;
+
+    outline:none;
+
+    font-size:12px;
+
+    color:#26384a;
+
+    background:#fff;
+
+    transition:.2s;
+
+}
+
+.input:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:
+    0 0 0 3px
+    rgba(197,29,103,.07);
+
+}
+
+.form-row{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:11px;
+
+}
+
+textarea.input{
+
+    resize:vertical;
+
+    min-height:90px;
+
+}
+
+.upload{
+
+    border:1px dashed #ccd6dd;
+
+    background:#fafbfc;
+
+    border-radius:11px;
+
+    padding:18px;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.upload:hover{
+
+    border-color:var(--primary);
+
+    background:#fff7fa;
+
+}
+
+.upload i{
+
+    color:var(--primary);
+
+    font-size:23px;
+
+    margin-bottom:6px;
+
+}
+
+.upload p{
+
+    color:#7c8996;
+
+    font-size:11px;
+
+}
+
+.upload small{
+
+    color:#a0aab3;
+
+    font-size:9px;
+
+}
+
+.upload input{
+
+    display:none;
+
+}
+
+.upload-preview{
+
+    width:75px;
+    height:75px;
+
+    margin:10px auto 0;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    display:none;
+
+}
+
+.full-btn{
+
+    width:100%;
+
+    margin-top:16px;
+
+}
+
+
+/* =========================================================
+   PREVIEW AREA
+========================================================= */
+
+.preview-area{
+
+    background:#eef0f3;
+
+    border-radius:20px;
+
+    padding:28px;
+
+    min-height:900px;
+
+}
+
+.preview-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+}
+
+.preview-top h3{
+
+    font-size:16px;
+
+    color:var(--navy);
+
+}
+
+.preview-top span{
+
+    font-size:10px;
+
+    color:#8a96a2;
+
+}
+
+
+/* =========================================================
+   BIODATA DOCUMENT
+========================================================= */
+
+.biodata{
+
+    width:100%;
+
+    max-width:700px;
+
+    min-height:990px;
+
+    margin:auto;
+
+    position:relative;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 15px 45px
+    rgba(20,30,40,.14);
+
+}
+
+
+/* =========================================================
+   LIVE ROYAL TEMPLATE
+========================================================= */
+
+.biodata.royal{
+
+    background:#fffaf1;
+
+    color:#303b47;
+
+    padding:60px;
+
+    font-family:"DM Sans",sans-serif;
+
+}
+
+.biodata.royal::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:18px;
+
+    border:1px solid #d2b26a;
+
+}
+
+.biodata.royal::after{
+
+    content:"✦  ❖  ✦";
+
+    position:absolute;
+
+    top:30px;
+
+    left:0;
+    right:0;
+
+    text-align:center;
+
+    color:#b88b35;
+
+    font-size:12px;
+
+    letter-spacing:5px;
+
+}
+
+.biodata.royal .bio-header{
+
+    text-align:center;
+
+    position:relative;
+
+}
+
+.biodata.royal .bio-label{
+
+    color:#ae8031;
+
+    letter-spacing:4px;
+
+    font-size:10px;
+
+    font-weight:700;
+
+}
+
+.biodata.royal .bio-title{
+
+    font-family:
+    "Playfair Display",
+    serif;
+
+    font-size:40px;
+
+    color:#193b58;
+
+    margin:7px 0 22px;
+
+}
+
+.biodata.royal .bio-photo{
+
+    width:125px;
+    height:125px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    background:#ead9d8;
+
+    border:5px solid #fff;
+
+    box-shadow:
+    0 5px 18px rgba(0,0,0,.12);
+
+}
+
+.biodata.royal .bio-section{
+
+    margin-top:35px;
+
+}
+
+.biodata.royal .bio-section-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#193b58;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    margin-bottom:15px;
+
+}
+
+.biodata.royal .bio-section-title::after{
+
+    content:"";
+
+    flex:1;
+
+    height:1px;
+
+    background:#d7c28e;
+
+}
+
+.biodata.royal .bio-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:11px 30px;
+
+}
+
+.biodata.royal .bio-row{
+
+    display:grid;
+
+    grid-template-columns:100px 10px 1fr;
+
+    font-size:11px;
+
+}
+
+.biodata.royal .bio-row strong{
+
+    color:#7c8085;
+
+}
+
+.biodata.royal .colon{
+
+    color:#b58d43;
+
+}
+
+.biodata.royal .bio-about{
+
+    font-size:11px;
+
+    color:#596570;
+
+    line-height:1.8;
+
+}
+
+.biodata.royal .bio-footer{
+
+    text-align:center;
+
+    color:#b18a3b;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    margin-top:45px;
+
+}
+
+
+/* =========================================================
+   LIVE MINIMAL TEMPLATE
+========================================================= */
+
+.biodata.minimal{
+
+    background:#fff;
+
+    color:#17202b;
+
+    padding:65px;
+
+    font-family:"Inter",sans-serif;
+
+}
+
+.biodata.minimal::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:7px;
+
+    left:0;
+    top:0;
+    bottom:0;
+
+    background:#17202b;
+
+}
+
+.biodata.minimal .bio-header{
+
+    display:grid;
+
+    grid-template-columns:1fr 140px;
+
+    gap:40px;
+
+    align-items:center;
+
+    padding-bottom:30px;
+
+    border-bottom:1px solid #e3e7ea;
+
+}
+
+.biodata.minimal .bio-label{
+
+    color:#7b8793;
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+    font-weight:700;
+
+}
+
+.biodata.minimal .bio-title{
+
+    font-size:43px;
+
+    line-height:1.05;
+
+    margin:8px 0;
+
+    color:#111827;
+
+    font-weight:700;
+
+}
+
+.biodata.minimal .bio-subtitle{
+
+    color:#7a8490;
+
+    font-size:11px;
+
+}
+
+.biodata.minimal .bio-photo{
+
+    width:135px;
+    height:155px;
+
+    object-fit:cover;
+
+    border-radius:5px;
+
+    background:#edf0f2;
+
+}
+
+.biodata.minimal .bio-section{
+
+    margin-top:35px;
+
+}
+
+.biodata.minimal .bio-section-title{
+
+    color:#111827;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+
+    margin-bottom:15px;
+
+}
+
+.biodata.minimal .bio-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:0 35px;
+
+}
+
+.biodata.minimal .bio-row{
+
+    display:grid;
+
+    grid-template-columns:105px 1fr;
+
+    padding:10px 0;
+
+    border-bottom:1px solid #edf0f2;
+
+    font-size:11px;
+
+}
+
+.biodata.minimal .bio-row strong{
+
+    color:#89929d;
+
+    font-weight:500;
+
+}
+
+.biodata.minimal .bio-about{
+
+    font-size:11px;
+
+    line-height:1.9;
+
+    color:#59636e;
+
+}
+
+.biodata.minimal .bio-footer{
+
+    margin-top:45px;
+
+    padding-top:15px;
+
+    border-top:1px solid #e4e7ea;
+
+    font-size:9px;
+
+    color:#929aa3;
+
+}
+
+
+/* =========================================================
+   LIVE FLORAL TEMPLATE
+========================================================= */
+
+.biodata.floral{
+
+    background:#fffdfd;
+
+    color:#4d3740;
+
+    padding:60px;
+
+    font-family:"DM Sans",sans-serif;
+
+}
+
+.biodata.floral::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:17px;
+
+    border:1px solid #ead6db;
+
+    border-radius:5px;
+
+}
+
+.biodata.floral::after{
+
+    content:"❀  ❀  ❀";
+
+    position:absolute;
+
+    top:27px;
+
+    left:0;
+    right:0;
+
+    text-align:center;
+
+    color:#c56684;
+
+    font-size:13px;
+
+    letter-spacing:7px;
+
+}
+
+.biodata.floral .bio-header{
+
+    text-align:center;
+
+}
+
+.biodata.floral .bio-label{
+
+    color:#bd5877;
+
+    font-size:10px;
+
+    letter-spacing:4px;
+
+}
+
+.biodata.floral .bio-title{
+
+    font-family:
+    "Cormorant Garamond",
+    serif;
+
+    font-size:48px;
+
+    color:#713e52;
+
+    line-height:1;
+
+    margin:8px 0 20px;
+
+}
+
+.biodata.floral .bio-photo{
+
+    width:130px;
+    height:130px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    background:#f1dddd;
+
+    border:5px solid #fff;
+
+    box-shadow:
+    0 5px 20px rgba(130,70,90,.13);
+
+}
+
+.biodata.floral .bio-section{
+
+    margin-top:36px;
+
+}
+
+.biodata.floral .bio-section-title{
+
+    text-align:center;
+
+    color:#8d5367;
+
+    font-family:
+    "Cormorant Garamond",
+    serif;
+
+    font-size:23px;
+
+    margin-bottom:15px;
+
+}
+
+.biodata.floral .bio-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:0 25px;
+
+}
+
+.biodata.floral .bio-row{
+
+    padding:9px 0;
+
+    border-bottom:1px dashed #ead8dd;
+
+    font-size:11px;
+
+}
+
+.biodata.floral .bio-row strong{
+
+    display:inline-block;
+
+    width:95px;
+
+    color:#986174;
+
+}
+
+.biodata.floral .bio-about{
+
+    text-align:center;
+
+    font-family:
+    "Cormorant Garamond",
+    serif;
+
+    font-size:17px;
+
+    line-height:1.6;
+
+    color:#6b4a56;
+
+}
+
+.biodata.floral .bio-footer{
+
+    text-align:center;
+
+    margin-top:42px;
+
+    color:#bd6a85;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+}
+
+
+/* =========================================================
+   LIVE DARK TEMPLATE
+========================================================= */
+
+.biodata.dark{
+
+    background:
+    linear-gradient(
+        145deg,
+        #101d2b,
+        #203b4e
+    );
+
+    color:#f5f3ed;
+
+    padding:60px;
+
+    font-family:"DM Sans",sans-serif;
+
+}
+
+.biodata.dark::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:18px;
+
+    border:1px solid #a8894e;
+
+}
+
+.biodata.dark::after{
+
+    content:"✦";
+
+    position:absolute;
+
+    top:30px;
+
+    left:0;
+    right:0;
+
+    text-align:center;
+
+    color:#d4b566;
+
+    font-size:14px;
+
+}
+
+.biodata.dark .bio-header{
+
+    text-align:center;
+
+}
+
+.biodata.dark .bio-label{
+
+    color:#d2b46b;
+
+    font-size:10px;
+
+    letter-spacing:4px;
+
+}
+
+.biodata.dark .bio-title{
+
+    font-family:
+    "Playfair Display",
+    serif;
+
+    color:#fff;
+
+    font-size:43px;
+
+    margin:8px 0 20px;
+
+}
+
+.biodata.dark .bio-photo{
+
+    width:125px;
+    height:125px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    background:#d8c6c0;
+
+    border:4px solid #d1b36a;
+
+}
+
+.biodata.dark .bio-section{
+
+    margin-top:35px;
+
+}
+
+.biodata.dark .bio-section-title{
+
+    color:#d7b969;
+
+    font-size:13px;
+
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+
+    margin-bottom:15px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.biodata.dark .bio-section-title::after{
+
+    content:"";
+
+    height:1px;
+
+    background:#715d3b;
+
+    flex:1;
+
+}
+
+.biodata.dark .bio-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:0 30px;
+
+}
+
+.biodata.dark .bio-row{
+
+    padding:10px 0;
+
+    border-bottom:
+    1px solid rgba(255,255,255,.10);
+
+    font-size:11px;
+
+}
+
+.biodata.dark .bio-row strong{
+
+    color:#c7aa62;
+
+    display:inline-block;
+
+    width:100px;
+
+}
+
+.biodata.dark .bio-about{
+
+    color:#d1d7db;
+
+    font-size:11px;
+
+    line-height:1.9;
+
+}
+
+.biodata.dark .bio-footer{
+
+    text-align:center;
+
+    color:#bfa45f;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    margin-top:45px;
+
+}
+
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.features-section{
+
+    background:#fff9fa;
+
+}
+
+.features{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:15px;
+
+}
+
+.feature{
+
+    text-align:center;
+
+    background:#fff;
+
+    padding:35px 20px;
+
+    border:1px solid #f0e5e8;
+
+    border-radius:17px;
+
+}
+
+.feature-icon{
+
+    width:52px;
+    height:52px;
+
+    margin:0 auto 15px;
+
+    border-radius:15px;
+
+    background:#fff0f5;
+
+    color:var(--primary);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:20px;
+
+}
+
+.feature h3{
+
+    font-size:15px;
+
+    color:var(--navy);
+
+    margin-bottom:6px;
+
+}
+
+.feature p{
+
+    color:#7a8794;
+
+    font-size:11px;
+
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.cta-section{
+
+    padding:90px 0;
+
+}
+
+.cta-box{
+
+    background:
+    linear-gradient(
+        135deg,
+        #123653,
+        #1e4969
+    );
+
+    border-radius:25px;
+
+    text-align:center;
+
+    padding:75px 25px;
+
+    color:white;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.cta-box::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:280px;
+    height:280px;
+
+    border:1px solid rgba(255,255,255,.1);
+
+    border-radius:50%;
+
+    left:-100px;
+    top:-120px;
+
+}
+
+.cta-box::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:280px;
+    height:280px;
+
+    border:1px solid rgba(255,255,255,.1);
+
+    border-radius:50%;
+
+    right:-100px;
+    bottom:-120px;
+
+}
+
+.cta-box h2{
+
+    font-family:
+    "Playfair Display",
+    serif;
+
+    font-size:42px;
+
+    margin-bottom:12px;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.cta-box p{
+
+    color:#d4dfe7;
+
+    font-size:14px;
+
+    margin-bottom:25px;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+
+    background:#0d2b43;
+
+    color:#fff;
+
+    padding:30px 0;
+
+}
+
+.footer-inner{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.footer p{
+
+    color:#aebdca;
+
+    font-size:11px;
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+
+    position:fixed;
+
+    bottom:25px;
+
+    right:25px;
+
+    background:#172f45;
+
+    color:white;
+
+    padding:13px 18px;
+
+    border-radius:10px;
+
+    font-size:12px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.2);
+
+    transform:
+    translateY(100px);
+
+    opacity:0;
+
+    transition:.3s;
+
+    z-index:5000;
+
+}
+
+.toast.show{
+
+    transform:
+    translateY(0);
+
+    opacity:1;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1050px){
+
+    .hero-grid{
+
+        gap:35px;
+
+    }
+
+    .builder{
+
+        grid-template-columns:
+        350px 1fr;
+
+    }
+
+}
+
+@media(max-width:850px){
+
+    .nav{
+
+        display:none;
+
+        position:absolute;
+
+        top:78px;
+
+        left:0;
+        right:0;
+
+        background:#fff;
+
+        padding:20px;
+
+        flex-direction:column;
+
+        gap:18px;
+
+        border-bottom:1px solid #eee;
+
+    }
+
+    .nav.open{
+
+        display:flex;
+
+    }
+
+    .mobile-menu{
+
+        display:block;
+
+    }
+
+    .hero-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .hero-content{
+
+        text-align:center;
+
+    }
+
+    .hero-description{
+
+        margin-left:auto;
+        margin-right:auto;
+
+    }
+
+    .hero-buttons{
+
+        justify-content:center;
+
+    }
+
+    .hero-trust{
+
+        justify-content:center;
+
+        flex-wrap:wrap;
+
+    }
+
+    .template-grid{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+    .steps{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+    .step:not(:last-child)::after{
+
+        display:none;
+
+    }
+
+    .builder{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .form-panel{
+
+        position:static;
+
+    }
+
+    .features{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .container{
+
+        width:
+        calc(100% - 28px);
+
+    }
+
+    .section{
+
+        padding:70px 0;
+
+    }
+
+    .hero{
+
+        padding:65px 0;
+
+    }
+
+    .hero h1{
+
+        font-size:43px;
+
+    }
+
+    .hero-description{
+
+        font-size:14px;
+
+    }
+
+    .hero-visual{
+
+        transform:scale(.86);
+
+        margin:
+        -30px 0;
+
+    }
+
+    .steps{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .template-grid{
+
+        grid-template-columns:
+        1fr 1fr;
+
+        gap:12px;
+
+    }
+
+    .section-heading h2{
+
+        font-size:32px;
+
+    }
+
+    .form-row{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .preview-area{
+
+        padding:8px;
+
+        overflow:hidden;
+
+    }
+
+    .preview-top{
+
+        padding:8px;
+
+    }
+
+    .preview-top span{
+
+        display:none;
+
+    }
+
+    .biodata{
+
+        min-height:900px;
+
+    }
+
+    .biodata.royal,
+    .biodata.floral,
+    .biodata.dark{
+
+        padding:45px 30px;
+
+    }
+
+    .biodata.minimal{
+
+        padding:45px 30px;
+
+    }
+
+    .biodata.minimal .bio-header{
+
+        grid-template-columns:1fr 100px;
+
+        gap:20px;
+
+    }
+
+    .biodata.minimal .bio-title{
+
+        font-size:30px;
+
+    }
+
+    .biodata.minimal .bio-photo{
+
+        width:95px;
+        height:115px;
+
+    }
+
+    .biodata.royal .bio-grid,
+    .biodata.minimal .bio-grid,
+    .biodata.floral .bio-grid,
+    .biodata.dark .bio-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .biodata.royal .bio-title,
+    .biodata.dark .bio-title{
+
+        font-size:32px;
+
+    }
+
+    .biodata.floral .bio-title{
+
+        font-size:40px;
+
+    }
+
+    .features{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .cta-box{
+
+        padding:55px 20px;
+
+    }
+
+    .cta-box h2{
+
+        font-size:31px;
+
+    }
+
+    .footer-inner{
+
+        flex-direction:column;
+
+        gap:10px;
+
+        text-align:center;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="header">
+
+<div class="container header-inner">
+
+<a href="#home" class="logo">
+
+<div class="logo-icon">
+
+<i class="fa-solid fa-heart"></i>
+
+</div>
+
+<div class="logo-text">
+
+<strong>VivahBio</strong>
+
+<span>Marriage Biodata Maker</span>
+
+</div>
+
+</a>
+
+
+<nav class="nav" id="nav">
+
+<a href="#home">
+Home
+</a>
+
+<a href="#how">
+How It Works
+</a>
+
+<a href="#templates">
+Templates
+</a>
+
+<a href="#builder">
+Create Biodata
+</a>
+
+<a href="#builder"
+class="nav-cta">
+
+Get Started
+
+</a>
+
+</nav>
+
+
+<button
+class="mobile-menu"
+id="mobileMenu">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+</div>
+
+</header>
+
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section
+class="hero"
+id="home">
+
+<div class="container hero-grid">
+
+
+<div>
+
+<div class="hero-tag">
+
+CREATE BEAUTIFUL BIODATA
+
+</div>
+
+
+<h1>
+
+Your Story.
+
+<span>
+Your Biodata.
+</span>
+
+Your Way.
+
+</h1>
+
+
+<p class="hero-description">
+
+Create an elegant marriage biodata in just a few
+minutes. Enter your information, upload your photo,
+choose a beautiful design and download your
+professional biodata as a PDF.
+
+</p>
+
+
+<div class="hero-buttons">
+
+<a
+href="#builder"
+class="btn btn-primary">
+
+Create My Biodata
+
+<i class="fa-solid fa-arrow-right"></i>
+
+</a>
+
+
+<a
+href="#templates"
+class="btn btn-outline">
+
+Explore Templates
+
+</a>
+
+</div>
+
+
+<div class="hero-trust">
+
+<div class="trust-item">
+
+<i class="fa-solid fa-bolt"></i>
+
+Quick & Easy
+
+</div>
+
+<div class="trust-item">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+Private
+
+</div>
+
+<div class="trust-item">
+
+<i class="fa-solid fa-file-pdf"></i>
+
+PDF Download
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- HERO VISUAL -->
+
+<div class="hero-visual">
+
+
+<div class="floating-card left">
+
+<div class="float-icon">
+
+<i class="fa-solid fa-wand-magic-sparkles"></i>
+
+</div>
+
+<strong>
+Beautiful Templates
+</strong>
+
+<p>
+Choose a design you love
+</p>
+
+</div>
+
+
+<div class="hero-biodata">
+
+<div class="hero-biodata-inner">
+
+<div class="mock-top">
+
+<div class="mock-label">
+PERSONAL
+</div>
+
+<div class="mock-title">
+BIODATA
+</div>
+
+<div class="mock-photo">
+
+<i class="fa-solid fa-user"></i>
+
+</div>
+
+</div>
+
+
+<div class="mock-lines">
+
+<div class="mock-line"></div>
+<div class="mock-line"></div>
+<div class="mock-line"></div>
+<div class="mock-line"></div>
+<div class="mock-line"></div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="floating-card right">
+
+<div class="float-icon">
+
+<i class="fa-solid fa-file-pdf"></i>
+
+</div>
+
+<strong>
+Instant PDF
+</strong>
+
+<p>
+Download your biodata instantly
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     HOW IT WORKS
+========================================================= -->
+
+<section
+class="section steps-section"
+id="how">
+
+<div class="container">
+
+<div class="section-heading">
+
+<div class="section-label">
+HOW IT WORKS
+</div>
+
+<h2>
+Create Your Biodata in 4 Easy Steps
+</h2>
+
+<p>
+No design skills required. Just enter your details
+and we'll take care of the rest.
+</p>
+
+</div>
+
+
+<div class="steps">
+
+
+<div class="step">
+
+<div class="step-icon">
+
+<i class="fa-regular fa-pen-to-square"></i>
+
+<div class="step-number">
+1
+</div>
+
+</div>
+
+<h3>
+Enter Your Details
+</h3>
+
+<p>
+Add your personal, professional and family information.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-icon">
+
+<i class="fa-solid fa-camera"></i>
+
+<div class="step-number">
+2
+</div>
+
+</div>
+
+<h3>
+Upload Your Photo
+</h3>
+
+<p>
+Upload a clear photo for your biodata profile.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-icon">
+
+<i class="fa-solid fa-layer-group"></i>
+
+<div class="step-number">
+3
+</div>
+
+</div>
+
+<h3>
+Choose Your Design
+</h3>
+
+<p>
+Select from our beautiful modern templates.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-icon">
+
+<i class="fa-solid fa-download"></i>
+
+<div class="step-number">
+4
+</div>
+
+</div>
+
+<h3>
+Download PDF
+</h3>
+
+<p>
+Download your ready-to-share marriage biodata.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     TEMPLATES
+========================================================= -->
+
+<section
+class="section template-section"
+id="templates">
+
+<div class="container">
+
+<div class="section-heading">
+
+<div class="section-label">
+OUR TEMPLATES
+</div>
+
+<h2>
+Choose a Design That Feels Like You
+</h2>
+
+<p>
+From timeless elegance to modern minimalism,
+find a biodata style that matches your personality.
+</p>
+
+</div>
+
+
+<div class="template-grid">
+
+
+<!-- =========================
+     ROYAL
+========================= -->
+
+<div
+class="template-option selected"
+data-template="royal">
+
+<div class="template-card">
+
+<div class="template-image t-royal">
+
+<div class="royal-decoration">
+✦ ❖ ✦
+</div>
+
+<div class="royal-title">
+BIODATA
+</div>
+
+<div class="royal-photo">
+
+<i class="fa-solid fa-user"></i>
+
+</div>
+
+<div class="royal-lines">
+
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+
+</div>
+
+</div>
+
+<div class="template-name">
+
+<span class="radio"></span>
+
+Royal Gold
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     MINIMAL
+========================= -->
+
+<div
+class="template-option"
+data-template="minimal">
+
+<div class="template-card">
+
+<div class="template-image t-minimal">
+
+<div class="minimal-top">
+
+<div class="minimal-title">
+BIODATA
+</div>
+
+<div class="minimal-accent"></div>
+
+</div>
+
+<div class="minimal-photo">
+
+<i class="fa-solid fa-user"></i>
+
+</div>
+
+<div class="minimal-line">
+<strong>Name</strong>
+<span>Rahul Sharma</span>
+</div>
+
+<div class="minimal-line">
+<strong>Education</strong>
+<span>B.Tech</span>
+</div>
+
+<div class="minimal-line">
+<strong>Profession</strong>
+<span>Engineer</span>
+</div>
+
+<div class="minimal-line">
+<strong>Location</strong>
+<span>New Delhi</span>
+</div>
+
+</div>
+
+<div class="template-name">
+
+<span class="radio"></span>
+
+Modern Minimal
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     FLORAL
+========================= -->
+
+<div
+class="template-option"
+data-template="floral">
+
+<div class="template-card">
+
+<div class="template-image t-floral">
+
+<div class="floral-top">
+🌿 ❀ 🌿
+</div>
+
+<div class="floral-title">
+Biodata
+</div>
+
+<div class="floral-photo">
+
+<i class="fa-solid fa-user"></i>
+
+</div>
+
+<div class="floral-data">
+
+<div>
+<strong>Name</strong>
+<span>Priya Verma</span>
+</div>
+
+<div>
+<strong>Education</strong>
+<span>M.Sc</span>
+</div>
+
+<div>
+<strong>Profession</strong>
+<span>Teacher</span>
+</div>
+
+<div>
+<strong>City</strong>
+<span>Delhi</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="template-name">
+
+<span class="radio"></span>
+
+Floral Elegance
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     DARK
+========================= -->
+
+<div
+class="template-option"
+data-template="dark">
+
+<div class="template-card">
+
+<div class="template-image t-dark">
+
+<div class="dark-border"></div>
+
+<div class="dark-label">
+PERSONAL
+</div>
+
+<div class="dark-title">
+BIODATA
+</div>
+
+<div class="dark-photo">
+
+<i class="fa-solid fa-user"></i>
+
+</div>
+
+<div class="dark-data">
+
+<div>
+<strong>Name</strong>
+<span>Amit Kumar</span>
+</div>
+
+<div>
+<strong>Education</strong>
+<span>MBA</span>
+</div>
+
+<div>
+<strong>Profession</strong>
+<span>Business</span>
+</div>
+
+<div>
+<strong>Location</strong>
+<span>Mumbai</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="template-name">
+
+<span class="radio"></span>
+
+Dark Luxury
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     BUILDER
+========================================================= -->
+
+<section
+class="section builder-section"
+id="builder">
+
+<div class="container">
+
+
+<div class="section-heading">
+
+<div class="section-label">
+CREATE YOUR BIODATA
+</div>
+
+<h2>
+Build Your Marriage Biodata
+</h2>
+
+<p>
+Enter your information below and see your biodata
+update live on the right.
+</p>
+
+</div>
+
+
+<div class="builder">
+
+
+<!-- =====================================================
+     FORM
+===================================================== -->
+
+<div class="form-panel">
+
+<div class="form-heading">
+
+<h3>
+Your Information
+</h3>
+
+<p>
+Fill in the details you want to include.
+</p>
+
+</div>
+
+
+<!-- PERSONAL -->
+
+<div class="form-title">
+Personal Information
+</div>
+
+
+<div class="form-group">
+
+<label>
+Full Name *
+</label>
+
+<input
+type="text"
+id="name"
+class="input"
+value="Rahul Sharma"
+placeholder="Enter full name">
+
+</div>
+
+
+<div class="form-row">
+
+<div class="form-group">
+
+<label>
+Gender
+</label>
+
+<select
+id="gender"
+class="input">
+
+<option>Male</option>
+
+<option>Female</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Date of Birth
+</label>
+
+<input
+type="date"
+id="dob"
+class="input">
+
+</div>
+
+</div>
+
+
+<div class="form-row">
+
+<div class="form-group">
+
+<label>
+Height
+</label>
+
+<input
+type="text"
+id="height"
+class="input"
+value="5'10&quot;"
+placeholder="5'10&quot;">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Religion
+</label>
+
+<input
+type="text"
+id="religion"
+class="input"
+value="Hindu"
+placeholder="Religion">
+
+</div>
+
+</div>
+
+
+<div class="form-row">
+
+<div class="form-group">
+
+<label>
+Education
+</label>
+
+<input
+type="text"
+id="education"
+class="input"
+value="B.Tech"
+placeholder="Education">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Profession
+</label>
+
+<input
+type="text"
+id="profession"
+class="input"
+value="Software Engineer"
+placeholder="Profession">
+
+</div>
+
+</div>
+
+
+<div class="form-row">
+
+<div class="form-group">
+
+<label>
+Annual Income
+</label>
+
+<input
+type="text"
+id="income"
+class="input"
+value="₹12 LPA"
+placeholder="Annual income">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+City
+</label>
+
+<input
+type="text"
+id="city"
+class="input"
+value="New Delhi"
+placeholder="City">
+
+</div>
+
+</div>
+
+
+
+<!-- FAMILY -->
+
+<div class="form-title">
+Family Information
+</div>
+
+
+<div class="form-group">
+
+<label>
+Father's Name
+</label>
+
+<input
+type="text"
+id="father"
+class="input"
+value="Rajesh Sharma"
+placeholder="Father's name">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Mother's Name
+</label>
+
+<input
+type="text"
+id="mother"
+class="input"
+value="Sunita Sharma"
+placeholder="Mother's name">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Siblings
+</label>
+
+<input
+type="text"
+id="siblings"
+class="input"
+value="1 Brother"
+placeholder="Brother / Sister">
+
+</div>
+
+
+
+<!-- CONTACT -->
+
+<div class="form-title">
+Contact Information
+</div>
+
+
+<div class="form-row">
+
+<div class="form-group">
+
+<label>
+Phone
+</label>
+
+<input
+type="text"
+id="phone"
+class="input"
+placeholder="+91 XXXXX XXXXX">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Email
+</label>
+
+<input
+type="email"
+id="email"
+class="input"
+placeholder="email@example.com">
+
+</div>
+
+</div>
+
+
+
+<!-- ABOUT -->
+
+<div class="form-title">
+About Me
+</div>
+
+
+<div class="form-group">
+
+<label>
+About Yourself
+</label>
+
+<textarea
+id="about"
+class="input"
+placeholder="Write something about yourself..."
+>Simple, caring and family-oriented person who believes in maintaining a good balance between professional and personal life.</textarea>
+
+</div>
+
+
+
+<!-- PHOTO -->
+
+<div class="form-title">
+Profile Photo
+</div>
+
+
+<label class="upload">
+
+<i class="fa-solid fa-cloud-arrow-up"></i>
+
+<p>
+Click to upload your photo
+</p>
+
+<small>
+JPG or PNG • Maximum 5MB
+</small>
+
+
+<input
+type="file"
+id="photo"
+accept="image/jpeg,image/png">
+
+
+<img
+src=""
+id="uploadPreview"
+class="upload-preview"
+alt="Uploaded photo">
+
+</label>
+
+
+<button
+class="btn btn-primary full-btn"
+id="downloadPdf">
+
+<i class="fa-solid fa-file-pdf"></i>
+
+Download Biodata PDF
+
+</button>
+
+</div>
+
+
+
+<!-- =====================================================
+     LIVE PREVIEW
+===================================================== -->
+
+<div class="preview-area">
+
+
+<div class="preview-top">
+
+<h3>
+Live Preview
+</h3>
+
+<span>
+Template updates automatically
+</span>
+
+</div>
+
+
+<!-- BIODATA -->
+
+<div
+id="biodata"
+class="biodata royal">
+
+
+<div class="bio-header">
+
+<div class="bio-label">
+PERSONAL
+</div>
+
+<div class="bio-title">
+BIODATA
+</div>
+
+<img
+src=""
+id="bioPhoto"
+class="bio-photo"
+alt="Profile photo">
+
+</div>
+
+
+
+<!-- PERSONAL -->
+
+<div class="bio-section">
+
+<div class="bio-section-title">
+Personal Information
+</div>
+
+
+<div class="bio-grid">
+
+
+<div class="bio-row">
+<strong>Name</strong>
+<span id="bioName">Rahul Sharma</span>
+</div>
+
+
+<div class="bio-row">
+<strong>Gender</strong>
+<span id="bioGender">Male</span>
+</div>
+
+
+<div class="bio-row">
+<strong>Date of Birth</strong>
+<span id="bioDob">—</span>
+</div>
+
+
+<div class="bio-row">
+<strong>Height</strong>
+<span id="bioHeight">5'10"</span>
+</div>
+
+
+<div class="bio-row">
+<strong>Religion</strong>
+<span id="bioReligion">Hindu</span>
+</div>
+
+
+<div class="bio-row">
+<strong>Education</strong>
+<span id="bioEducation">B.Tech</span>
+</div>
+
+
+<div class="bio-row">
+<strong>Profession</strong>
+<span id="bioProfession">
+Software Engineer
+</span>
+</div>
+
+
+<div class="bio-row">
+<strong>Income</strong>
+<span id="bioIncome">
+₹12 LPA
+</span>
+</div>
+
+
+<div class="bio-row">
+<strong>City</strong>
+<span id="bioCity">
+New Delhi
+</span>
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- FAMILY -->
+
+<div class="bio-section">
+
+<div class="bio-section-title">
+Family Information
+</div>
+
+
+<div class="bio-grid">
+
+
+<div class="bio-row">
+<strong>Father</strong>
+<span id="bioFather">
+Rajesh Sharma
+</span>
+</div>
+
+
+<div class="bio-row">
+<strong>Mother</strong>
+<span id="bioMother">
+Sunita Sharma
+</span>
+</div>
+
+
+<div class="bio-row">
+<strong>Siblings</strong>
+<span id="bioSiblings">
+1 Brother
+</span>
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- CONTACT -->
+
+<div class="bio-section">
+
+<div class="bio-section-title">
+Contact Information
+</div>
+
+
+<div class="bio-grid">
+
+
+<div class="bio-row">
+<strong>Phone</strong>
+<span id="bioPhone">—</span>
+</div>
+
+
+<div class="bio-row">
+<strong>Email</strong>
+<span id="bioEmail">—</span>
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ABOUT -->
+
+<div class="bio-section">
+
+<div class="bio-section-title">
+About Me
+</div>
+
+<p
+class="bio-about"
+id="bioAbout">
+
+Simple, caring and family-oriented person who believes
+in maintaining a good balance between professional
+and personal life.
+
+</p>
+
+</div>
+
+
+<div class="bio-footer">
+
+MADE WITH VIVAHBIO
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FEATURES
+========================================================= -->
+
+<section
+class="section features-section">
+
+<div class="container">
+
+<div class="section-heading">
+
+<div class="section-label">
+WHY VIVAHBIO
+</div>
+
+<h2>
+Everything You Need
+</h2>
+
+<p>
+Create a biodata that looks professional,
+beautiful and personal.
+</p>
+
+</div>
+
+
+<div class="features">
+
+
+<div class="feature">
+
+<div class="feature-icon">
+
+<i class="fa-solid fa-palette"></i>
+
+</div>
+
+<h3>
+Beautiful Designs
+</h3>
+
+<p>
+Modern and elegant templates created specifically
+for marriage biodata.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">
+
+<i class="fa-solid fa-lock"></i>
+
+</div>
+
+<h3>
+Private & Secure
+</h3>
+
+<p>
+Your information stays in your browser in this
+client-side version.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">
+
+<i class="fa-solid fa-bolt"></i>
+
+</div>
+
+<h3>
+Super Fast
+</h3>
+
+<p>
+Create your biodata in minutes without complicated
+design software.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">
+
+<i class="fa-solid fa-file-pdf"></i>
+
+</div>
+
+<h3>
+PDF Ready
+</h3>
+
+<p>
+Download a ready-to-share PDF directly from the
+biodata maker.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     CTA
+========================================================= -->
+
+<section class="cta-section">
+
+<div class="container">
+
+<div class="cta-box">
+
+<h2>
+Create Your Perfect Biodata Today
+</h2>
+
+<p>
+Choose a beautiful design, add your details
+and create your marriage biodata in minutes.
+</p>
+
+<a
+href="#builder"
+class="btn btn-primary">
+
+Start Creating
+
+<i class="fa-solid fa-arrow-right"></i>
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+<div class="container footer-inner">
+
+<div class="logo">
+
+<div class="logo-icon">
+
+<i class="fa-solid fa-heart"></i>
+
+</div>
+
+<div class="logo-text">
+
+<strong style="color:#fff;">
+VivahBio
+</strong>
+
+<span>
+Marriage Biodata Maker
+</span>
+
+</div>
+
+</div>
+
+
+<p>
+© 2026 VivahBio. Create beautiful biodata.
+</p>
+
+</div>
+
+</footer>
+
+
+
+<!-- TOAST -->
+
+<div
+class="toast"
+id="toast">
+
+Biodata updated successfully.
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   MOBILE NAVIGATION
+========================================================= */
+
+const mobileMenu =
+document.getElementById("mobileMenu");
+
+const nav =
+document.getElementById("nav");
+
+
+mobileMenu.addEventListener(
+"click",
+function(){
+
+nav.classList.toggle("open");
+
+}
+);
+
+
+document.querySelectorAll(
+".nav a"
+).forEach(function(link){
+
+link.addEventListener(
+"click",
+function(){
+
+nav.classList.remove("open");
+
+}
+);
+
+});
+
+
+
+/* =========================================================
+   FORM ELEMENTS
+========================================================= */
+
+const formFields = {
+
+name:
+document.getElementById("name"),
+
+gender:
+document.getElementById("gender"),
+
+dob:
+document.getElementById("dob"),
+
+height:
+document.getElementById("height"),
+
+religion:
+document.getElementById("religion"),
+
+education:
+document.getElementById("education"),
+
+profession:
+document.getElementById("profession"),
+
+income:
+document.getElementById("income"),
+
+city:
+document.getElementById("city"),
+
+father:
+document.getElementById("father"),
+
+mother:
+document.getElementById("mother"),
+
+siblings:
+document.getElementById("siblings"),
+
+phone:
+document.getElementById("phone"),
+
+email:
+document.getElementById("email"),
+
+about:
+document.getElementById("about")
+
+};
+
+
+
+/* =========================================================
+   HELPER
+========================================================= */
+
+function setText(id,value){
+
+const element =
+document.getElementById(id);
+
+if(element){
+
+element.textContent =
+value || "—";
+
+}
+
+}
+
+
+
+/* =========================================================
+   UPDATE LIVE PREVIEW
+========================================================= */
+
+function updatePreview(){
+
+setText(
+"bioName",
+formFields.name.value
+);
+
+setText(
+"bioGender",
+formFields.gender.value
+);
+
+setText(
+"bioHeight",
+formFields.height.value
+);
+
+setText(
+"bioReligion",
+formFields.religion.value
+);
+
+setText(
+"bioEducation",
+formFields.education.value
+);
+
+setText(
+"bioProfession",
+formFields.profession.value
+);
+
+setText(
+"bioIncome",
+formFields.income.value
+);
+
+setText(
+"bioCity",
+formFields.city.value
+);
+
+setText(
+"bioFather",
+formFields.father.value
+);
+
+setText(
+"bioMother",
+formFields.mother.value
+);
+
+setText(
+"bioSiblings",
+formFields.siblings.value
+);
+
+setText(
+"bioPhone",
+formFields.phone.value
+);
+
+setText(
+"bioEmail",
+formFields.email.value
+);
+
+setText(
+"bioAbout",
+formFields.about.value
+);
+
+
+/* DATE */
+
+if(formFields.dob.value){
+
+const date =
+new Date(
+formFields.dob.value +
+"T00:00:00"
+);
+
+const formatted =
+date.toLocaleDateString(
+"en-IN",
+{
+day:"2-digit",
+month:"short",
+year:"numeric"
+}
+);
+
+setText(
+"bioDob",
+formatted
+);
+
+}
+else{
+
+setText(
+"bioDob",
+"—"
+);
+
+}
+
+}
+
+
+/* =========================================================
+   INPUT LISTENERS
+========================================================= */
+
+Object.values(
+formFields
+).forEach(function(field){
+
+field.addEventListener(
+"input",
+updatePreview
+);
+
+field.addEventListener(
+"change",
+updatePreview
+);
+
+});
+
+
+
+/* =========================================================
+   INITIAL PREVIEW
+========================================================= */
+
+updatePreview();
+
+
+
+/* =========================================================
+   PHOTO UPLOAD
+========================================================= */
+
+const photoInput =
+document.getElementById("photo");
+
+const uploadPreview =
+document.getElementById("uploadPreview");
+
+const bioPhoto =
+document.getElementById("bioPhoto");
+
+
+photoInput.addEventListener(
+"change",
+function(event){
+
+const file =
+event.target.files[0];
+
+
+if(!file){
+
+return;
+
+}
+
+
+/* File validation */
+
+if(
+![
+"image/jpeg",
+"image/png"
+].includes(file.type)
+){
+
+showToast(
+"Please upload JPG or PNG only."
+);
+
+photoInput.value="";
+
+return;
+
+}
+
+
+/* Size validation */
+
+if(
+file.size >
+5 * 1024 * 1024
+){
+
+showToast(
+"Photo must be smaller than 5MB."
+);
+
+photoInput.value="";
+
+return;
+
+}
+
+
+const reader =
+new FileReader();
+
+
+reader.onload =
+function(e){
+
+uploadPreview.src =
+e.target.result;
+
+uploadPreview.style.display =
+"block";
+
+bioPhoto.src =
+e.target.result;
+
+};
+
+
+reader.readAsDataURL(file);
+
+});
+
+
+
+/* =========================================================
+   TEMPLATE SELECTION
+========================================================= */
+
+const templateOptions =
+document.querySelectorAll(
+".template-option"
+);
+
+
+templateOptions.forEach(
+function(option){
+
+option.addEventListener(
+"click",
+function(){
+
+templateOptions.forEach(
+function(item){
+
+item.classList.remove(
+"selected"
+);
+
+}
+);
+
+
+option.classList.add(
+"selected"
+);
+
+
+const template =
+option.dataset.template;
+
+
+changeTemplate(
+template
+);
+
+
+/* Scroll builder */
+
+document
+.getElementById("builder")
+.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+
+});
+
+});
+
+
+
+/* =========================================================
+   CHANGE TEMPLATE
+========================================================= */
+
+function changeTemplate(
+template
+){
+
+const biodata =
+document.getElementById(
+"biodata"
+);
+
+
+/* Remove previous */
+
+biodata.classList.remove(
+"royal",
+"minimal",
+"floral",
+"dark"
+);
+
+
+/* Add selected */
+
+biodata.classList.add(
+template
+);
+
+
+/* Update header structure */
+
+const header =
+biodata.querySelector(
+".bio-header"
+);
+
+if(!header){
+
+return;
+
+}
+
+
+/* =====================================================
+   MINIMAL
+===================================================== */
+
+if(
+template === "minimal"
+){
+
+header.innerHTML = `
+
+<div>
+
+<div class="bio-label">
+MARRIAGE PROFILE
+</div>
+
+<div class="bio-title">
+${escapeHTML(
+formFields.name.value ||
+"YOUR NAME"
+)}
+</div>
+
+<div class="bio-subtitle">
+Personal Marriage Biodata
+</div>
+
+</div>
+
+<img
+src="${bioPhoto.src || ""}"
+class="bio-photo"
+alt="Profile Photo">
+
+`;
+
+}
+
+
+/* =====================================================
+   OTHER TEMPLATES
+===================================================== */
+
+else{
+
+header.innerHTML = `
+
+<div class="bio-label">
+PERSONAL
+</div>
+
+<div class="bio-title">
+BIODATA
+</div>
+
+<img
+src="${bioPhoto.src || ""}"
+class="bio-photo"
+alt="Profile Photo">
+
+`;
+
+}
+
+}
+
+
+
+/* =========================================================
+   KEEP PHOTO WHEN TEMPLATE CHANGES
+========================================================= */
+
+function refreshPhoto(){
+
+const image =
+document.querySelector(
+"#biodata .bio-photo"
+);
+
+if(
+image &&
+bioPhoto.src
+){
+
+image.src =
+bioPhoto.src;
+
+}
+
+}
+
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(
+str
+){
+
+return String(str)
+.replace(
+/&/g,
+"&amp;"
+)
+.replace(
+/</g,
+"&lt;"
+)
+.replace(
+/>/g,
+"&gt;"
+)
+.replace(
+/"/g,
+"&quot;"
+)
+.replace(
+/'/g,
+"&#039;"
+);
+
+}
+
+
+
+/* =========================================================
+   REBUILD TEMPLATE ON NAME CHANGE
+========================================================= */
+
+formFields.name.addEventListener(
+"input",
+function(){
+
+const selected =
+document.querySelector(
+".template-option.selected"
+);
+
+if(
+selected &&
+selected.dataset.template ===
+"minimal"
+){
+
+changeTemplate("minimal");
+
+}
+
+});
+
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(
+message
+){
+
+const toast =
+document.getElementById(
+"toast"
+);
+
+toast.textContent =
+message;
+
+toast.classList.add(
+"show"
+);
+
+setTimeout(
+function(){
+
+toast.classList.remove(
+"show"
+);
+
+},
+2500
+);
+
+}
+
+
+
+/* =========================================================
+   DOWNLOAD PDF
+========================================================= */
+
+const downloadButton =
+document.getElementById(
+"downloadPdf"
+);
+
+
+downloadButton.addEventListener(
+"click",
+async function(){
+
+const originalText =
+downloadButton.innerHTML;
+
+
+const name =
+formFields.name.value.trim();
+
+
+if(!name){
+
+showToast(
+"Please enter your name first."
+);
+
+formFields.name.focus();
+
+return;
+
+}
+
+
+downloadButton.disabled =
+true;
+
+
+downloadButton.innerHTML = `
+
+<i class="fa-solid fa-spinner fa-spin"></i>
+
+Creating PDF...
+
+`;
+
+
+try{
+
+
+const biodata =
+document.getElementById(
+"biodata"
+);
+
+
+/*
+   Make sure the preview is
+   completely rendered.
+*/
+
+await new Promise(
+resolve =>
+setTimeout(
+resolve,
+400
+)
+);
+
+
+/*
+   Capture biodata
+*/
+
+const canvas =
+await html2canvas(
+biodata,
+{
+
+scale:2,
+
+useCORS:true,
+
+allowTaint:true,
+
+backgroundColor:null,
+
+logging:false
+
+}
+);
+
+
+/*
+   Convert canvas
+*/
+
+const image =
+canvas.toDataURL(
+"image/jpeg",
+0.96
+);
+
+
+/*
+   Create PDF
+*/
+
+const {
+jsPDF
+} =
+window.jspdf;
+
+
+const pdf =
+new jsPDF(
+{
+
+orientation:"portrait",
+
+unit:"mm",
+
+format:"a4"
+
+}
+);
+
+
+const pageWidth =
+pdf.internal.pageSize.getWidth();
+
+const pageHeight =
+pdf.internal.pageSize.getHeight();
+
+
+const imageWidth =
+pageWidth;
+
+
+const imageHeight =
+canvas.height *
+imageWidth /
+canvas.width;
+
+
+/*
+   Fit to A4.
+*/
+
+let finalWidth =
+imageWidth;
+
+let finalHeight =
+imageHeight;
+
+let x = 0;
+
+let y = 0;
+
+
+/*
+   If image is taller than A4,
+   scale it down.
+*/
+
+if(
+finalHeight >
+pageHeight
+){
+
+const ratio =
+pageHeight /
+finalHeight;
+
+finalWidth =
+finalWidth *
+ratio;
+
+finalHeight =
+pageHeight;
+
+x =
+(pageWidth -
+finalWidth) /
+2;
+
+y = 0;
+
+}
+
+
+pdf.addImage(
+image,
+"JPEG",
+x,
+y,
+finalWidth,
+finalHeight
+);
+
+
+/*
+   Filename
+*/
+
+const safeName =
+name
+.replace(
+/[^a-z0-9]+/gi,
+"-"
+)
+.replace(
+/^-+|-+$/g,
+""
+)
+.toLowerCase();
+
+
+pdf.save(
+`${safeName}-marriage-biodata.pdf`
+);
+
+
+showToast(
+"Your biodata PDF is ready!"
+);
+
+
+}
+catch(error){
+
+console.error(
+error
+);
+
+showToast(
+"Unable to create PDF. Please try again."
+);
+
+}
+
+
+downloadButton.innerHTML =
+originalText;
+
+downloadButton.disabled =
+false;
+
+});
+
+
+
+/* =========================================================
+   HERO BUTTONS
+========================================================= */
+
+document.querySelectorAll(
+'a[href="#builder"]'
+).forEach(function(link){
+
+link.addEventListener(
+"click",
+function(event){
+
+event.preventDefault();
+
+document
+.getElementById("builder")
+.scrollIntoView({
+
+behavior:"smooth",
+
+block:"start"
+
+});
+
+});
+
+});
+
+
+
+/* =========================================================
+   INITIAL TEMPLATE
+========================================================= */
+
+changeTemplate(
+"royal"
+);
+
+</script>
+
+
+</body>
+
+</html>

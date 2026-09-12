@@ -1,5 +1,5 @@
-<?php 
-  session_start();
+<?php
+session_start();
 $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
 ?>
 <!DOCTYPE html>
@@ -22,7 +22,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.boxicons.com/3.0.8/fonts/basic/boxicons.min.css" rel="stylesheet">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
   <link rel="stylesheet" href="./assets/css/style.css" />
@@ -61,11 +61,12 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
             <li>
               <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
             </li>
-            
-            
-            <?php if($isLoggedIn): ?>
+
+
+            <?php if ($isLoggedIn): ?>
               <li>
-                <a href="#" style="display:flex;align-items:center;gap:10px;"><i class="fa-solid fa-user" ></i><?php echo $_SESSION['user_name']; ?></a>
+                <a href="#" style="display:flex;align-items:center;gap:10px;"><i
+                    class="fa-solid fa-user"></i><?php echo $_SESSION['user_name']; ?></a>
 
                 <ul>
                   <li>
@@ -78,18 +79,47 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                     <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
                   </li>
                   <li>
-                    <a href="<?php echo('./validations/logout.php') ?>"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                    <a href="<?php echo ('./validations/logout.php') ?>"><i
+                        class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
                   </li>
                 </ul>
               </li>
-          <?php else: ?>
-            <li>
-              <a href="<?php echo('./register.php') ?>"><i class="fa-solid fa-user"></i></a>
-            </li>
-           <?php endif; ?>
+            <?php else: ?>
+              <li>
+                <a href="<?php echo ('./register.php') ?>"><i class="fa-solid fa-user"></i></a>
+              </li>
+            <?php endif; ?>
           </ul>
         </nav>
       </div>
     </div>
   </header>
   <!-- header section end -->
+
+
+
+  <!-- Video Loader -->
+  <!-- <div id="page-loader">
+    <video
+      id="loader-video"
+      autoplay
+      muted
+      playsinline
+      preload="auto"
+    >
+      <source src="./assets/images/loader.mp4" type="video/mp4">
+    </video>
+  </div> -->
+
+  <!-- text loader -->
+  <div id="page-loader">
+
+    <svg class="text-line" viewBox="0 0 500 120" preserveAspectRatio="xMidYMid meet">
+
+      <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">
+        Clothsy
+      </text>
+
+    </svg>
+
+  </div>

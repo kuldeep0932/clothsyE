@@ -67,21 +67,21 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 // js for the quick view popup
 document.addEventListener("DOMContentLoaded", function () {
 
-    document.querySelectorAll(".icon_btn").forEach(function (button) {
+  document.querySelectorAll(".icon_btn").forEach(function (button) {
 
-        button.addEventListener("click", function (e) {
+    button.addEventListener("click", function (e) {
 
-            e.preventDefault();
+      e.preventDefault();
 
-            const modal = new bootstrap.Modal(
-                document.getElementById("productQuickView")
-            );
+      const modal = new bootstrap.Modal(
+        document.getElementById("productQuickView")
+      );
 
-            modal.show();
-
-        });
+      modal.show();
 
     });
+
+  });
 
 });
 
@@ -113,3 +113,16 @@ var x = setInterval(function () {
   document.getElementById("minutes").innerHTML = String(minutes).padStart(2, '0');
   document.getElementById("seconds").innerHTML = String(seconds).padStart(2, '0');
 }, 1000);
+
+
+
+// loader js
+window.addEventListener("load", function () {
+
+  setTimeout(function () {
+    document.getElementById("page-loader").classList.add("hide");
+  }, 8000);
+
+});
+
+
