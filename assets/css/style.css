@@ -127,7 +127,7 @@ button {
   font-size: 14px;
   font-weight: 600;
   line-height: 1.4;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 a {
@@ -1055,7 +1055,7 @@ input[type="checkbox"] {
 }
 
 .signin-link a {
-  color: #f44336;
+  color: var(--primary-color);
   text-decoration: none;
 }
 
@@ -1650,9 +1650,8 @@ iframe .gm-style-mtc {
 
 .delete-product {
   position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  left: 73px;
+  top: -9px;
   width: 25px;
   height: 25px;
   border: 0;
@@ -1668,7 +1667,7 @@ iframe .gm-style-mtc {
 
 .delete-product:hover {
   background: #ffe0e0;
-  color: var(--primary-color)                         ;
+  color: var(--primary-color);
 }
 
 
@@ -1774,11 +1773,13 @@ iframe .gm-style-mtc {
   margin-bottom: 5px;
   font-size: 11px;
   color: #202630;
+  line-height: 1;
 }
 
 .secure-box p {
   font-size: 10px;
   color: #69717d;
+  line-height: 1;
 }
 
 
@@ -1792,9 +1793,684 @@ iframe .gm-style-mtc {
 /* cart page design css end */
 
 
+/* checkout page css start */
+/* =========================================
+   CLOTHSY CHECKOUT
+========================================= */
+
+.clothsy-checkout-section {
+  background: #ffffff;
+}
+
+.clothsy-checkout-card {
+  border: 1px solid #e1e5e8 !important;
+  border-radius: 6px !important;
+  background: #ffffff;
+  box-shadow: none !important;
+}
+
+.clothsy-checkout-card-body {
+  padding: 20px;
+}
+
+.clothsy-checkout-title {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #111111;
+}
+
+.clothsy-billing-form input {
+  padding-left: 15px !important;
+  font-size: 13px;
+}
+
+.clothsy-different-address {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.clothsy-different-address label {
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+/* =========================================
+   BILLING FORM
+========================================= */
+
+.clothsy-form-label {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #27313b;
+}
+
+.clothsy-form-control,
+.clothsy-form-select {
+  min-height: 38px;
+  padding: 8px 11px;
+  border: 1px solid #dce1e5;
+  border-radius: 5px;
+  background-color: #ffffff;
+  color: #27313b;
+  font-size: 12px;
+  box-shadow: none !important;
+}
+
+.clothsy-form-control::placeholder {
+  color: #929ba5;
+  opacity: 1;
+}
+
+.clothsy-form-control:focus,
+.clothsy-form-select:focus {
+  border-color: #c9ced3;
+  box-shadow: 0 0 0 0.15rem rgba(0, 0, 0, 0.03) !important;
+}
+
+.clothsy-order-notes {
+  min-height: 72px;
+  resize: vertical;
+}
+
+.clothsy-different-address {
+  margin-top: 14px;
+}
+
+.clothsy-checkbox {
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+  border-color: #c7cdd2;
+  cursor: pointer;
+}
+
+.clothsy-checkbox:checked {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.clothsy-checkbox-label {
+  padding-left: 3px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #4d5660;
+  cursor: pointer;
+}
+
+
+/* =========================================
+   ORDER PRODUCTS
+========================================= */
+
+.clothsy-order-product {
+  display: flex;
+  align-items: center;
+  min-height: 66px;
+  padding: 0 0 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #e2e5e8;
+}
+
+.clothsy-product-image {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  object-fit: cover;
+  border: 1px solid #e1e4e7;
+  border-radius: 5px;
+}
+
+.clothsy-product-info {
+  flex: 1;
+  min-width: 0;
+  padding-left: 10px;
+}
+
+.clothsy-product-name {
+  margin: 0 0 3px;
+  color: #26323d;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.clothsy-product-qty {
+  display: block;
+  color: #8a949e;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.clothsy-product-price {
+  margin-left: 10px;
+  color: var(--primary-color);
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   PRICE SUMMARY
+========================================= */
+
+.clothsy-price-summary {
+  padding-top: 2px;
+}
+
+.clothsy-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 9px;
+  color: #68737e;
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.clothsy-price-row:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =========================================
+   TOTAL
+========================================= */
+
+.clothsy-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  margin-top: 10px;
+  margin-bottom: 12px;
+  border-top: 1px solid #e0e3e6;
+  border-bottom: 1px solid #e0e3e6;
+}
+
+.clothsy-total-label {
+  margin: 0;
+  color: #26323d;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.clothsy-total-price {
+  margin: 0;
+  color: var(--primary-color);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+
+/* =========================================
+   PAYMENT METHOD
+========================================= */
+
+.clothsy-payment-title {
+  margin: 0 0 22px;
+  font-family: var(--playFairFont);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #111111;
+}
+
+.clothsy-payment-methods {
+  margin-bottom: 20px;
+}
+
+.clothsy-payment-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.clothsy-payment-option:last-child {
+  margin-bottom: 0;
+  margin: 0 !important;
+}
+
+.clothsy-payment-radio {
+  width: 14px !important;
+  height: 14px !important;
+  margin-top: 2px !important;
+  border-color: #c7cdd2 !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  float: unset !important;
+}
+
+.clothsy-payment-radio:checked {
+  background-color: #ffffff;
+  border-color: var(--primary-color);
+  box-shadow: inset 0 0 0 3px #ffffff;
+}
+
+.clothsy-payment-radio:focus {
+  box-shadow: 0 0 0 0.15rem rgba(239, 43, 35, 0.12);
+}
+
+.clothsy-payment-label {
+  display: block;
+  color: #34404b;
+  font-size: 11px;
+  line-height: 1.25;
+  cursor: pointer;
+}
+
+.clothsy-payment-label strong {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.clothsy-payment-label small {
+  display: block;
+  color: #9099a3;
+  font-size: 12px;
+  line-height: 1.3;
+}
 
 
 
+/* =========================================
+   SECURE CHECKOUT
+========================================= */
+
+.clothsy-secure-checkout {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  margin-top: 10px;
+  border-radius: 5px;
+  background: #fff1f1;
+}
+
+.clothsy-secure-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  margin-right: 10px;
+  color: var(--primary-color);
+  font-size: 18px;
+}
+
+.clothsy-secure-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.clothsy-secure-content strong {
+  margin-bottom: 2px;
+  color: #303a44;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.clothsy-secure-content small {
+  color: #8b949d;
+  font-size: 8px;
+  line-height: 1.2;
+}
+
+
+/* checkout page css end */
+
+/* single product page css start */
+/* Main product details box */
+.product-details {
+  width: 100%;
+  border: 1px solid #e7e7e7;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* -------------------------
+       TABS
+    ------------------------- */
+
+.product-tabs {
+  height: 60px;
+  padding-left: 40px;
+  border-bottom: 1px solid #e5e5e5;
+  background: #fff;
+}
+
+.product-tabs .nav-item {
+  margin-right: 42px;
+}
+
+.product-tabs .nav-link {
+  position: relative;
+  height: 60px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  color: #333;
+  background: transparent;
+
+  font-size: 13px;
+  font-weight: 400;
+
+  transition: color 0.2s ease;
+}
+
+.product-tabs .nav-link:hover {
+  color: var(--primary-color);
+}
+
+.product-tabs .nav-link.active {
+  color: var(--primary-color);
+  font-weight: 500;
+  background: transparent;
+}
+
+/* Red line under active tab */
+.product-tabs .nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+
+  height: 3px;
+  background: var(--primary-color);
+}
+
+/* -------------------------
+       TAB CONTENT
+    ------------------------- */
+
+.product-tab-content {
+  background: #fff;
+}
+
+#description {
+  padding: 7px 40px 0 40px;
+}
+
+/* -------------------------
+       LEFT DESCRIPTION
+    ------------------------- */
+
+.description-left {
+  padding-right: 65px;
+  padding-top: 15px;
+  padding-bottom: 30px;
+}
+
+.description-text {
+  margin: 0 0 25px 0;
+
+  color: #333;
+  font-size: 13px;
+  line-height: 1.8;
+  font-weight: 400;
+}
+
+/* Feature list */
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-list li {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 10px;
+
+  color: #333;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.check-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 20px;
+  margin-right: 14px;
+
+  color: var(--primary-color);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* -------------------------
+       PRODUCT INFORMATION TABLE
+    ------------------------- */
+
+.product-info {
+  margin: 0 0 0 5px;
+  border: 1px solid #eeeeee;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.info-row {
+  display: flex;
+  min-height: 37px;
+
+  border-bottom: 1px solid #eeeeee;
+}
+
+.info-row:last-child {
+  border-bottom: 0;
+}
+
+.info-label {
+  width: 35%;
+  padding: 9px 15px;
+
+  color: #222;
+  background: #fff;
+
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.info-value {
+  width: 65%;
+  padding: 9px 15px;
+
+  color: #333;
+  background: #fff;
+
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* Other tabs */
+.empty-tab-content {
+  min-height: 180px;
+  padding: 35px 40px;
+  color: #555;
+  font-size: 13px;
+}
+
+/* =========================================
+   REVIEWS TAB
+========================================= */
+
+#reviews {
+    padding: 7px 40px 30px 40px;
+}
+
+.reviews-wrapper {
+    width: 100%;
+    padding-top: 15px;
+}
+
+.reviews-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: 15px;
+    margin-bottom: 5px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.reviews-header h5 {
+    margin: 0;
+
+    color: #222;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.reviews-header span {
+    color: #777;
+    font-size: 13px;
+}
+
+.review-item {
+    padding: 18px 0;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.review-item:last-child {
+    border-bottom: 0;
+}
+
+.review-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+}
+
+.review-top strong {
+    color: #333;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.stars {
+    color: var(--primary-color);
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.review-item p {
+    margin: 0;
+
+    color: #555;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   SHIPPING & RETURNS TAB
+========================================= */
+
+#shipping, #additional {
+    padding: 7px 40px 30px 40px;
+}
+
+.shipping-wrapper {
+    width: 100%;
+    padding-top: 15px;
+}
+
+.shipping-section {
+    padding: 0 0 22px 0;
+    margin-bottom: 22px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.shipping-section:last-child {
+    margin-bottom: 0;
+    border-bottom: 0;
+}
+
+.shipping-section h5 {
+    margin: 0 0 12px 0;
+
+    color: #222;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.shipping-section p {
+    margin: 0 0 14px 0;
+
+    color: #555;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.shipping-section ul {
+    list-style: none;
+
+    padding: 0;
+    margin: 0;
+}
+
+.shipping-section ul li {
+    position: relative;
+
+    padding-left: 28px;
+    margin-bottom: 10px;
+
+    color: #333;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.shipping-section ul li:last-child {
+    margin-bottom: 0;
+}
+
+/* Red checkmark - same style as Description tab */
+.shipping-section ul li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--primary-color);
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1;
+}
+.also_like_slider .slick-list {
+    margin: 0 -10px;
+}
+
+.also_like_slider .slick-slide {
+    padding: 0 10px;
+}
+
+/* single product page css end */
 
 
 
@@ -2135,8 +2811,8 @@ iframe .gm-style-mtc {
   stroke-dashoffset: 600;
   font-size: 100px;
   animation:
-    dash 8s linear forwards,
-    filling 8s ease-in forwards;
+    dash 4s linear forwards,
+    filling 4s ease-in forwards;
 }
 
 

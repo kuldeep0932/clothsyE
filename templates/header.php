@@ -59,7 +59,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
               <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
             </li>
             <li>
-              <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+              <a href="./cart.php"><i class="fa-solid fa-cart-shopping"></i></a>
             </li>
 
 
@@ -96,20 +96,6 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
   </header>
   <!-- header section end -->
 
-
-
-  <!-- Video Loader -->
-  <!-- <div id="page-loader">
-    <video
-      id="loader-video"
-      autoplay
-      muted
-      playsinline
-      preload="auto"
-    >
-      <source src="./assets/images/loader.mp4" type="video/mp4">
-    </video>
-  </div> -->
 
   <!-- text loader -->
   <div id="page-loader">

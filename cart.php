@@ -6,8 +6,6 @@ $pageKeywords = "home, my website, awesome content";
 include('./templates/header.php'); ?>
 
 <style>
-  
-
     /* =========================================
    TABLET
 ========================================= */
@@ -96,6 +94,27 @@ include('./templates/header.php'); ?>
 
     }
 </style>
+
+<!-- page header section banner start -->
+<section class="clothsy-shop-banner">
+    <div class="container">
+
+        <div class="clothsy-shop-banner-content">
+
+            <h1>Cart</h1>
+
+            <div class="clothsy-breadcrumb">
+                <a href="/">Home</a>
+                <span class="arrow">›</span>
+                <span class="current">Cart</span>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- page header section banner end -->
+
+
 <section class="cart-section py-4">
     <div class="container">
 
@@ -139,7 +158,8 @@ include('./templates/header.php'); ?>
                                 <div class="d-flex align-items-center gap-3">
 
                                     <div class="product-img">
-                                        <img src="./assets/images/category4.jpg" alt="Stylish Denim Shirt" class="img-fluid">
+                                        <img src="./assets/images/category4.jpg" alt="Stylish Denim Shirt"
+                                            class="img-fluid">
                                     </div>
 
                                     <div class="product-info">
@@ -231,7 +251,8 @@ include('./templates/header.php'); ?>
                                 <div class="d-flex align-items-center gap-3">
 
                                     <div class="product-img">
-                                        <img src="./assets/images/category3.jpg" alt="Cotton Polo T-Shirt" class="img-fluid">
+                                        <img src="./assets/images/category3.jpg" alt="Cotton Polo T-Shirt"
+                                            class="img-fluid">
                                     </div>
 
                                     <div class="product-info">
@@ -323,7 +344,8 @@ include('./templates/header.php'); ?>
                                 <div class="d-flex align-items-center gap-3">
 
                                     <div class="product-img">
-                                        <img src="./assets/images/category1.jpg" alt="Black Denim Jacket" class="img-fluid">
+                                        <img src="./assets/images/category1.jpg" alt="Black Denim Jacket"
+                                            class="img-fluid">
                                     </div>
 
                                     <div class="product-info">
@@ -494,7 +516,7 @@ include('./templates/header.php'); ?>
 
 
                     <!-- Checkout Button -->
-                    <a href="#" class="checkout-button btn btn_fill">
+                    <a href="#" class="checkout-button btn btn_fill w-100 mt-2">
 
                         <i class="fa-solid fa-lock"></i>
 
