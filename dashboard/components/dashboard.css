@@ -77961,10 +77961,26 @@ table.dataTable thead .dt-ordering-asc:hover .dt-column-order::after {
 .dropdown-item:active {
   background-color: var(--bs-menu-active-bg) !important;
 }
-table td, table th {
-    font-size: 13px;
+
+table td,
+table th {
+  font-size: 13px;
 }
 
-table td small, table th small {
-    font-size: 12px;
+table td small,
+table th small {
+  font-size: 12px;
 }
+
+/* .layout-menu {
+  height: 100dvh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.main_content_container {
+  max-width: calc(100% - 260px);
+  margin-left: 260px;
+  width: 100%;
+} */

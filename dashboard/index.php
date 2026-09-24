@@ -551,13 +551,6 @@ include('./components/head_html.php');
                                                     <td class="control dtr-hidden" tabindex="0" style="display: none;">
                                                     </td>
 
-                                                    <!-- Checkbox
-                                                                <td class="dt-select">
-                                                                    <input aria-label="Select row" class="form-check-input"
-                                                                        type="checkbox">
-                                                                </td> -->
-
-
                                                     <!-- Customer ID -->
                                                     <td style="text-align:center;">
                                                         <span class="text-heading">#
