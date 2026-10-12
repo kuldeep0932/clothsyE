@@ -1,6 +1,32 @@
 <?php
 session_start();
 $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
+
+include './../database/connection.php';
+
+$sql = "SELECT * FROM site_settings WHERE id = 1 LIMIT 1";
+
+$result = mysqli_query($conn, $sql);
+
+$row = mysqli_fetch_assoc($result);
+
+$siteName = $row['site_name'] ?? '';
+$siteLogo = $row['site_logo'] ?? '';
+$aboutText = $row['about_text'] ?? '';
+
+$email = $row['email'] ?? '';
+$phone = $row['phone'] ?? '';
+$address = $row['address'] ?? '';
+
+$facebookUrl = $row['facebook_url'] ?? '';
+$instagramUrl = $row['instagram_url'] ?? '';
+$twitterUrl = $row['twitter_url'] ?? '';
+$youtubeUrl = $row['youtube_url'] ?? '';
+$linkedinUrl = $row['linkedin_url'] ?? '';
+
+$copyrightText = $row['copyright_text'] ?? '';
+
+$primaryColor = $row['primary_color'] ?? '#ef2d19';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +50,11 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/5.3.5/apexcharts-legend.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/5.3.5/apexcharts.min.css"/>
     <link rel="stylesheet" href="./components/dashboard.css">
-
+    <style>
+      :root{
+         --bs-primary: <?= htmlspecialchars($primaryColor) ?>;
+      }
+    </style>
       <!-- ApexCharts CDN -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>

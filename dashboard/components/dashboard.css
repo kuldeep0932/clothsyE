@@ -77972,6 +77972,10 @@ table th small {
   font-size: 12px;
 }
 
+input[type="color"] {
+  padding: 0 !important;
+}
+
 /* .layout-menu {
   height: 100dvh;
   position: fixed;

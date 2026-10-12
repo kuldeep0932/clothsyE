@@ -1,7 +1,36 @@
 <?php
 session_start();
 $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
+
+
+include './database/connection.php';
+
+$sql = "SELECT * FROM site_settings WHERE id = 1 LIMIT 1";
+
+$result = mysqli_query($conn, $sql);
+
+$row = mysqli_fetch_assoc($result);
+
+$siteName = $row['site_name'] ?? '';
+$siteLogo = $row['site_logo'] ?? '';
+$aboutText = $row['about_text'] ?? '';
+
+$email = $row['email'] ?? '';
+$phone = $row['phone'] ?? '';
+$address = $row['address'] ?? '';
+
+$facebookUrl = $row['facebook_url'] ?? '';
+$instagramUrl = $row['instagram_url'] ?? '';
+$twitterUrl = $row['twitter_url'] ?? '';
+$youtubeUrl = $row['youtube_url'] ?? '';
+$linkedinUrl = $row['linkedin_url'] ?? '';
+
+$copyrightText = $row['copyright_text'] ?? '';
+
+$primaryColor = $row['primary_color'] ?? '#ef2d19';
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,6 +57,13 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
   <link rel="stylesheet" href="./assets/css/style.css" />
+  <style>
+    :root {
+      --primary-color:
+        <?= htmlspecialchars($primaryColor) ?>
+      ;
+    }
+  </style>
 </head>
 
 <body>
@@ -38,7 +74,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
   <header class="main_header">
     <div class="container">
       <div class="d-flex align-items-center flex-wrap justify-content-between">
-        <a href="#" class="logo">Clothsy</a>
+        <a href="#" class="logo"><?= htmlspecialchars($siteName) ?></a>
         <nav class="main_navigation d-flex align-items-center">
           <div class="overlay_menu"></div>
           <ul class="navigation_links list-unstyled">
@@ -53,10 +89,10 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
               <a href="#"><i class="fa-solid fa-bars-staggered menuTogg_main_btn"></i></a>
             </li>
             <li>
-              <a href="#"><i class="fa-brands fa-instagram"></i></a>
+              <a href="<?= htmlspecialchars($instagramUrl) ?>"><i class="fa-brands fa-instagram"></i></a>
             </li>
             <li>
-              <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+              <a href="<?= htmlspecialchars($facebookUrl) ?>"><i class="fa-brands fa-facebook-f"></i></a>
             </li>
             <li>
               <a href="./cart.php"><i class="fa-solid fa-cart-shopping"></i></a>
@@ -103,7 +139,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
     <svg class="text-line" viewBox="0 0 500 120" preserveAspectRatio="xMidYMid meet">
 
       <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">
-        Clothsy
+        <?= htmlspecialchars($siteName) ?>
       </text>
 
     </svg>

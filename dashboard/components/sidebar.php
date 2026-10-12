@@ -1,7 +1,7 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" data-bg-class="bg-menu-theme">
   <div class="app-brand demo">
     <a href="#" class="foot_logo display-2 text-dark">
-      <img src="http://localhost/clothsyE/dashboard/components/img/clothsy-logo.png" alt="Clothsy Logo" width="150px">
+      <img src="<?= htmlspecialchars($siteLogo) ?>" alt="Clothsy Logo" width="150px">
     </a>
     <a href="/home" class="layout-menu-toggle menu-link text-large ms-auto">
       <i class="bx bx-chevron-left d-block d-xl-none align-middle"></i>
@@ -43,30 +43,38 @@
 
     <li class="menu-item <?php echo ($currentPage == 'customers.php') ? 'active open' : ''; ?>">
       <a href="./customers.php" class="menu-link">
-         <i class="menu-icon tf-icons bx bx-user"></i>
+        <i class="menu-icon tf-icons bx bx-user"></i>
         <div>Customers</div>
       </a>
     </li>
-    <li class="menu-item <?php echo ($currentPage == 'ecommerce.php') ? 'active open' : ''; ?>">
-      <a href="./ecommerce.php" class="menu-link">
-         <i class="menu-icon tf-icons bx bx-box"></i>
+    <li class="menu-item <?php echo ($currentPage == 'product.php') ? 'active open' : ''; ?>">
+      <a href="./product.php" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-box"></i>
         <div>Products</div>
       </a>
     </li>
     <li class="menu-item <?php echo ($currentPage == 'ecommerce.php') ? 'active open' : ''; ?>">
       <a href="./ecommerce.php" class="menu-link">
-         <i class="menu-icon tf-icons bx bx-cart"></i>
+        <i class="menu-icon tf-icons bx bx-cart"></i>
         <div>Order</div>
       </a>
     </li>
     <li class="menu-item <?php echo ($currentPage == 'ecommerce.php') ? 'active open' : ''; ?>">
       <a href="./ecommerce.php" class="menu-link">
-         <i class="menu-icon tf-icons bx bx-cog"></i>
+        <i class="menu-icon tf-icons bx bx-cog"></i>
         <div>Settings</div>
       </a>
     </li>
-    
 
+
+    <!-- Website Details -->
+    <li class="menu-header small text-uppercase"><span class="menu-header-text">Website Details</span></li>
+    <li class="menu-item <?php echo ($currentPage == 'site-setting.php') ? 'active open' : ''; ?>">
+      <a href="./site-setting.php" target="_blank" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-layout"></i>
+        <div class="text-truncate" data-i18n="setting">Site Setting</div>
+      </a>
+    </li>
     <!-- Misc -->
     <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
     <li class="menu-item">

@@ -120,14 +120,15 @@ include('./components/head_html.php');
                                                         <span class="dt-column-title" role="button">PIN Code</span>
                                                         <span class="dt-column-order"></span>
                                                     </th>
-
-                                                    <!-- Agree Status (replacing Order) -->
-                                                    <th data-dt-column="5" rowspan="1" colspan="1"
-                                                        class="dt-orderable-asc dt-orderable-desc dt-type-numeric"
-                                                        aria-label="Agree: Activate to sort" tabindex="0">
-                                                        <span class="dt-column-title" role="button">Agree</span>
+                                                    
+                                                    <!-- Actions -->
+                                                    <th class="text-nowrap dt-orderable-asc dt-orderable-desc dt-type-numeric"
+                                                        data-dt-column="6" rowspan="1" colspan="1"
+                                                        aria-label="Created At: Activate to sort" tabindex="0">
+                                                        <span class="dt-column-title" role="button">Action</span>
                                                         <span class="dt-column-order"></span>
                                                     </th>
+
 
                                                 </tr>
                                             </thead>
@@ -231,14 +232,19 @@ include('./components/head_html.php');
                                                                 <?= $row['pin'] ?>
                                                             </span>
                                                         </td>
+                                                         <!-- action button -->
+                                                        <td>
+                                                            <button class="btn btn-icon" data-bs-toggle="offcanvas"
+                                                                data-bs-target="#offcanvasEcommerceCustomerEdit"
+                                                                onclick="editCustomer(<?= $row['id'] ?>)"
+                                                                title="Edit Customer"><i
+                                                                    class="icon-base bx bx-edit icon-md"></i></button>
+                                                            <button class="btn btn-icon"
+                                                                onclick="deleteCustomer(<?= $row['id'] ?>)"
+                                                                title="Delete Customer"><i
+                                                                    class="icon-base bx bx-trash icon-md"></i></button>
 
-                                                        <!-- Agree -->
-                                                        <td class="dt-type-numeric">
-                                                            <span>
-                                                                <?= $agreeStatus ?>
-                                                            </span>
                                                         </td>
-
 
                                                     </tr>
 
@@ -314,6 +320,114 @@ include('./components/head_html.php');
                             </div>
                             <div class="offcanvas-body border-top mx-0 flex-grow-0">
                                 <form id="eCommerceCustomerAddForm" class="pt-0">
+
+                                    <!-- Basic Information -->
+                                    <div class="mb-4">
+                                        <h6 class="mb-4">Basic Information</h6>
+
+                                        <div class="mb-4">
+                                            <label for="customer-name" class="form-label">
+                                                Name <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" id="customer-name" name="customerName"
+                                                class="form-control" placeholder="John Doe">
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label for="customer-email" class="form-label">
+                                                Email <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="email" id="customer-email" name="customerEmail"
+                                                class="form-control" placeholder="john.doe@example.com">
+                                        </div>
+
+                                        <div>
+                                            <label for="customer-contact" class="form-label">
+                                                Mobile
+                                            </label>
+                                            <input type="tel" id="customer-contact" name="customerContact"
+                                                class="form-control" placeholder="+(123) 456-7890">
+                                        </div>
+                                    </div>
+
+                                    <!-- Shipping Information -->
+                                    <!-- Shipping Information -->
+                                    <div class="mb-4 pt-3">
+                                        <h6 class="mb-4">Shipping Information</h6>
+
+                                        <div class="mb-4">
+                                            <label for="customer-address-1" class="form-label">
+                                                Address
+                                            </label>
+                                            <input type="text" id="customer-address-1" name="customerAddress1"
+                                                class="form-control" placeholder="House No., Street">
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label for="customer-town" class="form-label">
+                                                City
+                                            </label>
+                                            <input type="text" id="customer-town" name="customerTown"
+                                                class="form-control" placeholder="Amritsar">
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label for="customer-state" class="form-label">
+                                                State
+                                            </label>
+                                            <input type="text" id="customer-state" name="customerState"
+                                                class="form-control" placeholder="Punjab">
+                                        </div>
+
+                                        <div>
+                                            <label for="customer-pincode" class="form-label">
+                                                PIN Code
+                                            </label>
+                                            <input type="text" id="customer-pincode" name="pin" class="form-control"
+                                                placeholder="143001" maxlength="6" inputmode="numeric">
+                                        </div>
+                                    </div>
+
+                                    <!-- Billing Address -->
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <div>
+                                            <h6 class="mb-1">Use as a billing address?</h6>
+                                            <small class="text-muted">
+                                                Use the shipping address as the billing address.
+                                            </small>
+                                        </div>
+
+                                        <div class="form-check form-switch">
+                                            <input type="checkbox" id="billing-address" name="useAsBillingAddress"
+                                                class="form-check-input" checked>
+                                        </div>
+                                    </div>
+
+                                    <!-- Actions -->
+                                    <div class="d-flex gap-2">
+                                        <button type="submit" class="btn btn-primary">
+                                            Add
+                                        </button>
+
+                                        <button type="reset" class="btn btn-label-danger" data-bs-dismiss="offcanvas">
+                                            Discard
+                                        </button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                        <!-- Offcanvas to edit customer -->
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEcommerceCustomerEdit"
+                            aria-labelledby="offcanvasEcommerceCustomerEditLabel">
+                            <div class="offcanvas-header">
+                                <h5 id="offcanvasEcommerceCustomerEditLabel" class="offcanvas-title">Edit Customer
+                                </h5>
+                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body border-top mx-0 flex-grow-0">
+                                <form id="offcanvasEcommerceCustomerEditForm" class="pt-0">
 
                                     <!-- Basic Information -->
                                     <div class="mb-4">

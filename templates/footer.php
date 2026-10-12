@@ -7,27 +7,25 @@
         <div class="col-md-12 pb-3 footer_about_cont">
           <div class="footer_about text-center">
             <!-- footer logo text  -->
-            <a href="#" class="foot_logo display-2 text-white">Clothsy</a>
+            <a href="#" class="foot_logo display-2 text-white"><?= htmlspecialchars($siteName) ?></a>
             <!-- about clothsy text ontainer -->
             <p class="text-white mt-3 mb-0 about_text">
-              Your destination for trendy and affordable fashion that makes
-              you look and feel amazing
+              <?= htmlspecialchars($aboutText) ?>
             </p>
             <!-- clothsy contact info or location start -->
             <ul
               class="contac_infoLInk list-unstyled d-flex align-items-center gap-md-4 gap-3 flex-wrap justify-content-center my-3">
               <li>
-                <a href="mailto:info@clothsy.com" class="d-flex align-items-center gap-2 text-white p-2"><i
-                    class="fa-solid fa-envelope"></i> info@clothsy.com</a>
+                <a href="mailto:<?= htmlspecialchars($email) ?>" class="d-flex align-items-center gap-2 text-white p-2"><i
+                    class="fa-solid fa-envelope"></i> <?= htmlspecialchars($email) ?></a>
               </li>
               <li>
-                <a href="tel:+123456789" class="d-flex align-items-center gap-2 text-white p-2"><i
-                    class="fa-solid fa-phone"></i> +123456789</a>
+                <a href="tel:<?= htmlspecialchars($phone) ?>" class="d-flex align-items-center gap-2 text-white p-2"><i
+                    class="fa-solid fa-phone"></i> <?= htmlspecialchars($phone) ?></a>
               </li>
               <li>
                 <a href="#" class="d-flex align-items-center gap-2 text-white p-2"><i
-                    class="fa-solid fa-map-location-dot"></i> 123 Fashion
-                  Street Style City, SC 12345</a>
+                    class="fa-solid fa-map-location-dot"></i> <?= htmlspecialchars($address) ?></a>
               </li>
             </ul>
             <!-- clothsy contact info or location end -->
@@ -47,16 +45,16 @@
             <!-- footer navigation links end -->
             <ul
               class="footer_follow_link list-unstyled d-flex align-items-center gap-md-3 gap-3 flex-wrap justify-content-center mb-3">
-              <li><a href="#" class="text-white"><i class="fa-brands fa-instagram"></i></a></li>
-              <li><a href="#" class="text-white"><i class="fa-brands fa-facebook-f"></i></a></li>
-              <li><a href="#" class="text-white"><i class="fa-brands fa-x-twitter"></i></a></li>
-              <li><a href="#" class="text-white"><i class="fa-brands fa-youtube"></i></a></li>
+              <li><a href="<?= htmlspecialchars($instagramUrl) ?>" class="text-white"><i class="fa-brands fa-instagram"></i></a></li>
+              <li><a href="<?= htmlspecialchars($facebookUrl) ?>" class="text-white"><i class="fa-brands fa-facebook-f"></i></a></li>
+              <li><a href="<?= htmlspecialchars($twitterUrl) ?>" class="text-white"><i class="fa-brands fa-x-twitter"></i></a></li>
+              <li><a href="<?= htmlspecialchars($youtubeUrl) ?>" class="text-white"><i class="fa-brands fa-youtube"></i></a></li>
             </ul>
           </div>
         </div>
         <!-- copyright text cont start -->
         <div class="col-md-12 text-center">
-          <p class="pt-4 m-0">&copy; Clothsy. All rights are reserved.</p>
+          <p class="pt-4 m-0"><?= htmlspecialchars($copyrightText ) ?></p>
         </div>
         <!-- copyright text cont end -->
       </div>

@@ -183,8 +183,7 @@ include('./templates/header.php'); ?>
                             </div>
 
                             <p class="info-text">
-                                123 Fashion Street, Style City,<br>
-                                SC 12345, United States
+                               <?= htmlspecialchars($address) ?>
                             </p>
 
                         </div>
@@ -207,7 +206,7 @@ include('./templates/header.php'); ?>
                             </div>
 
                             <p class="info-text">
-                                +1 234 567 890<br>
+                                <a href="tel:<?= htmlspecialchars($phone) ?>"><?= htmlspecialchars($phone) ?></a><br>
                                 Mon - Fri, 9:00 AM - 6:00 PM
                             </p>
 
@@ -231,8 +230,7 @@ include('./templates/header.php'); ?>
                             </div>
 
                             <p class="info-text">
-                                info@clothsy.com<br>
-                                support@clothsy.com
+                                <a href="tel:<?= htmlspecialchars($email) ?>"><?= htmlspecialchars($email) ?></a>
                             </p>
 
                         </div>
@@ -273,20 +271,20 @@ include('./templates/header.php'); ?>
 
                     <div class="social-links">
 
-                        <a href="#" class="social-link" aria-label="Instagram">
+                        <a href="<?= htmlspecialchars($instagramUrl) ?>" class="social-link" aria-label="Instagram">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
 
-                        <a href="#" class="social-link" aria-label="Facebook">
+                        <a href="<?= htmlspecialchars($facebookUrl) ?>" class="social-link" aria-label="Facebook">
                             <i class="fa-brands fa-facebook-f"></i>
                         </a>
 
-                        <a href="#" class="social-link" aria-label="X">
+                        <a href="<?= htmlspecialchars($twitterUrl) ?>" class="social-link" aria-label="X">
                             <i class="fa-brands fa-x-twitter"></i>
                         </a>
 
-                        <a href="#" class="social-link" aria-label="Pinterest">
-                            <i class="fa-brands fa-pinterest-p"></i>
+                        <a href="<?= htmlspecialchars($youtubeUrl ) ?>" class="social-link" aria-label="Pinterest">
+                            <i class="fa-brands fa-youtube"></i>
                         </a>
 
                     </div>
@@ -396,9 +394,7 @@ include('./templates/header.php'); ?>
 
                                 <!-- Address -->
                                 <div class="store-address">
-                                    123 Fashion Street,<br>
-                                    Style City, SC 12345,<br>
-                                    United States
+                                    <?= htmlspecialchars($address) ?>
                                 </div>
 
                                 <!-- Button -->

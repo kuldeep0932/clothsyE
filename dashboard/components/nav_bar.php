@@ -10,7 +10,7 @@
   
     <!-- Search -->
     <div class="navbar-nav align-items-center">
-     <h4 class="m-0"><?php echo $pageTitle ?></h4>
+     <h4 class="m-0 dashboard-page_title"><?php echo $pageTitle ?></h4>
     </div>
 
     <!-- /Search -->
