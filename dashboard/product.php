@@ -75,8 +75,7 @@ include './components/head_html.php';
 
                         <div class="card-datatable table-responsive">
 
-                            <div id="DataTables_Table_0_wrapper"
-                                class="dt-container dt-bootstrap5 dt-empty-footer">
+                            <div id="DataTables_Table_0_wrapper" class="dt-container dt-bootstrap5 dt-empty-footer">
 
                                 <!-- Table Top -->
                                 <div class="row m-3 my-0 justify-content-between">
@@ -86,11 +85,8 @@ include './components/head_html.php';
 
                                         <div class="dt-search">
 
-                                            <input type="search"
-                                                class="form-control ms-0"
-                                                id="dt-search-0"
-                                                placeholder="Search Product"
-                                                aria-controls="DataTables_Table_0">
+                                            <input type="search" class="form-control ms-0" id="dt-search-0"
+                                                placeholder="Search Product" aria-controls="DataTables_Table_0">
 
                                         </div>
 
@@ -102,10 +98,8 @@ include './components/head_html.php';
 
                                         <div class="dt-length mt-0 mt-md-6">
 
-                                            <select name="DataTables_Table_0_length"
-                                                aria-controls="DataTables_Table_0"
-                                                class="form-select"
-                                                id="dt-length-0">
+                                            <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0"
+                                                class="form-select" id="dt-length-0">
 
                                                 <option value="10">10</option>
                                                 <option value="25">25</option>
@@ -123,11 +117,8 @@ include './components/head_html.php';
 
                                             <div class="btn-group">
 
-                                                <button
-                                                    class="btn create-new btn-primary"
-                                                    tabindex="0"
-                                                    aria-controls="DataTables_Table_0"
-                                                    type="button"
+                                                <button class="btn create-new btn-primary" tabindex="0"
+                                                    aria-controls="DataTables_Table_0" type="button"
                                                     data-bs-toggle="offcanvas"
                                                     data-bs-target="#offcanvasEcommerceProductAdd">
 
@@ -163,10 +154,8 @@ include './components/head_html.php';
                                     <div
                                         class="d-md-flex justify-content-between align-items-center dt-layout-full table-responsive">
 
-                                        <table
-                                            class="datatables-products table border-top dataTable dtr-column"
-                                            id="DataTables_Table_0"
-                                            aria-describedby="DataTables_Table_0_info"
+                                        <table class="datatables-products table border-top dataTable dtr-column"
+                                            id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info"
                                             style="width: 100%;">
 
                                             <thead>
@@ -174,8 +163,7 @@ include './components/head_html.php';
                                                 <tr>
 
                                                     <!-- ID -->
-                                                    <th
-                                                        class="text-nowrap dt-orderable-asc dt-orderable-desc text-center"
+                                                    <th class="text-nowrap dt-orderable-asc dt-orderable-desc text-center"
                                                         data-dt-column="1">
 
                                                         <span class="dt-column-title">
@@ -188,9 +176,7 @@ include './components/head_html.php';
 
 
                                                     <!-- Product -->
-                                                    <th
-                                                        data-dt-column="2"
-                                                        class="dt-orderable-asc dt-orderable-desc">
+                                                    <th data-dt-column="2" class="dt-orderable-asc dt-orderable-desc">
 
                                                         <span class="dt-column-title">
                                                             Product
@@ -202,8 +188,7 @@ include './components/head_html.php';
 
 
                                                     <!-- SKU -->
-                                                    <th
-                                                        class="text-nowrap dt-orderable-asc dt-orderable-desc">
+                                                    <th class="text-nowrap dt-orderable-asc dt-orderable-desc">
 
                                                         <span class="dt-column-title">
                                                             SKU
@@ -215,8 +200,7 @@ include './components/head_html.php';
 
 
                                                     <!-- Collection -->
-                                                    <th
-                                                        class="text-nowrap dt-orderable-asc dt-orderable-desc">
+                                                    <th class="text-nowrap dt-orderable-asc dt-orderable-desc">
 
                                                         <span class="dt-column-title">
                                                             Collection
@@ -228,8 +212,7 @@ include './components/head_html.php';
 
 
                                                     <!-- Price -->
-                                                    <th
-                                                        class="text-nowrap dt-orderable-asc dt-orderable-desc">
+                                                    <th class="text-nowrap dt-orderable-asc dt-orderable-desc">
 
                                                         <span class="dt-column-title">
                                                             Price
@@ -241,8 +224,7 @@ include './components/head_html.php';
 
 
                                                     <!-- Stock -->
-                                                    <th
-                                                        class="text-nowrap dt-orderable-asc dt-orderable-desc">
+                                                    <th class="text-nowrap dt-orderable-asc dt-orderable-desc">
 
                                                         <span class="dt-column-title">
                                                             Stock
@@ -254,8 +236,7 @@ include './components/head_html.php';
 
 
                                                     <!-- Status -->
-                                                    <th
-                                                        class="text-nowrap dt-orderable-asc dt-orderable-desc">
+                                                    <th class="text-nowrap dt-orderable-asc dt-orderable-desc">
 
                                                         <span class="dt-column-title">
                                                             Status
@@ -267,8 +248,7 @@ include './components/head_html.php';
 
 
                                                     <!-- Action -->
-                                                    <th
-                                                        class="text-nowrap dt-orderable-asc dt-orderable-desc">
+                                                    <th class="text-nowrap dt-orderable-asc dt-orderable-desc">
 
                                                         <span class="dt-column-title">
                                                             Action
@@ -306,7 +286,7 @@ include './components/head_html.php';
                                                     $stock = $row['stock_quantity'] ?? 0;
                                                     $status = $row['status'] ?? '';
 
-                                                ?>
+                                                    ?>
 
                                                     <tr>
 
@@ -337,8 +317,7 @@ include './components/head_html.php';
 
                                                                         <?php if (!empty($row['main_image'])) { ?>
 
-                                                                            <img
-                                                                                src="<?= htmlspecialchars($row['main_image']) ?>"
+                                                                            <img src="../<?= htmlspecialchars($row['main_image'] ?? '') ?>"
                                                                                 alt="<?= htmlspecialchars($productName) ?>"
                                                                                 class="rounded">
 
@@ -428,8 +407,7 @@ include './components/head_html.php';
 
                                                             <?php if (!empty($row['old_price'])) { ?>
 
-                                                                <small
-                                                                    class="text-muted text-decoration-line-through ms-1">
+                                                                <small class="text-muted text-decoration-line-through ms-1">
 
                                                                     $<?= number_format(
                                                                         (float) $row['old_price'],
@@ -491,9 +469,7 @@ include './components/head_html.php';
                                                             send the product ID to PHP.
                                                             -->
 
-                                                            <a
-                                                                href="?edit_id=<?= (int) $row['id'] ?>"
-                                                                class="btn btn-icon"
+                                                            <a href="?edit_id=<?= (int) $row['id'] ?>" class="btn btn-icon"
                                                                 title="Edit Product">
 
                                                                 <i class="icon-base bx bx-edit icon-md"></i>
@@ -504,7 +480,7 @@ include './components/head_html.php';
 
                                                     </tr>
 
-                                                <?php
+                                                    <?php
 
                                                 }
 
@@ -528,10 +504,7 @@ include './components/head_html.php';
                                     <div
                                         class="d-md-flex justify-content-between align-items-center dt-layout-start col-md-auto me-auto mt-0">
 
-                                        <div
-                                            class="dt-info"
-                                            aria-live="polite"
-                                            id="DataTables_Table_0_info"
+                                        <div class="dt-info" aria-live="polite" id="DataTables_Table_0_info"
                                             role="status">
 
                                             Showing products
@@ -552,9 +525,7 @@ include './components/head_html.php';
 
                                                     <li class="dt-paging-button page-item disabled">
 
-                                                        <button
-                                                            class="page-link previous"
-                                                            type="button"
+                                                        <button class="page-link previous" type="button"
                                                             aria-label="Previous">
 
                                                             <i
@@ -623,9 +594,7 @@ include './components/head_html.php';
 
                                                     <li class="dt-paging-button page-item disabled">
 
-                                                        <button
-                                                            class="page-link ellipsis"
-                                                            type="button">
+                                                        <button class="page-link ellipsis" type="button">
 
                                                             …
 
@@ -647,10 +616,7 @@ include './components/head_html.php';
 
                                                     <li class="dt-paging-button page-item">
 
-                                                        <button
-                                                            class="page-link next"
-                                                            type="button"
-                                                            aria-label="Next">
+                                                        <button class="page-link next" type="button" aria-label="Next">
 
                                                             <i
                                                                 class="icon-base bx bx-chevron-right scaleX-n1-rtl icon-18px">
@@ -679,39 +645,28 @@ include './components/head_html.php';
                         <!-- ADD PRODUCT OFFCANVAS -->
                         <!-- ===================================== -->
 
-                        <div
-                            class="offcanvas offcanvas-end"
-                            tabindex="-1"
-                            id="offcanvasEcommerceProductAdd"
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEcommerceProductAdd"
                             aria-labelledby="offcanvasEcommerceProductAddLabel">
 
                             <div class="offcanvas-header">
 
-                                <h5
-                                    id="offcanvasEcommerceProductAddLabel"
-                                    class="offcanvas-title">
+                                <h5 id="offcanvasEcommerceProductAddLabel" class="offcanvas-title">
 
                                     Add Product
 
                                 </h5>
 
-                                <button
-                                    type="button"
-                                    class="btn-close text-reset"
-                                    data-bs-dismiss="offcanvas"
+                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                                     aria-label="Close">
                                 </button>
 
                             </div>
 
 
-                            <div
-                                class="offcanvas-body border-top mx-0 flex-grow-0">
+                            <div class="offcanvas-body border-top mx-0 flex-grow-0">
 
-                                <form
-                                    id="eCommerceProductAddForm"
-                                    class="pt-0">
-
+                                <form id="eCommerceProductAddForm" class="pt-0" method="POST"
+                                    action="../validations/product-save.php">
 
                                     <!-- ================================= -->
                                     <!-- BASIC INFORMATION -->
@@ -728,20 +683,14 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="product-name"
-                                                class="form-label">
+                                            <label for="product-name" class="form-label">
 
                                                 Product Name
                                                 <span class="text-danger">*</span>
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="product-name"
-                                                name="productName"
-                                                class="form-control"
+                                            <input type="text" id="product-name" name="productName" class="form-control"
                                                 placeholder="Stylish Summer Outfit">
 
                                         </div>
@@ -751,20 +700,14 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="product-sku"
-                                                class="form-label">
+                                            <label for="product-sku" class="form-label">
 
                                                 SKU
                                                 <span class="text-danger">*</span>
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="product-sku"
-                                                name="sku"
-                                                class="form-control"
+                                            <input type="text" id="product-sku" name="sku" class="form-control"
                                                 placeholder="SSO-2024-BLUE">
 
                                         </div>
@@ -774,20 +717,14 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="product-category"
-                                                class="form-label">
+                                            <label for="product-category" class="form-label">
 
                                                 Category
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="product-category"
-                                                name="category"
-                                                class="form-control"
-                                                placeholder="Men">
+                                            <input type="text" id="product-category" name="category"
+                                                class="form-control" placeholder="Men">
 
                                         </div>
 
@@ -796,20 +733,14 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="product-collection"
-                                                class="form-label">
+                                            <label for="product-collection" class="form-label">
 
                                                 Collection
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="product-collection"
-                                                name="collection"
-                                                class="form-control"
-                                                placeholder="Trending">
+                                            <input type="text" id="product-collection" name="collection"
+                                                class="form-control" placeholder="Trending">
 
                                         </div>
 
@@ -818,20 +749,14 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="product-description"
-                                                class="form-label">
+                                            <label for="product-description" class="form-label">
 
                                                 Description
 
                                             </label>
 
-                                            <textarea
-                                                id="product-description"
-                                                name="description"
-                                                class="form-control"
-                                                rows="4"
-                                                placeholder="Product description"></textarea>
+                                            <textarea id="product-description" name="description" class="form-control"
+                                                rows="4" placeholder="Product description"></textarea>
 
                                         </div>
 
@@ -851,64 +776,43 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="product-price"
-                                                class="form-label">
+                                            <label for="product-price" class="form-label">
 
                                                 Price
                                                 <span class="text-danger">*</span>
 
                                             </label>
 
-                                            <input
-                                                type="number"
-                                                step="0.01"
-                                                id="product-price"
-                                                name="price"
-                                                class="form-control"
-                                                placeholder="59.00">
+                                            <input type="number" step="0.01" id="product-price" name="price"
+                                                class="form-control" placeholder="59.00">
 
                                         </div>
 
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="product-old-price"
-                                                class="form-label">
+                                            <label for="product-old-price" class="form-label">
 
                                                 Old Price
 
                                             </label>
 
-                                            <input
-                                                type="number"
-                                                step="0.01"
-                                                id="product-old-price"
-                                                name="old_price"
-                                                class="form-control"
-                                                placeholder="79.00">
+                                            <input type="number" step="0.01" id="product-old-price" name="old_price"
+                                                class="form-control" placeholder="79.00">
 
                                         </div>
 
 
                                         <div>
 
-                                            <label
-                                                for="product-discount"
-                                                class="form-label">
+                                            <label for="product-discount" class="form-label">
 
                                                 Discount %
 
                                             </label>
 
-                                            <input
-                                                type="number"
-                                                step="0.01"
-                                                id="product-discount"
-                                                name="discount_percentage"
-                                                class="form-control"
-                                                placeholder="25">
+                                            <input type="number" step="0.01" id="product-discount"
+                                                name="discount_percentage" class="form-control" placeholder="25">
 
                                         </div>
 
@@ -930,19 +834,13 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="product-brand"
-                                                class="form-label">
+                                            <label for="product-brand" class="form-label">
 
                                                 Brand
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="product-brand"
-                                                name="brand"
-                                                class="form-control"
+                                            <input type="text" id="product-brand" name="brand" class="form-control"
                                                 placeholder="Stylish Summer">
 
                                         </div>
@@ -952,19 +850,13 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="product-color"
-                                                class="form-label">
+                                            <label for="product-color" class="form-label">
 
                                                 Color
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="product-color"
-                                                name="color"
-                                                class="form-control"
+                                            <input type="text" id="product-color" name="color" class="form-control"
                                                 placeholder="Blue">
 
                                         </div>
@@ -974,20 +866,14 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="product-material"
-                                                class="form-label">
+                                            <label for="product-material" class="form-label">
 
                                                 Material
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="product-material"
-                                                name="material"
-                                                class="form-control"
-                                                placeholder="Denim Cotton">
+                                            <input type="text" id="product-material" name="material"
+                                                class="form-control" placeholder="Denim Cotton">
 
                                         </div>
 
@@ -996,19 +882,13 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="product-fit"
-                                                class="form-label">
+                                            <label for="product-fit" class="form-label">
 
                                                 Fit
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="product-fit"
-                                                name="fit"
-                                                class="form-control"
+                                            <input type="text" id="product-fit" name="fit" class="form-control"
                                                 placeholder="Regular Fit">
 
                                         </div>
@@ -1018,19 +898,13 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="product-pattern"
-                                                class="form-label">
+                                            <label for="product-pattern" class="form-label">
 
                                                 Pattern
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="product-pattern"
-                                                name="pattern"
-                                                class="form-control"
+                                            <input type="text" id="product-pattern" name="pattern" class="form-control"
                                                 placeholder="Solid">
 
                                         </div>
@@ -1040,20 +914,14 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="product-occasion"
-                                                class="form-label">
+                                            <label for="product-occasion" class="form-label">
 
                                                 Occasion
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="product-occasion"
-                                                name="occasion"
-                                                class="form-control"
-                                                placeholder="Casual, Travel, Weekend Wear">
+                                            <input type="text" id="product-occasion" name="occasion"
+                                                class="form-control" placeholder="Casual, Travel, Weekend Wear">
 
                                         </div>
 
@@ -1062,19 +930,13 @@ include './components/head_html.php';
 
                                         <div>
 
-                                            <label
-                                                for="product-care"
-                                                class="form-label">
+                                            <label for="product-care" class="form-label">
 
                                                 Care
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="product-care"
-                                                name="care"
-                                                class="form-control"
+                                            <input type="text" id="product-care" name="care" class="form-control"
                                                 placeholder="Machine wash cold">
 
                                         </div>
@@ -1095,19 +957,13 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="product-neck"
-                                                class="form-label">
+                                            <label for="product-neck" class="form-label">
 
                                                 Neck Type
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="product-neck"
-                                                name="neck_type"
-                                                class="form-control"
+                                            <input type="text" id="product-neck" name="neck_type" class="form-control"
                                                 placeholder="Collar Neck">
 
                                         </div>
@@ -1115,20 +971,14 @@ include './components/head_html.php';
 
                                         <div>
 
-                                            <label
-                                                for="product-sleeve"
-                                                class="form-label">
+                                            <label for="product-sleeve" class="form-label">
 
                                                 Sleeve Style
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="product-sleeve"
-                                                name="sleeve_style"
-                                                class="form-control"
-                                                placeholder="Full Sleeve">
+                                            <input type="text" id="product-sleeve" name="sleeve_style"
+                                                class="form-control" placeholder="Full Sleeve">
 
                                         </div>
 
@@ -1148,19 +998,13 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="product-sizes"
-                                                class="form-label">
+                                            <label for="product-sizes" class="form-label">
 
                                                 Available Sizes
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="product-sizes"
-                                                name="sizes"
-                                                class="form-control"
+                                            <input type="text" id="product-sizes" name="sizes" class="form-control"
                                                 placeholder="XS,S,M,L,XL,XXL">
 
                                             <small class="text-muted">
@@ -1172,38 +1016,27 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="product-stock"
-                                                class="form-label">
+                                            <label for="product-stock" class="form-label">
 
                                                 Stock Quantity
 
                                             </label>
 
-                                            <input
-                                                type="number"
-                                                id="product-stock"
-                                                name="stock_quantity"
-                                                class="form-control"
-                                                placeholder="100">
+                                            <input type="number" id="product-stock" name="stock_quantity"
+                                                class="form-control" placeholder="100">
 
                                         </div>
 
 
                                         <div>
 
-                                            <label
-                                                for="product-stock-status"
-                                                class="form-label">
+                                            <label for="product-stock-status" class="form-label">
 
                                                 Stock Status
 
                                             </label>
 
-                                            <select
-                                                id="product-stock-status"
-                                                name="stock_status"
-                                                class="form-select">
+                                            <select id="product-stock-status" name="stock_status" class="form-select">
 
                                                 <option value="in_stock">
                                                     In Stock
@@ -1229,27 +1062,16 @@ include './components/head_html.php';
                                     <!-- ================================= -->
 
                                     <div class="mb-4 pt-3">
+                                        <h6 class="mb-4">Product Image</h6>
 
-                                        <h6 class="mb-4">
-                                            Product Image
-                                        </h6>
-
-                                        <label
-                                            for="product-image"
-                                            class="form-label">
-
+                                        <label for="product-image" class="form-label">
                                             Main Image
-
                                         </label>
 
-                                        <input
-                                            type="text"
-                                            id="product-image"
-                                            name="main_image"
-                                            class="form-control"
-                                            placeholder="/uploads/product-image.jpg">
-
+                                        <input type="file" id="product-image" name="main_image" class="form-control"
+                                            accept="image/jpeg,image/png,image/webp,image/gif" required>
                                     </div>
+
 
 
                                     <!-- ================================= -->
@@ -1265,10 +1087,7 @@ include './components/head_html.php';
 
                                         <div class="mb-3">
 
-                                            <input
-                                                type="text"
-                                                name="feature_1"
-                                                class="form-control"
+                                            <input type="text" name="feature_1" class="form-control"
                                                 placeholder="Premium quality fabric">
 
                                         </div>
@@ -1276,10 +1095,7 @@ include './components/head_html.php';
 
                                         <div class="mb-3">
 
-                                            <input
-                                                type="text"
-                                                name="feature_2"
-                                                class="form-control"
+                                            <input type="text" name="feature_2" class="form-control"
                                                 placeholder="Lightweight & breathable">
 
                                         </div>
@@ -1287,10 +1103,7 @@ include './components/head_html.php';
 
                                         <div class="mb-3">
 
-                                            <input
-                                                type="text"
-                                                name="feature_3"
-                                                class="form-control"
+                                            <input type="text" name="feature_3" class="form-control"
                                                 placeholder="Perfect for summer">
 
                                         </div>
@@ -1298,10 +1111,7 @@ include './components/head_html.php';
 
                                         <div class="mb-3">
 
-                                            <input
-                                                type="text"
-                                                name="feature_4"
-                                                class="form-control"
+                                            <input type="text" name="feature_4" class="form-control"
                                                 placeholder="Modern and stylish fit">
 
                                         </div>
@@ -1309,10 +1119,7 @@ include './components/head_html.php';
 
                                         <div>
 
-                                            <input
-                                                type="text"
-                                                name="feature_5"
-                                                class="form-control"
+                                            <input type="text" name="feature_5" class="form-control"
                                                 placeholder="Easy to wash and maintain">
 
                                         </div>
@@ -1333,19 +1140,14 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="shipping-description"
-                                                class="form-label">
+                                            <label for="shipping-description" class="form-label">
 
                                                 Description
 
                                             </label>
 
-                                            <textarea
-                                                id="shipping-description"
-                                                name="shipping_return_description"
-                                                class="form-control"
-                                                rows="4"
+                                            <textarea id="shipping-description" name="shipping_return_description"
+                                                class="form-control" rows="4"
                                                 placeholder="Shipping and return information"></textarea>
 
                                         </div>
@@ -1353,10 +1155,7 @@ include './components/head_html.php';
 
                                         <div class="mb-3">
 
-                                            <input
-                                                type="text"
-                                                name="shipping_return_point_1"
-                                                class="form-control"
+                                            <input type="text" name="shipping_return_point_1" class="form-control"
                                                 placeholder="Free shipping on orders over $50">
 
                                         </div>
@@ -1364,10 +1163,7 @@ include './components/head_html.php';
 
                                         <div class="mb-3">
 
-                                            <input
-                                                type="text"
-                                                name="shipping_return_point_2"
-                                                class="form-control"
+                                            <input type="text" name="shipping_return_point_2" class="form-control"
                                                 placeholder="Orders are processed within 1–2 business days">
 
                                         </div>
@@ -1375,10 +1171,7 @@ include './components/head_html.php';
 
                                         <div class="mb-3">
 
-                                            <input
-                                                type="text"
-                                                name="shipping_return_point_3"
-                                                class="form-control"
+                                            <input type="text" name="shipping_return_point_3" class="form-control"
                                                 placeholder="Standard delivery takes 3–5 business days">
 
                                         </div>
@@ -1386,10 +1179,7 @@ include './components/head_html.php';
 
                                         <div class="mb-3">
 
-                                            <input
-                                                type="text"
-                                                name="shipping_return_point_4"
-                                                class="form-control"
+                                            <input type="text" name="shipping_return_point_4" class="form-control"
                                                 placeholder="30-day return policy">
 
                                         </div>
@@ -1397,10 +1187,7 @@ include './components/head_html.php';
 
                                         <div>
 
-                                            <input
-                                                type="text"
-                                                name="shipping_return_point_5"
-                                                class="form-control"
+                                            <input type="text" name="shipping_return_point_5" class="form-control"
                                                 placeholder="Product must be unused and in original packaging">
 
                                         </div>
@@ -1418,10 +1205,7 @@ include './components/head_html.php';
                                             Product Status
                                         </h6>
 
-                                        <select
-                                            name="status"
-                                            id="product-status"
-                                            class="form-select">
+                                        <select name="status" id="product-status" class="form-select">
 
                                             <option value="active">
                                                 Active
@@ -1446,19 +1230,14 @@ include './components/head_html.php';
 
                                     <div class="d-flex gap-2">
 
-                                        <button
-                                            type="submit"
-                                            class="btn btn-primary">
+                                        <button type="submit" class="btn btn-primary">
 
                                             Add Product
 
                                         </button>
 
 
-                                        <button
-                                            type="reset"
-                                            class="btn btn-label-danger"
-                                            data-bs-dismiss="offcanvas">
+                                        <button type="reset" class="btn btn-label-danger" data-bs-dismiss="offcanvas">
 
                                             Discard
 
@@ -1477,49 +1256,35 @@ include './components/head_html.php';
                         <!-- EDIT PRODUCT OFFCANVAS -->
                         <!-- ===================================== -->
 
-                        <div
-                            class="offcanvas offcanvas-end"
-                            tabindex="-1"
-                            id="offcanvasEcommerceProductEdit"
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEcommerceProductEdit"
                             aria-labelledby="offcanvasEcommerceProductEditLabel">
 
                             <div class="offcanvas-header">
 
-                                <h5
-                                    id="offcanvasEcommerceProductEditLabel"
-                                    class="offcanvas-title">
+                                <h5 id="offcanvasEcommerceProductEditLabel" class="offcanvas-title">
 
                                     Edit Product
 
                                 </h5>
 
-                                <button
-                                    type="button"
-                                    class="btn-close text-reset"
-                                    data-bs-dismiss="offcanvas"
+                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                                     aria-label="Close">
                                 </button>
 
                             </div>
 
 
-                            <div
-                                class="offcanvas-body border-top mx-0 flex-grow-0">
+                            <div class="offcanvas-body border-top mx-0 flex-grow-0">
 
-                                <form
-                                    id="eCommerceProductEditForm"
-                                    class="pt-0">
+                                <form id="eCommerceProductEditForm" class="pt-0" method="POST"
+                                    action="../validations/product-update.php">
 
 
                                     <!-- Hidden Product ID -->
 
-                                    <input
-                                        type="hidden"
-                                        id="edit-product-id"
-                                        name="product_id"
-                                        value="<?= htmlspecialchars(
-                                            $editProduct['id'] ?? ''
-                                        ) ?>">
+                                    <input type="hidden" id="edit-product-id" name="product_id" value="<?= htmlspecialchars(
+                                        $editProduct['id'] ?? ''
+                                    ) ?>">
 
 
                                     <!-- ================================= -->
@@ -1537,24 +1302,17 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="edit-product-name"
-                                                class="form-label">
+                                            <label for="edit-product-name" class="form-label">
 
                                                 Product Name
                                                 <span class="text-danger">*</span>
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="edit-product-name"
-                                                name="productName"
-                                                class="form-control"
-                                                value="<?= htmlspecialchars(
+                                            <input type="text" id="edit-product-name" name="productName"
+                                                class="form-control" value="<?= htmlspecialchars(
                                                     $editProduct['name'] ?? ''
-                                                ) ?>"
-                                                placeholder="Stylish Summer Outfit">
+                                                ) ?>" placeholder="Stylish Summer Outfit">
 
                                         </div>
 
@@ -1563,24 +1321,17 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="edit-product-sku"
-                                                class="form-label">
+                                            <label for="edit-product-sku" class="form-label">
 
                                                 SKU
                                                 <span class="text-danger">*</span>
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="edit-product-sku"
-                                                name="sku"
-                                                class="form-control"
+                                            <input type="text" id="edit-product-sku" name="sku" class="form-control"
                                                 value="<?= htmlspecialchars(
                                                     $editProduct['sku'] ?? ''
-                                                ) ?>"
-                                                placeholder="SSO-2024-BLUE">
+                                                ) ?>" placeholder="SSO-2024-BLUE">
 
                                         </div>
 
@@ -1589,23 +1340,16 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="edit-product-category"
-                                                class="form-label">
+                                            <label for="edit-product-category" class="form-label">
 
                                                 Category
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="edit-product-category"
-                                                name="category"
-                                                class="form-control"
-                                                value="<?= htmlspecialchars(
+                                            <input type="text" id="edit-product-category" name="category"
+                                                class="form-control" value="<?= htmlspecialchars(
                                                     $editProduct['category'] ?? ''
-                                                ) ?>"
-                                                placeholder="Men">
+                                                ) ?>" placeholder="Men">
 
                                         </div>
 
@@ -1614,23 +1358,16 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="edit-product-collection"
-                                                class="form-label">
+                                            <label for="edit-product-collection" class="form-label">
 
                                                 Collection
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="edit-product-collection"
-                                                name="collection"
-                                                class="form-control"
-                                                value="<?= htmlspecialchars(
+                                            <input type="text" id="edit-product-collection" name="collection"
+                                                class="form-control" value="<?= htmlspecialchars(
                                                     $editProduct['collection'] ?? ''
-                                                ) ?>"
-                                                placeholder="Trending">
+                                                ) ?>" placeholder="Trending">
 
                                         </div>
 
@@ -1639,20 +1376,14 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="edit-product-description"
-                                                class="form-label">
+                                            <label for="edit-product-description" class="form-label">
 
                                                 Description
 
                                             </label>
 
-                                            <textarea
-                                                id="edit-product-description"
-                                                name="description"
-                                                class="form-control"
-                                                rows="4"
-                                                placeholder="Product description"><?= htmlspecialchars(
+                                            <textarea id="edit-product-description" name="description"
+                                                class="form-control" rows="4" placeholder="Product description"><?= htmlspecialchars(
                                                     $editProduct['description'] ?? ''
                                                 ) ?></textarea>
 
@@ -1676,25 +1407,17 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="edit-product-price"
-                                                class="form-label">
+                                            <label for="edit-product-price" class="form-label">
 
                                                 Price
                                                 <span class="text-danger">*</span>
 
                                             </label>
 
-                                            <input
-                                                type="number"
-                                                step="0.01"
-                                                id="edit-product-price"
-                                                name="price"
-                                                class="form-control"
-                                                value="<?= htmlspecialchars(
+                                            <input type="number" step="0.01" id="edit-product-price" name="price"
+                                                class="form-control" value="<?= htmlspecialchars(
                                                     $editProduct['price'] ?? ''
-                                                ) ?>"
-                                                placeholder="59.00">
+                                                ) ?>" placeholder="59.00">
 
                                         </div>
 
@@ -1703,24 +1426,16 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="edit-product-old-price"
-                                                class="form-label">
+                                            <label for="edit-product-old-price" class="form-label">
 
                                                 Old Price
 
                                             </label>
 
-                                            <input
-                                                type="number"
-                                                step="0.01"
-                                                id="edit-product-old-price"
-                                                name="old_price"
-                                                class="form-control"
-                                                value="<?= htmlspecialchars(
+                                            <input type="number" step="0.01" id="edit-product-old-price"
+                                                name="old_price" class="form-control" value="<?= htmlspecialchars(
                                                     $editProduct['old_price'] ?? ''
-                                                ) ?>"
-                                                placeholder="79.00">
+                                                ) ?>" placeholder="79.00">
 
                                         </div>
 
@@ -1729,24 +1444,16 @@ include './components/head_html.php';
 
                                         <div>
 
-                                            <label
-                                                for="edit-product-discount"
-                                                class="form-label">
+                                            <label for="edit-product-discount" class="form-label">
 
                                                 Discount %
 
                                             </label>
 
-                                            <input
-                                                type="number"
-                                                step="0.01"
-                                                id="edit-product-discount"
-                                                name="discount_percentage"
-                                                class="form-control"
-                                                value="<?= htmlspecialchars(
+                                            <input type="number" step="0.01" id="edit-product-discount"
+                                                name="discount_percentage" class="form-control" value="<?= htmlspecialchars(
                                                     $editProduct['discount_percentage'] ?? ''
-                                                ) ?>"
-                                                placeholder="25">
+                                                ) ?>" placeholder="25">
 
                                         </div>
 
@@ -1768,23 +1475,16 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="edit-product-brand"
-                                                class="form-label">
+                                            <label for="edit-product-brand" class="form-label">
 
                                                 Brand
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="edit-product-brand"
-                                                name="brand"
-                                                class="form-control"
+                                            <input type="text" id="edit-product-brand" name="brand" class="form-control"
                                                 value="<?= htmlspecialchars(
                                                     $editProduct['brand'] ?? ''
-                                                ) ?>"
-                                                placeholder="Stylish Summer">
+                                                ) ?>" placeholder="Stylish Summer">
 
                                         </div>
 
@@ -1793,23 +1493,16 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="edit-product-color"
-                                                class="form-label">
+                                            <label for="edit-product-color" class="form-label">
 
                                                 Color
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="edit-product-color"
-                                                name="color"
-                                                class="form-control"
+                                            <input type="text" id="edit-product-color" name="color" class="form-control"
                                                 value="<?= htmlspecialchars(
                                                     $editProduct['color'] ?? ''
-                                                ) ?>"
-                                                placeholder="Blue">
+                                                ) ?>" placeholder="Blue">
 
                                         </div>
 
@@ -1818,23 +1511,16 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="edit-product-material"
-                                                class="form-label">
+                                            <label for="edit-product-material" class="form-label">
 
                                                 Material
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="edit-product-material"
-                                                name="material"
-                                                class="form-control"
-                                                value="<?= htmlspecialchars(
+                                            <input type="text" id="edit-product-material" name="material"
+                                                class="form-control" value="<?= htmlspecialchars(
                                                     $editProduct['material'] ?? ''
-                                                ) ?>"
-                                                placeholder="Denim Cotton">
+                                                ) ?>" placeholder="Denim Cotton">
 
                                         </div>
 
@@ -1843,23 +1529,16 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="edit-product-fit"
-                                                class="form-label">
+                                            <label for="edit-product-fit" class="form-label">
 
                                                 Fit
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="edit-product-fit"
-                                                name="fit"
-                                                class="form-control"
+                                            <input type="text" id="edit-product-fit" name="fit" class="form-control"
                                                 value="<?= htmlspecialchars(
                                                     $editProduct['fit'] ?? ''
-                                                ) ?>"
-                                                placeholder="Regular Fit">
+                                                ) ?>" placeholder="Regular Fit">
 
                                         </div>
 
@@ -1868,23 +1547,16 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="edit-product-pattern"
-                                                class="form-label">
+                                            <label for="edit-product-pattern" class="form-label">
 
                                                 Pattern
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="edit-product-pattern"
-                                                name="pattern"
-                                                class="form-control"
-                                                value="<?= htmlspecialchars(
+                                            <input type="text" id="edit-product-pattern" name="pattern"
+                                                class="form-control" value="<?= htmlspecialchars(
                                                     $editProduct['pattern'] ?? ''
-                                                ) ?>"
-                                                placeholder="Solid">
+                                                ) ?>" placeholder="Solid">
 
                                         </div>
 
@@ -1893,23 +1565,16 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="edit-product-occasion"
-                                                class="form-label">
+                                            <label for="edit-product-occasion" class="form-label">
 
                                                 Occasion
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="edit-product-occasion"
-                                                name="occasion"
-                                                class="form-control"
-                                                value="<?= htmlspecialchars(
+                                            <input type="text" id="edit-product-occasion" name="occasion"
+                                                class="form-control" value="<?= htmlspecialchars(
                                                     $editProduct['occasion'] ?? ''
-                                                ) ?>"
-                                                placeholder="Casual, Travel, Weekend Wear">
+                                                ) ?>" placeholder="Casual, Travel, Weekend Wear">
 
                                         </div>
 
@@ -1918,23 +1583,16 @@ include './components/head_html.php';
 
                                         <div>
 
-                                            <label
-                                                for="edit-product-care"
-                                                class="form-label">
+                                            <label for="edit-product-care" class="form-label">
 
                                                 Care
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="edit-product-care"
-                                                name="care"
-                                                class="form-control"
+                                            <input type="text" id="edit-product-care" name="care" class="form-control"
                                                 value="<?= htmlspecialchars(
                                                     $editProduct['care'] ?? ''
-                                                ) ?>"
-                                                placeholder="Machine wash cold">
+                                                ) ?>" placeholder="Machine wash cold">
 
                                         </div>
 
@@ -1956,23 +1614,16 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="edit-product-neck"
-                                                class="form-label">
+                                            <label for="edit-product-neck" class="form-label">
 
                                                 Neck Type
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="edit-product-neck"
-                                                name="neck_type"
-                                                class="form-control"
-                                                value="<?= htmlspecialchars(
+                                            <input type="text" id="edit-product-neck" name="neck_type"
+                                                class="form-control" value="<?= htmlspecialchars(
                                                     $editProduct['neck_type'] ?? ''
-                                                ) ?>"
-                                                placeholder="Collar Neck">
+                                                ) ?>" placeholder="Collar Neck">
 
                                         </div>
 
@@ -1981,23 +1632,16 @@ include './components/head_html.php';
 
                                         <div>
 
-                                            <label
-                                                for="edit-product-sleeve"
-                                                class="form-label">
+                                            <label for="edit-product-sleeve" class="form-label">
 
                                                 Sleeve Style
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="edit-product-sleeve"
-                                                name="sleeve_style"
-                                                class="form-control"
-                                                value="<?= htmlspecialchars(
+                                            <input type="text" id="edit-product-sleeve" name="sleeve_style"
+                                                class="form-control" value="<?= htmlspecialchars(
                                                     $editProduct['sleeve_style'] ?? ''
-                                                ) ?>"
-                                                placeholder="Full Sleeve">
+                                                ) ?>" placeholder="Full Sleeve">
 
                                         </div>
 
@@ -2019,23 +1663,16 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="edit-product-sizes"
-                                                class="form-label">
+                                            <label for="edit-product-sizes" class="form-label">
 
                                                 Available Sizes
 
                                             </label>
 
-                                            <input
-                                                type="text"
-                                                id="edit-product-sizes"
-                                                name="sizes"
-                                                class="form-control"
+                                            <input type="text" id="edit-product-sizes" name="sizes" class="form-control"
                                                 value="<?= htmlspecialchars(
                                                     $editProduct['sizes'] ?? ''
-                                                ) ?>"
-                                                placeholder="XS,S,M,L,XL,XXL">
+                                                ) ?>" placeholder="XS,S,M,L,XL,XXL">
 
                                             <small class="text-muted">
                                                 Separate sizes with commas.
@@ -2048,23 +1685,16 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="edit-product-stock"
-                                                class="form-label">
+                                            <label for="edit-product-stock" class="form-label">
 
                                                 Stock Quantity
 
                                             </label>
 
-                                            <input
-                                                type="number"
-                                                id="edit-product-stock"
-                                                name="stock_quantity"
-                                                class="form-control"
-                                                value="<?= htmlspecialchars(
+                                            <input type="number" id="edit-product-stock" name="stock_quantity"
+                                                class="form-control" value="<?= htmlspecialchars(
                                                     $editProduct['stock_quantity'] ?? ''
-                                                ) ?>"
-                                                placeholder="100">
+                                                ) ?>" placeholder="100">
 
                                         </div>
 
@@ -2073,44 +1703,34 @@ include './components/head_html.php';
 
                                         <div>
 
-                                            <label
-                                                for="edit-product-stock-status"
-                                                class="form-label">
+                                            <label for="edit-product-stock-status" class="form-label">
 
                                                 Stock Status
 
                                             </label>
 
-                                            <select
-                                                id="edit-product-stock-status"
-                                                name="stock_status"
+                                            <select id="edit-product-stock-status" name="stock_status"
                                                 class="form-select">
 
-                                                <option
-                                                    value="in_stock"
-                                                    <?= (($editProduct['stock_status'] ?? '') === 'in_stock')
-                                                        ? 'selected'
-                                                        : '' ?>>
+                                                <option value="in_stock" <?= (($editProduct['stock_status'] ?? '') === 'in_stock')
+                                                    ? 'selected'
+                                                    : '' ?>>
 
                                                     In Stock
 
                                                 </option>
 
-                                                <option
-                                                    value="low_stock"
-                                                    <?= (($editProduct['stock_status'] ?? '') === 'low_stock')
-                                                        ? 'selected'
-                                                        : '' ?>>
+                                                <option value="low_stock" <?= (($editProduct['stock_status'] ?? '') === 'low_stock')
+                                                    ? 'selected'
+                                                    : '' ?>>
 
                                                     Low Stock
 
                                                 </option>
 
-                                                <option
-                                                    value="out_of_stock"
-                                                    <?= (($editProduct['stock_status'] ?? '') === 'out_of_stock')
-                                                        ? 'selected'
-                                                        : '' ?>>
+                                                <option value="out_of_stock" <?= (($editProduct['stock_status'] ?? '') === 'out_of_stock')
+                                                    ? 'selected'
+                                                    : '' ?>>
 
                                                     Out of Stock
 
@@ -2126,32 +1746,29 @@ include './components/head_html.php';
                                     <!-- ================================= -->
                                     <!-- PRODUCT IMAGE -->
                                     <!-- ================================= -->
-
                                     <div class="mb-4 pt-3">
+                                        <h6 class="mb-4">Product Image</h6>
 
-                                        <h6 class="mb-4">
-                                            Product Image
-                                        </h6>
+                                        <?php if (!empty($editProduct['main_image'])): ?>
+                                            <div class="mb-3">
+                                                <p class="form-label">Current Image</p>
+                                                <img src="../<?= htmlspecialchars($editProduct['main_image']) ?>"
+                                                    alt="Current product image"
+                                                    style="width: 120px; height: 120px; object-fit: cover;"
+                                                    class="rounded border">
+                                            </div>
+                                        <?php endif; ?>
 
-                                        <label
-                                            for="edit-product-image"
-                                            class="form-label">
-
-                                            Main Image
-
+                                        <label for="edit-product-image" class="form-label">
+                                            <?= !empty($editProduct['main_image'])
+                                                ? 'Choose a new image (optional)'
+                                                : 'Upload Main Image' ?>
                                         </label>
 
-                                        <input
-                                            type="text"
-                                            id="edit-product-image"
-                                            name="main_image"
-                                            class="form-control"
-                                            value="<?= htmlspecialchars(
-                                                $editProduct['main_image'] ?? ''
-                                            ) ?>"
-                                            placeholder="/uploads/product-image.jpg">
-
+                                        <input type="file" id="edit-product-image" name="main_image"
+                                            class="form-control" accept="image/jpeg,image/png,image/webp,image/gif">
                                     </div>
+
 
 
                                     <!-- ================================= -->
@@ -2167,75 +1784,50 @@ include './components/head_html.php';
 
                                         <div class="mb-3">
 
-                                            <input
-                                                type="text"
-                                                id="edit-feature-1"
-                                                name="feature_1"
-                                                class="form-control"
+                                            <input type="text" id="edit-feature-1" name="feature_1" class="form-control"
                                                 value="<?= htmlspecialchars(
                                                     $editProduct['feature_1'] ?? ''
-                                                ) ?>"
-                                                placeholder="Premium quality fabric">
+                                                ) ?>" placeholder="Premium quality fabric">
 
                                         </div>
 
 
                                         <div class="mb-3">
 
-                                            <input
-                                                type="text"
-                                                id="edit-feature-2"
-                                                name="feature_2"
-                                                class="form-control"
+                                            <input type="text" id="edit-feature-2" name="feature_2" class="form-control"
                                                 value="<?= htmlspecialchars(
                                                     $editProduct['feature_2'] ?? ''
-                                                ) ?>"
-                                                placeholder="Lightweight & breathable">
+                                                ) ?>" placeholder="Lightweight & breathable">
 
                                         </div>
 
 
                                         <div class="mb-3">
 
-                                            <input
-                                                type="text"
-                                                id="edit-feature-3"
-                                                name="feature_3"
-                                                class="form-control"
+                                            <input type="text" id="edit-feature-3" name="feature_3" class="form-control"
                                                 value="<?= htmlspecialchars(
                                                     $editProduct['feature_3'] ?? ''
-                                                ) ?>"
-                                                placeholder="Perfect for summer">
+                                                ) ?>" placeholder="Perfect for summer">
 
                                         </div>
 
 
                                         <div class="mb-3">
 
-                                            <input
-                                                type="text"
-                                                id="edit-feature-4"
-                                                name="feature_4"
-                                                class="form-control"
+                                            <input type="text" id="edit-feature-4" name="feature_4" class="form-control"
                                                 value="<?= htmlspecialchars(
                                                     $editProduct['feature_4'] ?? ''
-                                                ) ?>"
-                                                placeholder="Modern and stylish fit">
+                                                ) ?>" placeholder="Modern and stylish fit">
 
                                         </div>
 
 
                                         <div>
 
-                                            <input
-                                                type="text"
-                                                id="edit-feature-5"
-                                                name="feature_5"
-                                                class="form-control"
+                                            <input type="text" id="edit-feature-5" name="feature_5" class="form-control"
                                                 value="<?= htmlspecialchars(
                                                     $editProduct['feature_5'] ?? ''
-                                                ) ?>"
-                                                placeholder="Easy to wash and maintain">
+                                                ) ?>" placeholder="Easy to wash and maintain">
 
                                         </div>
 
@@ -2257,19 +1849,14 @@ include './components/head_html.php';
 
                                         <div class="mb-4">
 
-                                            <label
-                                                for="edit-shipping-description"
-                                                class="form-label">
+                                            <label for="edit-shipping-description" class="form-label">
 
                                                 Description
 
                                             </label>
 
-                                            <textarea
-                                                id="edit-shipping-description"
-                                                name="shipping_return_description"
-                                                class="form-control"
-                                                rows="4"
+                                            <textarea id="edit-shipping-description" name="shipping_return_description"
+                                                class="form-control" rows="4"
                                                 placeholder="Shipping and return information"><?= htmlspecialchars(
                                                     $editProduct['shipping_return_description'] ?? ''
                                                 ) ?></textarea>
@@ -2281,15 +1868,10 @@ include './components/head_html.php';
 
                                         <div class="mb-3">
 
-                                            <input
-                                                type="text"
-                                                id="edit-shipping-point-1"
-                                                name="shipping_return_point_1"
-                                                class="form-control"
-                                                value="<?= htmlspecialchars(
+                                            <input type="text" id="edit-shipping-point-1" name="shipping_return_point_1"
+                                                class="form-control" value="<?= htmlspecialchars(
                                                     $editProduct['shipping_return_point_1'] ?? ''
-                                                ) ?>"
-                                                placeholder="Free shipping on orders over $50">
+                                                ) ?>" placeholder="Free shipping on orders over $50">
 
                                         </div>
 
@@ -2298,15 +1880,10 @@ include './components/head_html.php';
 
                                         <div class="mb-3">
 
-                                            <input
-                                                type="text"
-                                                id="edit-shipping-point-2"
-                                                name="shipping_return_point_2"
-                                                class="form-control"
-                                                value="<?= htmlspecialchars(
+                                            <input type="text" id="edit-shipping-point-2" name="shipping_return_point_2"
+                                                class="form-control" value="<?= htmlspecialchars(
                                                     $editProduct['shipping_return_point_2'] ?? ''
-                                                ) ?>"
-                                                placeholder="Orders are processed within 1–2 business days">
+                                                ) ?>" placeholder="Orders are processed within 1–2 business days">
 
                                         </div>
 
@@ -2315,15 +1892,10 @@ include './components/head_html.php';
 
                                         <div class="mb-3">
 
-                                            <input
-                                                type="text"
-                                                id="edit-shipping-point-3"
-                                                name="shipping_return_point_3"
-                                                class="form-control"
-                                                value="<?= htmlspecialchars(
+                                            <input type="text" id="edit-shipping-point-3" name="shipping_return_point_3"
+                                                class="form-control" value="<?= htmlspecialchars(
                                                     $editProduct['shipping_return_point_3'] ?? ''
-                                                ) ?>"
-                                                placeholder="Standard delivery takes 3–5 business days">
+                                                ) ?>" placeholder="Standard delivery takes 3–5 business days">
 
                                         </div>
 
@@ -2332,15 +1904,10 @@ include './components/head_html.php';
 
                                         <div class="mb-3">
 
-                                            <input
-                                                type="text"
-                                                id="edit-shipping-point-4"
-                                                name="shipping_return_point_4"
-                                                class="form-control"
-                                                value="<?= htmlspecialchars(
+                                            <input type="text" id="edit-shipping-point-4" name="shipping_return_point_4"
+                                                class="form-control" value="<?= htmlspecialchars(
                                                     $editProduct['shipping_return_point_4'] ?? ''
-                                                ) ?>"
-                                                placeholder="30-day return policy">
+                                                ) ?>" placeholder="30-day return policy">
 
                                         </div>
 
@@ -2349,15 +1916,10 @@ include './components/head_html.php';
 
                                         <div>
 
-                                            <input
-                                                type="text"
-                                                id="edit-shipping-point-5"
-                                                name="shipping_return_point_5"
-                                                class="form-control"
-                                                value="<?= htmlspecialchars(
+                                            <input type="text" id="edit-shipping-point-5" name="shipping_return_point_5"
+                                                class="form-control" value="<?= htmlspecialchars(
                                                     $editProduct['shipping_return_point_5'] ?? ''
-                                                ) ?>"
-                                                placeholder="Product must be unused and in original packaging">
+                                                ) ?>" placeholder="Product must be unused and in original packaging">
 
                                         </div>
 
@@ -2374,36 +1936,27 @@ include './components/head_html.php';
                                             Product Status
                                         </h6>
 
-                                        <select
-                                            name="status"
-                                            id="edit-product-status"
-                                            class="form-select">
+                                        <select name="status" id="edit-product-status" class="form-select">
 
-                                            <option
-                                                value="active"
-                                                <?= (($editProduct['status'] ?? '') === 'active')
-                                                    ? 'selected'
-                                                    : '' ?>>
+                                            <option value="active" <?= (($editProduct['status'] ?? '') === 'active')
+                                                ? 'selected'
+                                                : '' ?>>
 
                                                 Active
 
                                             </option>
 
-                                            <option
-                                                value="draft"
-                                                <?= (($editProduct['status'] ?? '') === 'draft')
-                                                    ? 'selected'
-                                                    : '' ?>>
+                                            <option value="draft" <?= (($editProduct['status'] ?? '') === 'draft')
+                                                ? 'selected'
+                                                : '' ?>>
 
                                                 Draft
 
                                             </option>
 
-                                            <option
-                                                value="inactive"
-                                                <?= (($editProduct['status'] ?? '') === 'inactive')
-                                                    ? 'selected'
-                                                    : '' ?>>
+                                            <option value="inactive" <?= (($editProduct['status'] ?? '') === 'inactive')
+                                                ? 'selected'
+                                                : '' ?>>
 
                                                 Inactive
 
@@ -2420,19 +1973,14 @@ include './components/head_html.php';
 
                                     <div class="d-flex gap-2">
 
-                                        <button
-                                            type="submit"
-                                            class="btn btn-primary">
+                                        <button type="submit" class="btn btn-primary">
 
                                             Update Product
 
                                         </button>
 
 
-                                        <button
-                                            type="button"
-                                            class="btn btn-label-danger"
-                                            data-bs-dismiss="offcanvas">
+                                        <button type="button" class="btn btn-label-danger" data-bs-dismiss="offcanvas">
 
                                             Cancel
 
@@ -2472,24 +2020,24 @@ include './components/head_html.php';
 
 <?php if ($editProduct): ?>
 
-<script>
+    <script>
 
-document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function () {
 
-    const editOffcanvasElement =
-        document.getElementById('offcanvasEcommerceProductEdit');
+            const editOffcanvasElement =
+                document.getElementById('offcanvasEcommerceProductEdit');
 
-    if (editOffcanvasElement) {
+            if (editOffcanvasElement) {
 
-        const editOffcanvas =
-            new bootstrap.Offcanvas(editOffcanvasElement);
+                const editOffcanvas =
+                    new bootstrap.Offcanvas(editOffcanvasElement);
 
-        editOffcanvas.show();
+                editOffcanvas.show();
 
-    }
+            }
 
-});
+        });
 
-</script>
+    </script>
 
 <?php endif; ?>

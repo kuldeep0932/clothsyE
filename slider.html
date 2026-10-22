@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi Slice Slider</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #111;
+  font-family: Arial, sans-serif;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+.slider {
+  position: relative;
+  width: min(1100px, 95vw);
+  height: min(600px, 70vh);
+  min-height: 350px;
+  overflow: hidden;
+  background: #222;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.slide.active {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Each slice covers one vertical section */
+.slice {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 12.5%;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(35px) scaleY(0.85);
+  transform-origin: bottom;
+}
+
+.slice img {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 800%;
+  max-width: none;
+  object-fit: cover;
+}
+
+/* Eight slices reveal in sequence */
+/* Each slice */
+.slice {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 12.5%;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+/* Left-to-right staggered animation */
+.slide.active .slice {
+  animation: sliceReveal 0.75s
+    cubic-bezier(.22, 1, .36, 1) forwards;
+  animation-delay: var(--delay);
+}
+
+@keyframes sliceReveal {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+    clip-path: inset(0 0 0 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+/* Caption */
+.caption {
+  position: absolute;
+  z-index: 3;
+  left: 8%;
+  bottom: 18%;
+  color: white;
+  font-size: clamp(28px, 5vw, 60px);
+  font-weight: 800;
+  text-shadow: 0 3px 15px #000;
+  opacity: 0;
+  transform: translateY(25px);
+}
+
+.slide.active .caption {
+  animation: captionIn 0.7s ease 0.9s forwards;
+}
+
+@keyframes captionIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Navigation */
+.nav {
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border: 1px solid #ffffff80;
+  border-radius: 50%;
+  color: white;
+  background: #0008;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.nav:hover {
+  background: #fff;
+  color: #111;
+}
+
+.prev { left: 20px; }
+.next { right: 20px; }
+
+/* Dots */
+.dots {
+  position: absolute;
+  z-index: 5;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  border: 0;
+  border-radius: 20px;
+  background: #ffffff80;
+  cursor: pointer;
+  transition: width .3s;
+}
+
+.dot.active {
+  width: 30px;
+  background: white;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide.active .slice,
+  .slide.active .caption {
+    animation-duration: 0.01ms;
+    animation-delay: 0ms;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="slider" id="slider">
+
+  <div class="slide active"
+       data-image="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=85"
+       data-title="Explore The World"></div>
+
+  <div class="slide"
+       data-image="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1600&q=85"
+       data-title="Discover Nature"></div>
+
+  <div class="slide"
+       data-image="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=85"
+       data-title="Into The Wild"></div>
+
+  <button class="nav prev" aria-label="Previous slide">&#10094;</button>
+  <button class="nav next" aria-label="Next slide">&#10095;</button>
+
+  <div class="dots"></div>
+</div>
+
+<script>
+const slider = document.querySelector("#slider");
+const slides = [...slider.querySelectorAll(".slide")];
+const dotsBox = slider.querySelector(".dots");
+
+let current = 0;
+let timer;
+
+/* Build eight individual image slices */
+slides.forEach((slide) => {
+  const image = slide.dataset.image;
+  const title = slide.dataset.title;
+
+  for (let i = 0; i < 8; i++) {
+    const slice = document.createElement("div");
+    slice.className = "slice";
+
+    slice.style.left = `${i * 12.5}%`;
+    slice.style.setProperty("--delay", `${i * 0.12}s`);
+
+    const img = document.createElement("img");
+    img.src = image;
+    img.alt = "";
+    img.draggable = false;
+
+    // Shift the full image underneath each slice
+    img.style.left = `${-i * 100}%`;
+
+    slice.appendChild(img);
+    slide.appendChild(slice);
+  }
+
+  const caption = document.createElement("div");
+  caption.className = "caption";
+  caption.textContent = title;
+  slide.appendChild(caption);
+
+  const dot = document.createElement("button");
+  dot.className = "dot";
+  dot.setAttribute("aria-label", `Go to ${title}`);
+
+  dot.addEventListener("click", () => {
+    showSlide(slides.indexOf(slide));
+    restartTimer();
+  });
+
+  dotsBox.appendChild(dot);
+});
+
+const dots = [...dotsBox.querySelectorAll(".dot")];
+
+function showSlide(index) {
+  slides[current].classList.remove("active");
+  dots[current].classList.remove("active");
+
+  current = (index + slides.length) % slides.length;
+
+  const nextSlide = slides[current];
+
+  // Reset each slice animation
+  nextSlide.classList.remove("active");
+  void nextSlide.offsetWidth;
+  nextSlide.classList.add("active");
+
+  dots[current].classList.add("active");
+}
+
+slider.querySelector(".next").addEventListener("click", () => {
+  showSlide(current + 1);
+  restartTimer();
+});
+
+slider.querySelector(".prev").addEventListener("click", () => {
+  showSlide(current - 1);
+  restartTimer();
+});
+
+function restartTimer() {
+  clearInterval(timer);
+  timer = setInterval(() => {
+    showSlide(current + 1);
+  }, 5500);
+}
+
+dots[0].classList.add("active");
+restartTimer();
+</script>
+
+</body>
+</html>

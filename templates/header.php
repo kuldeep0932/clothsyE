@@ -59,9 +59,7 @@ $primaryColor = $row['primary_color'] ?? '#ef2d19';
   <link rel="stylesheet" href="./assets/css/style.css" />
   <style>
     :root {
-      --primary-color:
-        <?= htmlspecialchars($primaryColor) ?>
-      ;
+      --primary-color: <?= htmlspecialchars($primaryColor) ?>;
     }
   </style>
 </head>

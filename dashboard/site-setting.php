@@ -64,7 +64,7 @@ $copyrightText = $row['copyright_text'] ?? '';
                             <?php if (!empty($siteLogo)) { ?>
 
                                 <div class="mt-3">
-                                    <img src="<?= htmlspecialchars($siteLogo) ?>" alt="Site Logo"
+                                    <img src="../<?= htmlspecialchars($siteLogo) ?>" alt="Site Logo"
                                         style="max-height:60px; max-width:200px;">
                                 </div>
 

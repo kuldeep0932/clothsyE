@@ -1,7 +1,7 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" data-bg-class="bg-menu-theme">
   <div class="app-brand demo">
-    <a href="#" class="foot_logo display-2 text-dark">
-      <img src="<?= htmlspecialchars($siteLogo) ?>" alt="Clothsy Logo" width="150px">
+    <a href="../" class="foot_logo display-2 text-dark">
+      <img src="../<?= htmlspecialchars($siteLogo) ?>" alt="Clothsy Logo" width="150px">
     </a>
     <a href="/home" class="layout-menu-toggle menu-link text-large ms-auto">
       <i class="bx bx-chevron-left d-block d-xl-none align-middle"></i>
