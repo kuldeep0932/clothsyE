@@ -53,8 +53,8 @@
         <div>Products</div>
       </a>
     </li>
-    <li class="menu-item <?php echo ($currentPage == 'ecommerce.php') ? 'active open' : ''; ?>">
-      <a href="./ecommerce.php" class="menu-link">
+    <li class="menu-item <?php echo ($currentPage == 'orders.php') ? 'active open' : ''; ?>">
+      <a href="./orders.php" class="menu-link">
         <i class="menu-icon tf-icons bx bx-cart"></i>
         <div>Order</div>
       </a>

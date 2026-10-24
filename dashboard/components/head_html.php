@@ -4,11 +4,8 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
 
 include './../database/connection.php';
 
-$sql = "SELECT * FROM site_settings WHERE id = 1 LIMIT 1";
-
-$result = mysqli_query($conn, $sql);
-
-$row = mysqli_fetch_assoc($result);
+$settingsResult = mysqli_query($conn, "SELECT * FROM site_settings WHERE id = 1 LIMIT 1");
+$row = mysqli_fetch_assoc($settingsResult) ?: [];
 
 $siteName = $row['site_name'] ?? '';
 $siteLogo = $row['site_logo'] ?? '';

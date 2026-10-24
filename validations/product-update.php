@@ -156,7 +156,7 @@ if (mysqli_stmt_execute($stmt)) {
         }
     }
 
-    header('Location: /dashboard/product.php');
+    header('Location: ../dashboard/product.php');
     exit;
 }
 

@@ -3,22 +3,7 @@
 
 $pageTitle = "Products";
 
-/*
-|--------------------------------------------------------------------------
-| DATABASE CONNECTION
-|--------------------------------------------------------------------------
-*/
-
 include '.././database/connection.php';
-
-
-/*
-|--------------------------------------------------------------------------
-| EDIT PRODUCT
-|--------------------------------------------------------------------------
-| If ?edit_id=5 is present, fetch product ID 5 from database.
-|--------------------------------------------------------------------------
-*/
 
 $editProduct = null;
 
@@ -666,7 +651,7 @@ include './components/head_html.php';
                             <div class="offcanvas-body border-top mx-0 flex-grow-0">
 
                                 <form id="eCommerceProductAddForm" class="pt-0" method="POST"
-                                    action="../validations/product-save.php">
+                                    action="../validations/product-save.php" enctype="multipart/form-data">
 
                                     <!-- ================================= -->
                                     <!-- BASIC INFORMATION -->
@@ -1277,7 +1262,7 @@ include './components/head_html.php';
                             <div class="offcanvas-body border-top mx-0 flex-grow-0">
 
                                 <form id="eCommerceProductEditForm" class="pt-0" method="POST"
-                                    action="../validations/product-update.php">
+                                    action="../validations/product-update.php" enctype="multipart/form-data">
 
 
                                     <!-- Hidden Product ID -->
