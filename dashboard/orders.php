@@ -399,7 +399,7 @@ include './components/head_html.php';
 
                                                             <!-- Order Number -->
                                                             <td>
-                                                                <a href="order-details.php?id=<?= (int) $order['id'] ?>">
+                                                                <a href="order-detail.php?id=<?= (int) $order['id'] ?>">
                                                                     <span>#<?= orderEscape($order['order_number'] ?? '') ?></span>
                                                                 </a>
                                                             </td>
@@ -479,7 +479,7 @@ include './components/head_html.php';
 
                                                                     <div class="dropdown-menu dropdown-menu-end m-0">
 
-                                                                        <a href="order-details.php?id=<?= (int) $order['id'] ?>"
+                                                                        <a href="order-detail.php?id=<?= (int) $order['id'] ?>"
                                                                             class="dropdown-item">
                                                                             View
                                                                         </a>

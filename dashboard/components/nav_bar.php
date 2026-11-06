@@ -54,12 +54,7 @@
           <i class="icon-base bx bx-grid-alt icon-md"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-end p-0">
-          <div class="dropdown-menu-header border-bottom">
-            <div class="dropdown-header d-flex align-items-center py-3">
-              <h6 class="mb-0 me-auto">Shortcuts</h6>
-              <a href="javascript:void(0)" class="dropdown-shortcuts-add py-2" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Add shortcuts" data-bs-original-title="Add shortcuts"><i class="icon-base bx bx-plus-circle text-heading"></i></a>
-            </div>
-          </div>
+          
           <div class="dropdown-shortcuts-list scrollable-container ps">
             <div class="row row-bordered overflow-visible g-0">
               <div class="dropdown-shortcuts-item col">
@@ -73,7 +68,7 @@
                 <span class="dropdown-shortcuts-icon rounded-circle mb-3">
                   <i class="icon-base bx bx-food-menu icon-26px text-heading"></i>
                 </span>
-                <a href="app-invoice-list.html" class="stretched-link">Invoice App</a>
+                <a href="./invoice.php" class="stretched-link">Invoice App</a>
                 <small>Manage Accounts</small>
               </div>
             </div>
@@ -281,27 +276,10 @@
             <div class="dropdown-divider my-1"></div>
           </li>
           <li>
-            <a class="dropdown-item" href="pages-profile-user.html"> <i class="icon-base bx bx-user icon-md me-3"></i><span>My Profile</span> </a>
+            <a class="dropdown-item" href="./my-profile.php"> <i class="icon-base bx bx-user icon-md me-3"></i><span>My Profile</span> </a>
           </li>
           <li>
-            <a class="dropdown-item" href="pages-account-settings-account.html"> <i class="icon-base bx bx-cog icon-md me-3"></i><span>Settings</span> </a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="pages-account-settings-billing.html">
-              <span class="d-flex align-items-center align-middle">
-                <i class="flex-shrink-0 icon-base bx bx-credit-card icon-md me-3"></i><span class="flex-grow-1 align-middle">Billing Plan</span>
-                <span class="flex-shrink-0 badge rounded-pill bg-danger">4</span>
-              </span>
-            </a>
-          </li>
-          <li>
-            <div class="dropdown-divider my-1"></div>
-          </li>
-          <li>
-            <a class="dropdown-item" href="pages-pricing.html"> <i class="icon-base bx bx-dollar icon-md me-3"></i><span>Pricing</span> </a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="pages-faq.html"> <i class="icon-base bx bx-help-circle icon-md me-3"></i><span>FAQ</span> </a>
+            <a class="dropdown-item" href="./settings.php"> <i class="icon-base bx bx-cog icon-md me-3"></i><span>Settings</span> </a>
           </li>
           <li>
             <div class="dropdown-divider my-1"></div>

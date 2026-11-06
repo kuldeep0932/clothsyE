@@ -77988,3 +77988,20 @@ input[type="color"] {
   margin-left: 260px;
   width: 100%;
 } */
+
+
+
+
+
+
+
+
+
+@media(max-width:767px) {
+
+  table td,
+  table th {
+    white-space: nowrap;
+    padding: 7px 9px !important;
+  }
+}
