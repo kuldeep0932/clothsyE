@@ -58694,7 +58694,7 @@ li:not(:first-child) .dropdown-item,
 }
 
 .progress .progress-bar {
-  background-color: var(--bs-primary);
+  background-color: var(--bs-primary) !important;
   box-shadow: 0 2px 4px 0 var(--bs-progress-bar-shadow-color);
   color: var(--bs-white);
 }
@@ -77992,7 +77992,9 @@ input[type="color"] {
 
 
 
-
+.text-primary {
+  color: var(--bs-primary) !important;
+}
 
 
 

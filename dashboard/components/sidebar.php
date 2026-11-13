@@ -40,13 +40,15 @@
       </a>
     </li>
 
+    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == 1) { ?>
+      <li class="menu-item <?php echo ($currentPage == 'customers.php') ? 'active open' : ''; ?>">
+        <a href="./customers.php" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-user"></i>
+          <div>Customers</div>
+        </a>
+      </li>
+    <?php } ?>
 
-    <li class="menu-item <?php echo ($currentPage == 'customers.php') ? 'active open' : ''; ?>">
-      <a href="./customers.php" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-user"></i>
-        <div>Customers</div>
-      </a>
-    </li>
     <li class="menu-item <?php echo ($currentPage == 'product.php') ? 'active open' : ''; ?>">
       <a href="./product.php" class="menu-link">
         <i class="menu-icon tf-icons bx bx-box"></i>
@@ -59,37 +61,58 @@
         <div>Order</div>
       </a>
     </li>
-    <li class="menu-item <?php echo ($currentPage == 'ecommerce.php') ? 'active open' : ''; ?>">
-      <a href="./ecommerce.php" class="menu-link">
+    <li class="menu-item <?php echo ($currentPage == 'invoice.php') ? 'active open' : ''; ?>">
+      <a href="./invoice.php" class="menu-link">
+        <i class="menu-icon icon-base bx bx-food-menu"></i>
+        <div>Invoice</div>
+      </a>
+    </li>
+    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == 1) { ?>
+    <li class="menu-item <?php echo ($currentPage == 'manage-reviews.php') ? 'active open' : ''; ?>">
+      <a href="./manage-reviews.php" class="menu-link">
+        <i class="menu-icon icon-base bx bxs-star"></i>
+        <div>Manage Reviews</div>
+      </a>
+    </li>
+    <?php } ?>
+
+    <li class="menu-item <?php echo ($currentPage == 'settings.php') ? 'active open' : ''; ?>">
+      <a href="./settings.php" class="menu-link">
         <i class="menu-icon tf-icons bx bx-cog"></i>
         <div>Settings</div>
       </a>
     </li>
 
+    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == 1) { ?>
 
-    <!-- Website Details -->
-    <li class="menu-header small text-uppercase"><span class="menu-header-text">Website Details</span></li>
-    <li class="menu-item <?php echo ($currentPage == 'site-setting.php') ? 'active open' : ''; ?>">
-      <a href="./site-setting.php" target="_blank" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-layout"></i>
-        <div class="text-truncate" data-i18n="setting">Site Setting</div>
-      </a>
-    </li>
+      <!-- Website Details -->
+      <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">Website Details</span>
+      </li>
+
+      <li class="menu-item <?php echo ($currentPage == 'site-setting.php') ? 'active open' : ''; ?>">
+        <a href="./site-setting.php" target="_blank" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div class="text-truncate" data-i18n="setting">Site Setting</div>
+        </a>
+      </li>
+
+    <?php } ?>
+
     <!-- Misc -->
     <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
     <li class="menu-item">
-      <a href="https://github.com/themeselection/sneat-bootstrap-html-admin-template-free/issues" target="_blank"
-        class="menu-link">
+      <a href="../contact-us.php" target="_blank" class="menu-link">
         <i class="menu-icon tf-icons bx bx-support"></i>
         <div class="text-truncate" data-i18n="Support">Support</div>
       </a>
     </li>
-    <li class="menu-item">
+    <!-- <li class="menu-item">
       <a href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/" target="_blank"
         class="menu-link">
         <i class="menu-icon tf-icons bx bx-file"></i>
         <div class="text-truncate" data-i18n="Documentation">Documentation</div>
       </a>
-    </li>
+    </li> -->
   </ul>
 </aside>

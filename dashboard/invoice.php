@@ -1,8 +1,49 @@
-
 <?php
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+
 $pageTitle = "Invoices";
 
 include '../database/connection.php';
+
+
+$currentUserId = (int) ($_SESSION['user_id'] ?? 0);
+$isAdmin = ($currentUserId === 1);
+$currentUserEmail = '';
+
+if ($currentUserId <= 0) {
+    header("Location: ./login.php");
+    exit;
+}
+
+// Fetch logged-in user's email
+if (!$isAdmin) {
+
+    $userStmt = $conn->prepare(
+        "SELECT email_add FROM users WHERE id = ?"
+    );
+
+    if (!$userStmt) {
+        die("User query preparation failed: " . $conn->error);
+    }
+
+    $userStmt->bind_param("i", $currentUserId);
+    $userStmt->execute();
+
+    $userResult = $userStmt->get_result();
+    $userData = $userResult->fetch_assoc();
+
+    $currentUserEmail = $userData['email_add'] ?? '';
+
+    $userStmt->close();
+
+    if (empty($currentUserEmail)) {
+        die("User email not found.");
+    }
+}
 
 /* Escape output */
 function invoiceEscape($value)
@@ -17,33 +58,51 @@ function invoiceMoney($amount)
 }
 
 /* Payment status badge */
-function invoiceStatusBadge($status)
+function invoiceStatusBadge($status, $balance = 0)
 {
     $status = strtolower(trim((string) $status));
 
-    $classes = [
-        'paid'     => 'bg-label-success',
-        'pending'  => 'bg-label-warning',
-        'failed'   => 'bg-label-danger',
-        'refunded' => 'bg-label-info'
+    $statuses = [
+        'paid' => [
+            'class' => 'bg-label-success',
+            'icon'  => 'bx-check'
+        ],
+        'pending' => [
+            'class' => 'bg-label-secondary',
+            'icon'  => 'bx-envelope'
+        ],
+        'failed' => [
+            'class' => 'bg-label-danger',
+            'icon'  => 'bx-error'
+        ],
+        'refunded' => [
+            'class' => 'bg-label-info',
+            'icon'  => 'bx-refresh'
+        ]
     ];
 
-    $icons = [
-        'paid'     => 'bx-check',
-        'pending'  => 'bx-time-five',
-        'failed'   => 'bx-error',
-        'refunded' => 'bx-refresh'
+    $item = $statuses[$status] ?? [
+        'class' => 'bg-label-secondary',
+        'icon'  => 'bx-file'
     ];
-
-    $class = $classes[$status] ?? 'bg-label-secondary';
-    $icon = $icons[$status] ?? 'bx-file';
 
     $label = ucfirst($status ?: 'pending');
 
-    return '<span class="badge p-1_5 rounded-pill ' . $class . '">
-                <i class="icon-base icon-16px bx ' . $icon . '"></i>
+    $tooltip = $label . '<br><span class="fw-medium">Balance:</span> '
+        . invoiceMoney($balance);
+
+    return '
+        <span class="d-inline-block"
+            data-bs-toggle="tooltip"
+            data-bs-html="true"
+            title="' . invoiceEscape($tooltip) . '">
+
+            <span class="badge p-1_5 rounded-pill ' . $item['class'] . '">
+                <i class="icon-base icon-16px bx ' . $item['icon'] . '"></i>
             </span>
-            <span class="ms-1">' . invoiceEscape($label) . '</span>';
+
+        </span>
+    ';
 }
 
 /* Get invoice ID */
@@ -71,6 +130,13 @@ $page = max(1, (int) ($_GET['page'] ?? 1));
 $where = [];
 $params = [];
 $types = '';
+
+/* Show all invoices to admin, own invoices to other users */
+if (!$isAdmin) {
+    $where[] = "customer_email = ?";
+    $params[] = $currentUserEmail;
+    $types .= 's';
+}
 
 if ($search !== '') {
     $where[] = "(
@@ -119,12 +185,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_invoice'])) {
 
     if ($deleteId > 0) {
 
-        $deleteStmt = $conn->prepare(
-            "DELETE FROM orders WHERE id = ?"
-        );
+       if ($isAdmin) {
+            $deleteStmt = $conn->prepare("DELETE FROM orders WHERE id = ?");
+            if ($deleteStmt) {
+                $deleteStmt->bind_param("i", $deleteId);
+            }
+        } else {
+            $deleteStmt = $conn->prepare("DELETE FROM orders WHERE id = ? AND customer_email = ?");
+            if ($deleteStmt) {
+                $deleteStmt->bind_param("is", $deleteId, $currentUserEmail);
+            }
+        }
 
         if ($deleteStmt) {
-            $deleteStmt->bind_param("i", $deleteId);
             $deleteStmt->execute();
             $deleteStmt->close();
         }
@@ -135,38 +208,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_invoice'])) {
 }
 
 /* Summary statistics */
-$summarySql = "
-    SELECT
-        COUNT(*) AS total_invoices,
-        COUNT(DISTINCT NULLIF(customer_email, '')) AS total_clients,
+// Invoice Summary
+if ($isAdmin) {
+    $summarySql = "SELECT
+        COUNT(*) AS totalInvoices,
+        COUNT(DISTINCT customer_email) AS totalClients,
+        COALESCE(SUM(CASE WHEN payment_status = 'paid' THEN total_amount ELSE 0 END), 0) AS paidAmount,
+        COALESCE(SUM(CASE WHEN payment_status IN ('pending', 'failed') THEN total_amount ELSE 0 END), 0) AS unpaidAmount
+        FROM orders";
 
-        COALESCE(
-            SUM(CASE
-                WHEN payment_status = 'paid'
-                THEN total_amount ELSE 0
-            END), 0
-        ) AS paid_amount,
+    $summaryStmt = $conn->prepare($summarySql);
+} else {
+    $summarySql = "SELECT
+        COUNT(*) AS totalInvoices,
+        COUNT(DISTINCT customer_email) AS totalClients,
+        COALESCE(SUM(CASE WHEN payment_status = 'paid' THEN total_amount ELSE 0 END), 0) AS paidAmount,
+        COALESCE(SUM(CASE WHEN payment_status IN ('pending', 'failed') THEN total_amount ELSE 0 END), 0) AS unpaidAmount
+        FROM orders
+        WHERE customer_email = ?";
 
-        COALESCE(
-            SUM(CASE
-                WHEN payment_status = 'pending'
-                THEN total_amount ELSE 0
-            END), 0
-        ) AS unpaid_amount
+    $summaryStmt = $conn->prepare($summarySql);
+    $summaryStmt->bind_param("s", $currentUserEmail);
+}
 
-    FROM orders
-";
+if ($summaryStmt) {
+    $summaryStmt->execute();
+    $summaryResult = $summaryStmt->get_result();
+    $summaryData = $summaryResult->fetch_assoc();
 
-$summaryResult = $conn->query($summarySql);
-$summary = $summaryResult
-    ? $summaryResult->fetch_assoc()
-    : [];
+    $totalClients = (int) ($summaryData['totalClients'] ?? 0);
+    $totalInvoices = (int) ($summaryData['totalInvoices'] ?? 0);
+    $paidAmount = (float) ($summaryData['paidAmount'] ?? 0);
+    $unpaidAmount = (float) ($summaryData['unpaidAmount'] ?? 0);
 
-$totalClients = (int) ($summary['total_clients'] ?? 0);
-$totalInvoices = (int) ($summary['total_invoices'] ?? 0);
-$paidAmount = (float) ($summary['paid_amount'] ?? 0);
-$unpaidAmount = (float) ($summary['unpaid_amount'] ?? 0);
-
+    $summaryStmt->close();
+} else {
+    $totalInvoices = 0;
+    $paidAmount = 0;
+    $unpaidAmount = 0;
+}
 /* Total matching invoices */
 $countSql = "SELECT COUNT(*) AS total FROM orders $whereSql";
 
@@ -385,450 +465,550 @@ include './components/head_html.php';
 
 
                     <!-- Invoice List -->
-
                     <div class="card">
-
-                        <!-- Search and Filters -->
-
-                        <div class="row mx-3 justify-content-between align-items-center">
-
-                            <div class="col-md-auto d-flex align-items-center gap-3 mt-4 mb-4">
-
-                                <form method="GET" class="d-flex align-items-center gap-2">
-
-                                    <label for="per_page">Show</label>
-
-                                    <select name="per_page"
-                                        id="per_page"
-                                        class="form-select"
-                                        onchange="this.form.submit()">
-
-                                        <?php foreach ($allowedPerPage as $limit): ?>
-
-                                            <option value="<?= $limit ?>"
-                                                <?= $perPage === $limit ? 'selected' : '' ?>>
-
-                                                <?= $limit ?>
-
-                                            </option>
-
-                                        <?php endforeach; ?>
-
-                                    </select>
-
-                                    <input type="hidden" name="search" value="<?= invoiceEscape($search) ?>">
-
-                                    <input type="hidden" name="status" value="<?= invoiceEscape($status) ?>">
-
-                                </form>
-
-                            </div>
-
-                            <div class="col-md-auto d-flex flex-wrap align-items-center gap-3 mt-4 mb-4">
-
-                                <form method="GET" class="d-flex flex-wrap align-items-center gap-3">
-
-                                    <input type="hidden" name="per_page" value="<?= $perPage ?>">
-
-                                    <!-- Search -->
-
-                                    <input type="search"
-                                        name="search"
-                                        class="form-control"
-                                        placeholder="Search Invoice"
-                                        value="<?= invoiceEscape($search) ?>">
-
-                                    <!-- Status Filter -->
-
-                                    <select name="status"
-                                        class="form-select"
-                                        onchange="this.form.submit()">
-
-                                        <option value="">Invoice Status</option>
-
-                                        <option value="paid" <?= $status === 'paid' ? 'selected' : '' ?>>
-                                            Paid
-                                        </option>
-
-                                        <option value="pending" <?= $status === 'pending' ? 'selected' : '' ?>>
-                                            Pending
-                                        </option>
-
-                                        <option value="failed" <?= $status === 'failed' ? 'selected' : '' ?>>
-                                            Failed
-                                        </option>
-
-                                        <option value="refunded" <?= $status === 'refunded' ? 'selected' : '' ?>>
-                                            Refunded
-                                        </option>
-
-                                    </select>
-
-                                    <button type="submit" class="btn btn-primary">
-                                        Search
-                                    </button>
-
-                                    <a href="invoice.php" class="btn btn-label-secondary">
-                                        Reset
-                                    </a>
-
-                                </form>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- Invoice Table -->
 
                         <div class="card-datatable table-responsive">
 
-                            <table class="invoice-list-table table border-top">
+                            <div id="DataTables_Table_0_wrapper"
+                                class="dt-container dt-bootstrap5 dt-empty-footer">
 
-                                <thead>
+                                <!-- Search and Filters -->
 
-                                    <tr>
+                                <div class="row mx-3 justify-content-between">
 
-                                        <th>
-                                            <input type="checkbox"
-                                                class="form-check-input"
-                                                id="selectAllInvoices">
-                                        </th>
+                                    <!-- Show Entries -->
 
-                                        <th>#</th>
+                                    <div class="align-items-center dt-layout-start col-md-auto me-auto px-3 pe-md-0 mt-0 d-flex justify-content-md-between justify-content-center mt-md-0 mt-5">
 
-                                        <th>Status</th>
+                                        <div class="dt-length d-flex align-items-center mx-2 my-md-5 my-0">
 
-                                        <th>Client</th>
+                                            <label for="dt-length-0">Show</label>
 
-                                        <th>Total</th>
+                                            <form method="GET" class="ms-2">
 
-                                        <th>Issued Date</th>
+                                                <select name="per_page"
+                                                    id="dt-length-0"
+                                                    class="form-select"
+                                                    onchange="this.form.submit()">
 
-                                        <th>Balance</th>
+                                                    <?php foreach ($allowedPerPage as $limit): ?>
 
-                                        <th>Actions</th>
+                                                        <option value="<?= $limit ?>"
+                                                            <?= $perPage === $limit ? 'selected' : '' ?>>
 
-                                    </tr>
+                                                            <?= $limit ?>
 
-                                </thead>
+                                                        </option>
 
-                                <tbody>
+                                                    <?php endforeach; ?>
 
-                                    <?php if (!empty($invoices)): ?>
+                                                </select>
 
-                                        <?php foreach ($invoices as $invoice): ?>
+                                                <input type="hidden"
+                                                    name="search"
+                                                    value="<?= invoiceEscape($search) ?>">
 
-                                            <?php
+                                                <input type="hidden"
+                                                    name="status"
+                                                    value="<?= invoiceEscape($status) ?>">
 
-                                            $invoiceId = (int) $invoice['id'];
+                                            </form>
 
-                                            $invoiceNumber = $invoice['order_number']
-                                                ?? $invoiceId;
+                                        </div>
 
-                                            $customerName = $invoice['customer_name']
-                                                ?? 'Unknown Customer';
+                                    </div>
 
-                                            $customerEmail = $invoice['customer_email']
-                                                ?? '';
 
-                                            $paymentStatus = strtolower(
-                                                $invoice['payment_status'] ?? 'pending'
-                                            );
+                                    <!-- Search and Status -->
 
-                                            $invoiceTotal = (float) ($invoice['total_amount'] ?? 0);
+                                    <div class="d-md-flex align-items-center dt-layout-end col-md-auto justify-content-md-between justify-content-center d-flex flex-wrap gap-sm-4 mb-sm-0 mb-5 mt-0 pe-md-3 ps-0">
 
-                                            $balance = $paymentStatus === 'paid'
-                                                || $paymentStatus === 'refunded'
-                                                ? 0
-                                                : $invoiceTotal;
+                                        <form method="GET"
+                                            class="d-md-flex align-items-center d-flex flex-wrap gap-3">
 
-                                            $issuedDate = !empty($invoice['created_at'])
-                                                ? date('d M Y', strtotime($invoice['created_at']))
-                                                : 'N/A';
+                                            <input type="hidden"
+                                                name="per_page"
+                                                value="<?= $perPage ?>">
 
-                                            $initials = strtoupper(
-                                                substr(trim($customerName), 0, 1)
-                                            );
+                                            <!-- Search -->
 
-                                            ?>
+                                            <div class="dt-search me-sm-0 me-4">
 
-                                            <tr>
+                                                <input type="search"
+                                                    name="search"
+                                                    class="form-control"
+                                                    placeholder="Search Invoice"
+                                                    value="<?= invoiceEscape($search) ?>">
 
-                                                <!-- Checkbox -->
+                                            </div>
 
-                                                <td>
-                                                    <input type="checkbox"
-                                                        class="form-check-input invoice-checkbox">
-                                                </td>
+                                            <!-- Status -->
 
-                                                <!-- Invoice Number -->
+                                            <div class="invoice_status">
 
-                                                <td>
+                                                <select name="status"
+                                                    class="form-select"
+                                                    onchange="this.form.submit()">
 
-                                                    <a href="order-detail.php?id=<?= $invoiceId ?>"
-                                                        class="text-heading fw-medium">
+                                                    <option value="">Invoice Status</option>
 
-                                                        #<?= invoiceEscape($invoiceNumber) ?>
+                                                    <option value="paid"
+                                                        <?= $status === 'paid' ? 'selected' : '' ?>>
+                                                        Paid
+                                                    </option>
 
-                                                    </a>
+                                                    <option value="pending"
+                                                        <?= $status === 'pending' ? 'selected' : '' ?>>
+                                                        Pending
+                                                    </option>
 
-                                                </td>
+                                                    <option value="failed"
+                                                        <?= $status === 'failed' ? 'selected' : '' ?>>
+                                                        Failed
+                                                    </option>
 
-                                                <!-- Status -->
+                                                    <option value="refunded"
+                                                        <?= $status === 'refunded' ? 'selected' : '' ?>>
+                                                        Refunded
+                                                    </option>
 
-                                                <td>
+                                                </select>
 
-                                                    <?= invoiceStatusBadge($paymentStatus) ?>
+                                            </div>
 
-                                                </td>
+                                            <button type="submit" class="btn btn-primary">
+                                                Search
+                                            </button>
 
-                                                <!-- Customer -->
+                                            <a href="invoice.php"
+                                                class="btn btn-label-secondary">
+                                                Reset
+                                            </a>
 
-                                                <td>
+                                        </form>
 
-                                                    <div class="d-flex justify-content-start align-items-center">
+                                    </div>
 
-                                                        <div class="avatar-wrapper">
+                                </div>
 
-                                                            <div class="avatar avatar-sm me-3">
 
-                                                                <span class="avatar-initial rounded-circle bg-label-primary">
+                                <!-- Invoice Table -->
 
-                                                                    <?= invoiceEscape($initials) ?>
+                                <div class="justify-content-between dt-layout-table">
 
+                                    <div class="d-md-flex justify-content-between align-items-center dt-layout-full table-responsive">
+
+                                        <table class="invoice-list-table table border-top dataTable"
+                                            id="DataTables_Table_0"
+                                            style="width: 100%;">
+
+                                            <thead>
+
+                                                <tr>
+
+                                                    <th>
+                                                        <input
+                                                            class="form-check-input"
+                                                            type="checkbox"
+                                                            id="selectAllInvoices"
+                                                            aria-label="Select all rows">
+                                                    </th>
+
+                                                    <th>#</th>
+
+                                                    <th>Status</th>
+
+                                                    <th>Client</th>
+
+                                                    <th>Total</th>
+
+                                                    <th class="text-truncate">Issued Date</th>
+
+                                                    <th>Balance</th>
+
+                                                    <th class="cell-fit">Actions</th>
+
+                                                </tr>
+
+                                            </thead>
+
+
+                                            <tbody>
+
+                                                <?php if (!empty($invoices)): ?>
+
+                                                    <?php foreach ($invoices as $invoice): ?>
+
+                                                        <?php
+
+                                                        $invoiceId = (int) $invoice['id'];
+
+                                                        $invoiceNumber = !empty($invoice['order_number'])
+                                                            ? $invoice['order_number']
+                                                            : $invoiceId;
+
+                                                        $customerName = !empty($invoice['customer_name'])
+                                                            ? $invoice['customer_name']
+                                                            : 'Unknown Customer';
+
+                                                        $customerEmail = $invoice['customer_email'] ?? '';
+
+                                                        $paymentStatus = strtolower(
+                                                            trim($invoice['payment_status'] ?? 'pending')
+                                                        );
+
+                                                        $invoiceTotal = (float) ($invoice['total_amount'] ?? 0);
+
+                                                        $balance = in_array($paymentStatus, ['paid', 'refunded'], true)
+                                                            ? 0
+                                                            : $invoiceTotal;
+
+                                                        $issuedDate = !empty($invoice['created_at'])
+                                                            ? date('d M Y', strtotime($invoice['created_at']))
+                                                            : 'N/A';
+
+                                                        // Customer initials
+
+                                                        $nameParts = preg_split(
+                                                            '/\s+/',
+                                                            trim($customerName)
+                                                        );
+
+                                                        $initials = '';
+
+                                                        if (!empty($nameParts[0])) {
+                                                            $initials .= substr($nameParts[0], 0, 1);
+                                                        }
+
+                                                        if (count($nameParts) > 1) {
+                                                            $initials .= substr(end($nameParts), 0, 1);
+                                                        }
+
+                                                        $initials = strtoupper($initials);
+
+                                                        ?>
+
+                                                        <tr>
+
+                                                            <!-- Checkbox -->
+
+                                                            <td>
+                                                                <input
+                                                                    aria-label="Select row"
+                                                                    class="form-check-input invoice-checkbox"
+                                                                    type="checkbox"
+                                                                    value="<?= $invoiceId ?>">
+                                                            </td>
+
+
+                                                            <!-- Invoice Number -->
+
+                                                            <td>
+                                                                <a href="order-detail.php?id=<?= $invoiceId ?>"
+                                                                    class="text-heading fw-medium">
+
+                                                                    #<?= invoiceEscape($invoiceNumber) ?>
+
+                                                                </a>
+                                                            </td>
+
+
+                                                            <!-- Status -->
+
+                                                            <td>
+
+                                                                <?= invoiceStatusBadge($paymentStatus, $balance) ?>
+
+                                                            </td>
+
+
+                                                            <!-- Customer -->
+
+                                                            <td>
+
+                                                                <div class="d-flex justify-content-start align-items-center">
+
+                                                                    <div class="avatar-wrapper">
+
+                                                                        <div class="avatar avatar-sm me-3">
+
+                                                                            <span class="avatar-initial rounded-circle bg-label-success">
+
+                                                                                <?= invoiceEscape($initials) ?>
+
+                                                                            </span>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div class="d-flex flex-column">
+
+                                                                        <a href="order-detail.php?id=<?= $invoiceId ?>"
+                                                                            class="text-heading text-truncate">
+
+                                                                            <span class="fw-medium">
+                                                                                <?= invoiceEscape($customerName) ?>
+                                                                            </span>
+
+                                                                        </a>
+
+                                                                        <small class="text-truncate">
+                                                                            <?= invoiceEscape($customerEmail) ?>
+                                                                        </small>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </td>
+
+
+                                                            <!-- Total -->
+
+                                                            <td class="dt-type-numeric">
+
+                                                                <span class="d-none">
+                                                                    <?= $invoiceTotal ?>
                                                                 </span>
 
-                                                            </div>
+                                                                <?= invoiceMoney($invoiceTotal) ?>
 
-                                                        </div>
+                                                            </td>
 
-                                                        <div class="d-flex flex-column">
 
-                                                            <span class="text-heading text-truncate fw-medium">
+                                                            <!-- Issued Date -->
 
-                                                                <?= invoiceEscape($customerName) ?>
+                                                            <td>
 
-                                                            </span>
+                                                                <span class="d-none">
+                                                                    <?= !empty($invoice['created_at'])
+                                                                        ? date('Ymd', strtotime($invoice['created_at']))
+                                                                        : '' ?>
+                                                                </span>
 
-                                                            <small class="text-truncate">
+                                                                <?= invoiceEscape($issuedDate) ?>
 
-                                                                <?= invoiceEscape($customerEmail) ?>
+                                                            </td>
 
-                                                            </small>
 
-                                                        </div>
+                                                            <!-- Balance -->
 
-                                                    </div>
+                                                            <td>
 
-                                                </td>
+                                                                <?php if ($balance > 0): ?>
 
-                                                <!-- Total -->
+                                                                    <span class="text-heading fw-medium">
+                                                                        <?= invoiceMoney($balance) ?>
+                                                                    </span>
 
-                                                <td>
-                                                    <?= invoiceMoney($invoiceTotal) ?>
-                                                </td>
+                                                                <?php elseif ($paymentStatus === 'refunded'): ?>
 
-                                                <!-- Issued Date -->
+                                                                    <span class="badge bg-label-info text-capitalize">
+                                                                        Refunded
+                                                                    </span>
 
-                                                <td>
-                                                    <?= invoiceEscape($issuedDate) ?>
-                                                </td>
+                                                                <?php else: ?>
 
-                                                <!-- Balance -->
+                                                                    <span class="badge bg-label-success text-capitalize">
+                                                                        Paid
+                                                                    </span>
 
-                                                <td>
+                                                                <?php endif; ?>
 
-                                                    <?php if ($balance > 0): ?>
+                                                            </td>
 
-                                                        <span class="text-heading fw-medium">
-                                                            <?= invoiceMoney($balance) ?>
-                                                        </span>
 
-                                                    <?php else: ?>
+                                                            <!-- Actions -->
 
-                                                        <span class="badge bg-label-success">
-                                                            Paid
-                                                        </span>
+                                                            <td>
 
-                                                    <?php endif; ?>
+                                                                <div class="d-flex align-items-center">
 
-                                                </td>
+                                                                    <!-- Delete -->
 
-                                                <!-- Actions -->
+                                                                    <form method="POST"
+                                                                        onsubmit="return confirm('Are you sure you want to delete this invoice?');">
 
-                                                <td>
+                                                                        <input type="hidden"
+                                                                            name="delete_invoice"
+                                                                            value="<?= $invoiceId ?>">
 
-                                                    <div class="d-flex align-items-center">
+                                                                        <button type="submit"
+                                                                            data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="Delete"
+                                                                            class="btn btn-icon">
 
-                                                        <!-- Delete -->
+                                                                            <i class="icon-base bx bx-trash icon-md"></i>
 
-                                                        <form method="POST"
-                                                            onsubmit="return confirm('Are you sure you want to delete this invoice?');">
+                                                                        </button>
 
-                                                            <input type="hidden"
-                                                                name="delete_invoice"
-                                                                value="<?= $invoiceId ?>">
+                                                                    </form>
 
-                                                            <button type="submit"
-                                                                class="btn btn-icon"
-                                                                title="Delete">
 
-                                                                <i class="icon-base bx bx-trash icon-md"></i>
+                                                                    <!-- Preview Invoice -->
 
-                                                            </button>
+                                                                    <a href="invoice-detail.php?id=<?= $invoiceId ?>"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-placement="top"
+                                                                        title="Preview Invoice"
+                                                                        class="btn btn-icon">
 
-                                                        </form>
+                                                                        <i class="icon-base bx bx-show icon-md"></i>
 
-                                                        <!-- View Invoice -->
+                                                                    </a>
 
-                                                        <a href="order-detail.php?id=<?= $invoiceId ?>"
-                                                            class="btn btn-icon"
-                                                            title="View Invoice">
 
-                                                            <i class="icon-base bx bx-show icon-md"></i>
+                                                                    <!-- More Actions -->
 
-                                                        </a>
+                                                                    <div class="dropdown">
 
-                                                        <!-- More Actions -->
+                                                                        <a href="javascript:;"
+                                                                            class="btn dropdown-toggle hide-arrow btn-icon p-0"
+                                                                            data-bs-toggle="dropdown">
 
-                                                        <div class="dropdown">
+                                                                            <i class="icon-base bx bx-dots-vertical-rounded icon-md"></i>
 
-                                                            <button type="button"
-                                                                class="btn dropdown-toggle hide-arrow btn-icon p-0"
-                                                                data-bs-toggle="dropdown">
+                                                                        </a>
 
-                                                                <i class="icon-base bx bx-dots-vertical-rounded icon-md"></i>
+                                                                        <div class="dropdown-menu dropdown-menu-end">
 
-                                                            </button>
+                                                                            <a href="order-detail.php?id=<?= $invoiceId ?>"
+                                                                                class="dropdown-item">
 
-                                                            <div class="dropdown-menu dropdown-menu-end">
+                                                                                View Details
 
-                                                                <a href="order-detail.php?id=<?= $invoiceId ?>"
-                                                                    class="dropdown-item">
+                                                                            </a>
 
-                                                                    View Details
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </td>
+
+                                                        </tr>
+
+                                                    <?php endforeach; ?>
+
+                                                <?php else: ?>
+
+                                                    <tr>
+
+                                                        <td colspan="8" class="text-center py-5">
+                                                            No invoices found.
+                                                        </td>
+
+                                                    </tr>
+
+                                                <?php endif; ?>
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- Pagination -->
+
+                                <div class="row mx-3 justify-content-between">
+
+                                    <div class="align-items-center dt-layout-start col-md-auto me-auto px-3 pe-md-0 mt-0 d-flex justify-content-md-between justify-content-center mt-md-0 mt-5">
+
+                                        <div class="dt-info" aria-live="polite" role="status">
+
+                                            Showing
+
+                                            <?= $totalRecords > 0 ? $offset + 1 : 0 ?>
+
+                                            to
+
+                                            <?= min($offset + $perPage, $totalRecords) ?>
+
+                                            of <?= $totalRecords ?> entries
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="d-md-flex align-items-center dt-layout-end col-md-auto justify-content-md-between justify-content-center d-flex flex-wrap gap-sm-4 mb-sm-0 mb-5 mt-0 pe-md-3 ps-0">
+
+                                        <?php if ($totalPages > 1): ?>
+
+                                            <div class="dt-paging">
+
+                                                <nav aria-label="pagination">
+
+                                                    <ul class="pagination mb-0">
+
+                                                        <!-- Previous -->
+
+                                                        <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
+
+                                                            <a class="page-link"
+                                                                href="<?= $page > 1 ? invoicePageUrl($page - 1) : '#' ?>">
+
+                                                                <i class="icon-base bx bx-chevron-left scaleX-n1-rtl icon-18px"></i>
+
+                                                            </a>
+
+                                                        </li>
+
+
+                                                        <!-- Page Numbers -->
+
+                                                        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+
+                                                            <li class="page-item <?= $page === $i ? 'active' : '' ?>">
+
+                                                                <a class="page-link"
+                                                                    href="<?= invoicePageUrl($i) ?>">
+
+                                                                    <?= $i ?>
 
                                                                 </a>
 
-                                                            </div>
+                                                            </li>
 
-                                                        </div>
-
-                                                    </div>
-
-                                                </td>
-
-                                            </tr>
-
-                                        <?php endforeach; ?>
-
-                                    <?php else: ?>
-
-                                        <tr>
-
-                                            <td colspan="8" class="text-center py-5">
-
-                                                No invoices found.
-
-                                            </td>
-
-                                        </tr>
-
-                                    <?php endif; ?>
-
-                                </tbody>
-
-                            </table>
-
-                        </div>
+                                                        <?php endfor; ?>
 
 
-                        <!-- Pagination -->
+                                                        <!-- Next -->
 
-                        <div class="row mx-3 justify-content-between align-items-center">
+                                                        <li class="page-item <?= $page >= $totalPages ? 'disabled' : '' ?>">
 
-                            <div class="col-md-auto mt-4 mb-4">
+                                                            <a class="page-link"
+                                                                href="<?= $page < $totalPages ? invoicePageUrl($page + 1) : '#' ?>">
 
-                                <p class="mb-0">
+                                                                <i class="icon-base bx bx-chevron-right scaleX-n1-rtl icon-18px"></i>
 
-                                    Showing
+                                                            </a>
 
-                                    <?= $totalRecords > 0 ? $offset + 1 : 0 ?>
+                                                        </li>
 
-                                    to
+                                                    </ul>
 
-                                    <?= min($offset + $perPage, $totalRecords) ?>
+                                                </nav>
 
-                                    of <?= $totalRecords ?> entries
+                                            </div>
 
-                                </p>
+                                        <?php endif; ?>
 
-                            </div>
+                                    </div>
 
-                            <div class="col-md-auto mt-4 mb-4">
-
-                                <?php if ($totalPages > 1): ?>
-
-                                    <nav aria-label="Invoice pagination">
-
-                                        <ul class="pagination mb-0">
-
-                                            <!-- Previous -->
-
-                                            <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
-
-                                                <a class="page-link"
-                                                    href="<?= $page > 1 ? invoicePageUrl($page - 1) : '#' ?>">
-
-                                                    <i class="icon-base bx bx-chevron-left"></i>
-
-                                                </a>
-
-                                            </li>
-
-                                            <!-- Page Numbers -->
-
-                                            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-
-                                                <li class="page-item <?= $page === $i ? 'active' : '' ?>">
-
-                                                    <a class="page-link"
-                                                        href="<?= invoicePageUrl($i) ?>">
-
-                                                        <?= $i ?>
-
-                                                    </a>
-
-                                                </li>
-
-                                            <?php endfor; ?>
-
-                                            <!-- Next -->
-
-                                            <li class="page-item <?= $page >= $totalPages ? 'disabled' : '' ?>">
-
-                                                <a class="page-link"
-                                                    href="<?= $page < $totalPages ? invoicePageUrl($page + 1) : '#' ?>">
-
-                                                    <i class="icon-base bx bx-chevron-right"></i>
-
-                                                </a>
-
-                                            </li>
-
-                                        </ul>
-
-                                    </nav>
-
-                                <?php endif; ?>
+                                </div>
 
                             </div>
 
                         </div>
 
                     </div>
-
                 </div>
 
             </div>

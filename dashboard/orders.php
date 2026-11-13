@@ -1,7 +1,45 @@
 <?php
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $pageTitle = "Orders";
 
 include '../database/connection.php';
+
+$currentUserId = (int) ($_SESSION['user_id'] ?? 0);
+$isAdmin = ($currentUserId === 1);
+
+if ($currentUserId <= 0) {
+    header("Location: ./login.php");
+    exit;
+}
+/* Get logged-in user's email */
+$currentUserEmail = '';
+
+$userStmt = $conn->prepare("
+    SELECT email_add
+    FROM users
+    WHERE id = ?
+    LIMIT 1
+");
+
+$userStmt->bind_param("i", $currentUserId);
+$userStmt->execute();
+
+$userResult = $userStmt->get_result();
+
+if ($userRow = $userResult->fetch_assoc()) {
+    $currentUserEmail = $userRow['email_add'];
+}
+
+$userStmt->close();
+
+if ($currentUserEmail === '') {
+    die("Unable to identify logged-in user.");
+}
+
 
 /* Escape output */
 function orderEscape($value)
@@ -51,12 +89,22 @@ function paymentStatusHtml($status)
         . orderEscape($label) . '</h6>';
 }
 
-/* Delete order */
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_order_id'])) {
+/* Delete order - Admin only */
+if (
+    $_SERVER['REQUEST_METHOD'] === 'POST' &&
+    isset($_POST['delete_order_id'])
+) {
+    if (!$isAdmin) {
+        http_response_code(403);
+        exit('You are not authorized to delete orders.');
+    }
+
     $deleteId = (int) $_POST['delete_order_id'];
 
     if ($deleteId > 0) {
-        $deleteStmt = $conn->prepare("DELETE FROM orders WHERE id = ?");
+        $deleteStmt = $conn->prepare(
+            "DELETE FROM orders WHERE id = ?"
+        );
 
         if ($deleteStmt) {
             $deleteStmt->bind_param("i", $deleteId);
@@ -83,11 +131,38 @@ if (!in_array($perPage, $allowedPerPage, true)) {
 $page = max(1, (int) ($_GET['page'] ?? 1));
 
 /* Search conditions */
-$where = "";
-$searchTerm = "%{$search}%";
+$whereConditions = [];
+$params = [];
+$types = '';
 
+/* Non-admin users can see only their own orders */
+if (!$isAdmin) {
+    $whereConditions[] = "customer_email = ?";
+
+    // Fetch email using the logged-in user's ID
+    $userStmt = $conn->prepare(
+        "SELECT email_add FROM users WHERE id = ? LIMIT 1"
+    );
+
+    $userStmt->bind_param("i", $currentUserId);
+    $userStmt->execute();
+
+    $userData = $userStmt->get_result()->fetch_assoc();
+    $userStmt->close();
+
+    $currentUserEmail = $userData['email_add'] ?? '';
+
+    if ($currentUserEmail === '') {
+        exit('Unable to identify your account.');
+    }
+
+    $params[] = $currentUserEmail;
+    $types .= 's';
+}
+
+/* Search filter */
 if ($search !== '') {
-    $where = " WHERE (
+    $whereConditions[] = "(
         order_number LIKE ?
         OR customer_name LIKE ?
         OR customer_email LIKE ?
@@ -96,47 +171,59 @@ if ($search !== '') {
         OR payment_status LIKE ?
         OR order_status LIKE ?
     )";
+
+    $searchTerm = "%{$search}%";
+
+    for ($i = 0; $i < 7; $i++) {
+        $params[] = $searchTerm;
+    }
+
+    $types .= 'sssssss';
 }
+
+$where = !empty($whereConditions)
+    ? " WHERE " . implode(" AND ", $whereConditions)
+    : '';
 
 /* Count matching orders */
 $countSql = "SELECT COUNT(*) AS total FROM orders" . $where;
+
 $countStmt = $conn->prepare($countSql);
 
 if (!$countStmt) {
     die("Unable to prepare order count query.");
 }
 
-if ($search !== '') {
-    $countStmt->bind_param(
-        "sssssss",
-        $searchTerm,
-        $searchTerm,
-        $searchTerm,
-        $searchTerm,
-        $searchTerm,
-        $searchTerm,
-        $searchTerm
-    );
+if (!empty($params)) {
+
+    $countStmt->bind_param($types, ...$params);
 }
 
-if (!$countStmt->execute()) {
-    die("Unable to count orders.");
-}
+$countStmt->execute();
 
 $countResult = $countStmt->get_result();
 $countRow = $countResult->fetch_assoc();
 
 $totalOrders = (int) ($countRow['total'] ?? 0);
+
 $countStmt->close();
+
 
 /* Calculate pagination */
 $totalPages = max(1, (int) ceil($totalOrders / $perPage));
 $page = min($page, $totalPages);
 $offset = ($page - 1) * $perPage;
 
+
 /* Fetch orders */
-$sql = "SELECT * FROM orders" . $where .
-    " ORDER BY created_at DESC LIMIT ? OFFSET ?";
+
+$sql = "
+    SELECT *
+    FROM orders
+    $where
+    ORDER BY created_at DESC
+    LIMIT ? OFFSET ?
+";
 
 $stmt = $conn->prepare($sql);
 
@@ -144,50 +231,71 @@ if (!$stmt) {
     die("Unable to prepare orders query.");
 }
 
-if ($search !== '') {
-    $stmt->bind_param(
-        "sssssssii",
-        $searchTerm,
-        $searchTerm,
-        $searchTerm,
-        $searchTerm,
-        $searchTerm,
-        $searchTerm,
-        $searchTerm,
-        $perPage,
-        $offset
-    );
-} else {
-    $stmt->bind_param("ii", $perPage, $offset);
-}
+$fetchParams = $params;
+$fetchTypes = $types . 'ii';
+$fetchParams = array_merge($params, [$perPage, $offset]);
 
-if (!$stmt->execute()) {
-    die("Unable to fetch orders.");
-}
+$stmt->bind_param($fetchTypes, ...$fetchParams);
+
+$stmt->execute();
 
 $result = $stmt->get_result();
+
 
 if ($result === false) {
     die("Unable to read orders. Check that your PHP MySQL driver supports get_result().");
 }
 
-/* Summary cards */
+
+/* Summary statistics */
+
 $summarySql = "
     SELECT
-        COALESCE(SUM(CASE WHEN payment_status = 'pending' THEN 1 ELSE 0 END), 0) AS pending_payment,
-        COALESCE(SUM(CASE WHEN order_status = 'delivered' THEN 1 ELSE 0 END), 0) AS completed,
-        COALESCE(SUM(CASE WHEN payment_status = 'refunded' THEN 1 ELSE 0 END), 0) AS refunded,
-        COALESCE(SUM(CASE WHEN payment_status = 'failed' THEN 1 ELSE 0 END), 0) AS failed
+        COALESCE(SUM(CASE
+            WHEN payment_status = 'pending' THEN 1
+            ELSE 0
+        END), 0) AS pending_payment,
+
+        COALESCE(SUM(CASE
+            WHEN order_status = 'delivered' THEN 1
+            ELSE 0
+        END), 0) AS completed,
+
+        COALESCE(SUM(CASE
+            WHEN payment_status = 'refunded' THEN 1
+            ELSE 0
+        END), 0) AS refunded,
+
+        COALESCE(SUM(CASE
+            WHEN payment_status = 'failed' THEN 1
+            ELSE 0
+        END), 0) AS failed
+
     FROM orders
 ";
 
-$summaryResult = $conn->query($summarySql);
-$summary = $summaryResult ? $summaryResult->fetch_assoc() : [];
+if (!$isAdmin) {
+    $summarySql .= " WHERE customer_email = ?";
+}
+
+$summaryStmt = $conn->prepare($summarySql);
+
+if (!$isAdmin) {
+    $summaryStmt->bind_param("s", $currentUserEmail);
+}
+
+$summaryStmt->execute();
+
+$summaryResult = $summaryStmt->get_result();
+$summary = $summaryResult->fetch_assoc();
+
+$summaryStmt->close();
 
 $pendingPayment = (int) ($summary['pending_payment'] ?? 0);
 $completed = (int) ($summary['completed'] ?? 0);
 $refunded = (int) ($summary['refunded'] ?? 0);
 $failed = (int) ($summary['failed'] ?? 0);
+
 
 include './components/head_html.php';
 ?>
@@ -483,7 +591,8 @@ include './components/head_html.php';
                                                                             class="dropdown-item">
                                                                             View
                                                                         </a>
-
+                                                                        <!-- Delete option: Admin only -->
+                                                                        <?php if ($isAdmin): ?>
                                                                         <form method="POST" action="orders.php"
                                                                             onsubmit="return confirm('Are you sure you want to delete this order?');">
 
@@ -496,6 +605,7 @@ include './components/head_html.php';
                                                                             </button>
 
                                                                         </form>
+                                                                        <?php endif; ?>
                                                                     </div>
                                                                 </div>
                                                             </td>
