@@ -47,7 +47,7 @@
           <div>Customers</div>
         </a>
       </li>
-    <?php } ?>
+    
 
     <li class="menu-item <?php echo ($currentPage == 'product.php') ? 'active open' : ''; ?>">
       <a href="./product.php" class="menu-link">
@@ -55,10 +55,13 @@
         <div>Products</div>
       </a>
     </li>
+
+    <?php } ?>
+    
     <li class="menu-item <?php echo ($currentPage == 'orders.php') ? 'active open' : ''; ?>">
       <a href="./orders.php" class="menu-link">
         <i class="menu-icon tf-icons bx bx-cart"></i>
-        <div>Order</div>
+        <div>Orders</div>
       </a>
     </li>
     <li class="menu-item <?php echo ($currentPage == 'invoice.php') ? 'active open' : ''; ?>">
@@ -67,14 +70,12 @@
         <div>Invoice</div>
       </a>
     </li>
-    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == 1) { ?>
     <li class="menu-item <?php echo ($currentPage == 'manage-reviews.php') ? 'active open' : ''; ?>">
       <a href="./manage-reviews.php" class="menu-link">
         <i class="menu-icon icon-base bx bxs-star"></i>
         <div>Manage Reviews</div>
       </a>
     </li>
-    <?php } ?>
 
     <li class="menu-item <?php echo ($currentPage == 'settings.php') ? 'active open' : ''; ?>">
       <a href="./settings.php" class="menu-link">

@@ -104,13 +104,13 @@ $primaryColor = $row['primary_color'] ?? '#ef2d19';
 
                 <ul>
                   <li>
-                    <a href="#"><i class="fa-regular fa-circle-user"></i> My Profile</a>
+                    <a href="./dashboard/my-profile.php"><i class="fa-regular fa-circle-user"></i> My Profile</a>
                   </li>
                   <li>
-                    <a href="#"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                    <a href="./dashboard/index.php"><i class="fa-solid fa-gauge"></i> Dashboard</a>
                   </li>
                   <li>
-                    <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
+                    <a href="./dashboard/settings.php"><i class="fa-solid fa-gear"></i> Settings</a>
                   </li>
                   <li>
                     <a href="<?php echo ('./validations/logout.php') ?>"><i
